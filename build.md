@@ -1,8 +1,9 @@
 ## 部署nacos
 
-`java
+```java
 // 1、下载源码
 git clone https://github.com/alibaba/nacos.git
+
 cd nacos/
 // 2、安装
 mvn -Prelease-nacos -Dmaven.test.skip=true clean install -U  
@@ -18,7 +19,7 @@ sh startup.sh -m standalone
 
 // 5、关闭服务器Linux/Unix/Mac
 sh shutdown.sh
-`
+```
 ## 服务注册&发现和配置管理
 ### 服务注册
 > curl -X POST 'http://127.0.0.1:8848/nacos/v1/ns/instance?serviceName=nacos.naming.serviceName&ip=20.18.7.10&port=8080'
