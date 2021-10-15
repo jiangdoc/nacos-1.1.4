@@ -167,8 +167,8 @@ public class MD5Util {
         return count;
     }
 
-    static final char WORD_SEPARATOR_CHAR = (char)2;
-    static final char LINE_SEPARATOR_CHAR = (char)1;
+    static final char WORD_SEPARATOR_CHAR = (char) 2;
+    static final char LINE_SEPARATOR_CHAR = (char) 1;
 
 }
 

@@ -136,12 +136,12 @@ public class MultiTenant_InstanceAPI_ITCase {
     public void multipleTenant_group_listInstance() throws Exception {
         String serviceName = randomDomainName();
 
-        naming1.registerInstance(serviceName, TEST_GROUP_1,"11.11.11.11", 80);
+        naming1.registerInstance(serviceName, TEST_GROUP_1, "11.11.11.11", 80);
 
-        naming1.registerInstance(serviceName,"22.22.22.22", 80);
+        naming1.registerInstance(serviceName, "22.22.22.22", 80);
 
-        naming.registerInstance(serviceName, TEST_GROUP_1,"33.33.33.33", 8888);
-        naming.registerInstance(serviceName, TEST_GROUP_2,"44.44.44.44", 8888);
+        naming.registerInstance(serviceName, TEST_GROUP_1, "33.33.33.33", 8888);
+        naming.registerInstance(serviceName, TEST_GROUP_2, "44.44.44.44", 8888);
 
         TimeUnit.SECONDS.sleep(5L);
 
@@ -306,9 +306,9 @@ public class MultiTenant_InstanceAPI_ITCase {
     public void multipleTenant_group_deleteInstance() throws Exception {
         String serviceName = randomDomainName();
 
-        naming1.registerInstance(serviceName, TEST_GROUP_1,"11.11.11.11", 80);
+        naming1.registerInstance(serviceName, TEST_GROUP_1, "11.11.11.11", 80);
 
-        naming2.registerInstance(serviceName, TEST_GROUP_2,"22.22.22.22", 80);
+        naming2.registerInstance(serviceName, TEST_GROUP_2, "22.22.22.22", 80);
 
         TimeUnit.SECONDS.sleep(5L);
 
@@ -402,7 +402,7 @@ public class MultiTenant_InstanceAPI_ITCase {
         String serviceName = randomDomainName();
 
         naming1.registerInstance(serviceName, "11.11.11.11", 80);
-        naming2.registerInstance(serviceName, TEST_GROUP_2,"22.22.22.22", 80);
+        naming2.registerInstance(serviceName, TEST_GROUP_2, "22.22.22.22", 80);
 
         TimeUnit.SECONDS.sleep(5L);
 
@@ -571,7 +571,7 @@ public class MultiTenant_InstanceAPI_ITCase {
 
     private void verifyInstanceListForNaming(NamingService naming, int size, String serviceName) throws Exception {
         int i = 0;
-        while ( i < 20 ) {
+        while (i < 20) {
             List<Instance> instances = naming.getAllInstances(serviceName);
             if (instances.size() == size) {
                 break;
@@ -583,7 +583,7 @@ public class MultiTenant_InstanceAPI_ITCase {
     }
 
     private <T> ResponseEntity<T> request(String path, MultiValueMap<String, String> params, Class<T> clazz) {
-        return  request(path, params, clazz, HttpMethod.GET);
+        return request(path, params, clazz, HttpMethod.GET);
     }
 
     private <T> ResponseEntity<T> request(String path, MultiValueMap<String, String> params, Class<T> clazz, HttpMethod httpMethod) {

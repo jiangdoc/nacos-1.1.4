@@ -42,7 +42,7 @@ import static com.alibaba.nacos.test.naming.NamingBase.randomDomainName;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = NamingApp.class, properties = {"server.servlet.context-path=/nacos"},
-        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+    webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class DeregisterInstance_ITCase {
 
     private NamingService naming;
@@ -139,8 +139,6 @@ public class DeregisterInstance_ITCase {
     }
 
 
-
-
     /**
      * 删除service中最后一个Instance，允许删除，结果返回null
      *
@@ -172,7 +170,7 @@ public class DeregisterInstance_ITCase {
         instances = naming.getAllInstances(serviceName, Arrays.asList("c2"));
         Assert.assertEquals(1, instances.size());
 
-        naming.deregisterInstance(serviceName,"127.0.0.2", TEST_PORT, "c2");
+        naming.deregisterInstance(serviceName, "127.0.0.2", TEST_PORT, "c2");
         TimeUnit.SECONDS.sleep(5);
         instances = naming.getAllInstances(serviceName);
         Assert.assertEquals(0, instances.size());
@@ -180,7 +178,7 @@ public class DeregisterInstance_ITCase {
 
     public void verifyInstanceList(List<Instance> instances, int size, String serviceName) throws Exception {
         int i = 0;
-        while ( i < 20 ) {
+        while (i < 20) {
             instances = naming.getAllInstances(serviceName);
             if (instances.size() == size) {
                 break;
@@ -190,7 +188,6 @@ public class DeregisterInstance_ITCase {
             }
         }
     }
-
 
 
 }

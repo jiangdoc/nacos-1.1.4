@@ -69,7 +69,7 @@ public class ClientIpWhiteList {
         }
         defaultLog.warn("[clientIpWhiteList] {}", content);
         try {
-            ACLInfo acl = (ACLInfo)JSONUtils.deserializeObject(content, ACLInfo.class);
+            ACLInfo acl = (ACLInfo) JSONUtils.deserializeObject(content, ACLInfo.class);
             isOpen = acl.getIsOpen();
             CLIENT_IP_WHITELIST.set(acl.getIps());
         } catch (Exception ioe) {

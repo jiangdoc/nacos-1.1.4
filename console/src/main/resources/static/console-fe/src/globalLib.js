@@ -22,7 +22,7 @@ const global = window;
  * 获取cookie值
  * @param {*String} keyName cookie名
  */
-const aliwareGetCookieByKeyName = function(keyName) {
+const aliwareGetCookieByKeyName = function (keyName) {
   let result = '';
   const cookieList = (document.cookie && document.cookie.split(';')) || [];
   cookieList.forEach(str => {
@@ -38,7 +38,7 @@ const aliwareGetCookieByKeyName = function(keyName) {
 /**
  * 监听事件对象
  */
-const nacosEvent = (function(_global) {
+const nacosEvent = (function (_global) {
   const eventListObj = {};
   const ignoreEventListObj = {};
   return {
@@ -136,7 +136,7 @@ const nacosEvent = (function(_global) {
 /**
  * nacos的工具类
  */
-const nacosUtils = (function(_global) {
+const nacosUtils = (function (_global) {
   let loadingCount = 0;
   let loadingState = {
     visible: false,
@@ -205,7 +205,7 @@ const nacosUtils = (function(_global) {
   };
 })(global);
 
-const aliwareIntl = (function(_global) {
+const aliwareIntl = (function (_global) {
   /**
    * 国际化构造方法
    * @param {Object} options 配置信息
@@ -233,21 +233,21 @@ const aliwareIntl = (function(_global) {
    * 通过key获取对应国际化文案
    * @param {String} key 国际化key
    */
-  AliwareI18n.prototype.get = function(key) {
+  AliwareI18n.prototype.get = function (key) {
     return this.nowData[key];
   };
   /**
    * 修改国际化文案数据
    * @param {String} local 语言信息
    */
-  AliwareI18n.prototype.changeLanguage = function(local) {
+  AliwareI18n.prototype.changeLanguage = function (local) {
     this.nowData = i18DocObj[local] || {};
   };
   /**
    * 数字国际化
    * @param {Number} num 数字
    */
-  AliwareI18n.prototype.intlNumberFormat = function(num) {
+  AliwareI18n.prototype.intlNumberFormat = function (num) {
     if (typeof Intl !== 'object' || typeof Intl.NumberFormat !== 'function') {
       return num;
     }
@@ -262,7 +262,7 @@ const aliwareIntl = (function(_global) {
    * @param {Number} num 时间戳
    * @param {Object} initOption 配置信息
    */
-  AliwareI18n.prototype.intlTimeFormat = function(num = Date.now(), initOption = {}) {
+  AliwareI18n.prototype.intlTimeFormat = function (num = Date.now(), initOption = {}) {
     try {
       const date = Object.prototype.toString.call(num) === '[object Date]' ? num : new Date(num);
       const options = Object.assign(
@@ -288,7 +288,7 @@ const aliwareIntl = (function(_global) {
    * 获取当前时间格式
    * @param {String} language 语言信息: zh/en
    */
-  AliwareI18n.prototype.getIntlTimeFormat = function(_language) {
+  AliwareI18n.prototype.getIntlTimeFormat = function (_language) {
     const language = _language || aliwareLocal;
     const langObj = {
       zh: 'YYYY年M月D日 HH:mm:ss',
@@ -301,7 +301,7 @@ const aliwareIntl = (function(_global) {
    * 设置moment的locale
    * @param {String} languageCode 语言信息: zh-ch/en-us
    */
-  AliwareI18n.prototype.setMomentLocale = function(languageCode) {
+  AliwareI18n.prototype.setMomentLocale = function (languageCode) {
     if (Object.prototype.toString.call(moment) === '[object Function]') {
       moment.locale(languageCode || this.currentLanguageCode);
       return true;
@@ -322,8 +322,8 @@ const aliwareIntl = (function(_global) {
 /**
  * 获取url中的参数
  */
-const getParams = (function(_global) {
-  return function(name) {
+const getParams = (function (_global) {
+  return function (name) {
     const reg = new RegExp(`(^|&)${name}=([^&]*)(&|$)`, 'i');
     let result = [];
     if (_global.location.hash !== '') {
@@ -350,10 +350,10 @@ const getParams = (function(_global) {
 /**
  * 设置参数
  */
-const setParams = (function(global) {
+const setParams = (function (global) {
   let _global = global;
   const _originHref = _global.location.href.split('#')[0];
-  return function(name, value) {
+  return function (name, value) {
     if (!name) {
       return;
     }
@@ -400,17 +400,17 @@ const setParams = (function(global) {
 /**
  * 设置参数
  */
-const setParam = function(...args) {
+const setParam = function (...args) {
   return setParams.apply(this, args);
 };
 
 /**
  * 删除参数
  */
-const removeParams = (function(global) {
+const removeParams = (function (global) {
   let _global = global;
   const _originHref = _global.location.href.split('#')[0];
-  return function(name) {
+  return function (name) {
     let removeList = [];
 
     const nameType = Object.prototype.toString.call(name);
@@ -451,7 +451,7 @@ const removeParams = (function(global) {
 /**
  * 封装的ajax请求
  */
-const request = (function(_global) {
+const request = (function (_global) {
   const middlewareList = [];
   const middlewareBackList = [];
   const serviceMap = {};
@@ -460,11 +460,11 @@ const request = (function(_global) {
   /**
    * 获取真实url信息
    */
-  const NacosRealUrlMapper = (function() {
+  const NacosRealUrlMapper = (function () {
     serviceList.forEach(obj => {
       serviceMap[obj.registerName] = obj;
     });
-    return function(registerName) {
+    return function (registerName) {
       const serviceObj = serviceMap[registerName];
       if (!serviceObj) {
         return null;
@@ -524,7 +524,8 @@ const request = (function(_global) {
           let code = null;
           try {
             code = JSON.parse(serviceObj.defaults);
-          } catch (error) {}
+          } catch (error) {
+          }
           config.success(code);
           return;
         }
@@ -535,7 +536,8 @@ const request = (function(_global) {
           if (serviceObj.is_param && typeof config.data === 'object') {
             config.data = Object.assign({}, JSON.parse(serviceObj.params), config.data);
           }
-        } catch (e) {}
+        } catch (e) {
+        }
         // 替换请求方式
         if (serviceObj.method && !config.type) {
           config.type = serviceObj.methodType;
@@ -550,23 +552,24 @@ const request = (function(_global) {
         try {
           // 设置临时代理 生产环境失效
           if (projectConfig.is_preview && serviceObj.is_proxy) {
-            const { beforeSend } = config;
-            config.beforeSend = function(xhr) {
+            const {beforeSend} = config;
+            config.beforeSend = function (xhr) {
               serviceObj.cookie && xhr.setRequestHeader('tmpCookie', serviceObj.cookie);
               serviceObj.header && xhr.setRequestHeader('tmpHeader', serviceObj.header);
               serviceObj.proxy && xhr.setRequestHeader('tmpProxy', serviceObj.proxy);
               beforeSend && beforeSend(xhr);
             };
           }
-        } catch (e) {}
+        } catch (e) {
+        }
         // 设置自动loading效果
         if (serviceObj.autoLoading) {
           nacosUtils.openLoading();
           const prevComplete = config.complete;
-          config.complete = function() {
+          config.complete = function () {
             nacosUtils.closeLoading();
             typeof prevComplete === 'function' &&
-              prevComplete.apply($, Array.prototype.slice.call(args));
+            prevComplete.apply($, Array.prototype.slice.call(args));
           };
         }
         // serviceObj = null;
@@ -612,7 +615,8 @@ const request = (function(_global) {
         },
       })
     ).then(
-      success => {},
+      success => {
+      },
       error => {
         // 处理403 forbidden
         if (error && (error.status === 403 || error.status === 401)) {

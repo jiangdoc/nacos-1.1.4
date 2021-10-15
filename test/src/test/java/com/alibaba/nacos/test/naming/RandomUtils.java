@@ -27,7 +27,7 @@ public class RandomUtils {
     private static Random rd = new Random();
     private static int UNICODE_START = 19968;
     private static int UNICODE_END = 40864;
-    private static final String  STRING_POOL = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String STRING_POOL = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
     private RandomUtils() {
     }
@@ -38,7 +38,7 @@ public class RandomUtils {
 
     public static long getLongMoreThanZero() {
         long res;
-        for(res = rd.nextLong(); res <= 0L; res = rd.nextLong()) {
+        for (res = rd.nextLong(); res <= 0L; res = rd.nextLong()) {
         }
 
         return res;
@@ -51,7 +51,7 @@ public class RandomUtils {
 
     public static long getLongMoreThanZeroLessThan(long n) {
         long res;
-        for(res = getLongLessThan(n); res <= 0L; res = getLongLessThan(n)) {
+        for (res = getLongLessThan(n); res <= 0L; res = getLongLessThan(n)) {
         }
 
         return res;
@@ -72,7 +72,7 @@ public class RandomUtils {
 
     public static int getIntegerMoreThanZero() {
         int res;
-        for(res = rd.nextInt(); res <= 0; res = rd.nextInt()) {
+        for (res = rd.nextInt(); res <= 0; res = rd.nextInt()) {
         }
 
         return res;
@@ -85,7 +85,7 @@ public class RandomUtils {
 
     public static int getIntegerMoreThanZeroLessThan(int n) {
         int res;
-        for(res = rd.nextInt(n); res == 0; res = rd.nextInt(n)) {
+        for (res = rd.nextInt(n); res == 0; res = rd.nextInt(n)) {
         }
 
         return res;
@@ -104,13 +104,13 @@ public class RandomUtils {
         int size = arg.length;
         int c = rd.nextInt(size / 2);
         c *= 2;
-        return (char)getIntegerBetween(arg[c], arg[c + 1]);
+        return (char) getIntegerBetween(arg[c], arg[c + 1]);
     }
 
     private static String getString(int n, int[] arg) {
         StringBuilder res = new StringBuilder();
 
-        for(int i = 0; i < n; ++i) {
+        for (int i = 0; i < n; ++i) {
             res.append(getChar(arg));
         }
 
@@ -137,7 +137,7 @@ public class RandomUtils {
         Random random = new Random();
         int range = STRING_POOL.length();
 
-        for(int i = 0; i < length; ++i) {
+        for (int i = 0; i < length; ++i) {
             sb.append(STRING_POOL.charAt(random.nextInt(range)));
         }
 
@@ -243,7 +243,7 @@ public class RandomUtils {
     public static String getCheseWord(int len) {
         StringBuilder res = new StringBuilder();
 
-        for(int i = 0; i < len; ++i) {
+        for (int i = 0; i < len; ++i) {
             char str = getCheseChar();
             res.append(str);
         }
@@ -252,7 +252,7 @@ public class RandomUtils {
     }
 
     private static char getCheseChar() {
-        return (char)(UNICODE_START + rd.nextInt(UNICODE_END - UNICODE_START));
+        return (char) (UNICODE_START + rd.nextInt(UNICODE_END - UNICODE_START));
     }
 
     public static boolean getBoolean() {
@@ -268,13 +268,13 @@ public class RandomUtils {
         if (max >= min && n <= len) {
             int[] source = new int[len];
 
-            for(int i = min; i < min + len; source[i - min] = i++) {
+            for (int i = min; i < min + len; source[i - min] = i++) {
             }
 
             int[] result = new int[n];
             Random rd = new Random();
 
-            for(int i = 0; i < result.length; ++i) {
+            for (int i = 0; i < result.length; ++i) {
                 int index = Math.abs(rd.nextInt() % len--);
                 result[i] = source[index];
                 source[index] = source[len];
@@ -292,13 +292,13 @@ public class RandomUtils {
         int mn = min;
         int i;
         if (n == max + 1 - min) {
-            for(i = 1; i <= n; ++i) {
+            for (i = 1; i <= n; ++i) {
                 res.add(i);
             }
 
             return res;
         } else {
-            for(i = 0; i < n; ++i) {
+            for (i = 0; i < n; ++i) {
                 int v = getIntegerBetween(mn, mx);
                 if (v == mx) {
                     --mx;
@@ -308,7 +308,7 @@ public class RandomUtils {
                     ++mn;
                 }
 
-                while(res.contains(v)) {
+                while (res.contains(v)) {
                     v = getIntegerBetween(mn, mx);
                     if (v == mx) {
                         mx = v;

@@ -12,4 +12,4 @@ function setValue(key, value) {
   document.cookie = `${key}=${value}`;
 }
 
-export default { getValue, setValue };
+export default {getValue, setValue};

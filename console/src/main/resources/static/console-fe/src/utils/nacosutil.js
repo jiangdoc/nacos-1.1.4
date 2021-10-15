@@ -14,7 +14,7 @@
 /* eslint-disable import/prefer-default-export */
 export const throttle = (fn, delay) => {
   let timer = null;
-  return function(...args) {
+  return function (...args) {
     const context = this;
     clearTimeout(timer);
     timer = setTimeout(() => {
@@ -26,9 +26,9 @@ export const throttle = (fn, delay) => {
 export const getScrollTop = () => {
   let scrollTop = 0;
   if (document.documentElement && document.documentElement.scrollTop) {
-    ({ scrollTop } = document.documentElement);
+    ({scrollTop} = document.documentElement);
   } else if (document.body) {
-    ({ scrollTop } = document.body);
+    ({scrollTop} = document.body);
   }
   return scrollTop;
 };

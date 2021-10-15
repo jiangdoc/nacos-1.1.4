@@ -18,12 +18,12 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-const [cssLoader]  = base.module.rules;
+const [cssLoader] = base.module.rules;
 cssLoader.use.push({
   loader: '@alifd/next-theme-loader',
   options: {
     modifyVars: {
-      '$icon-font-path':'"/nacos/console-fe/public/icons/icon-font"',
+      '$icon-font-path': '"/nacos/console-fe/public/icons/icon-font"',
       '$font-custom-path': '"/nacos/console-fe/public/fonts/"'
     }
   }

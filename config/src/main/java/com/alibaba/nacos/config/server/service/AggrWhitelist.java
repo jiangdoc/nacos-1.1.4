@@ -42,7 +42,7 @@ public class AggrWhitelist {
     /**
      * 判断指定的dataId是否在聚合dataId白名单。
      */
-     public static boolean isAggrDataId(String dataId) {
+    public static boolean isAggrDataId(String dataId) {
         if (null == dataId) {
             throw new IllegalArgumentException();
         }
@@ -58,7 +58,7 @@ public class AggrWhitelist {
     /**
      * 传入内容，重新加载聚合白名单
      */
-     public static void load(String content) {
+    public static void load(String content) {
         if (StringUtils.isBlank(content)) {
             fatalLog.error("aggr dataId whitelist is blank.");
             return;

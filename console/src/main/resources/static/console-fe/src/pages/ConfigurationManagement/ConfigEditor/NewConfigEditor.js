@@ -13,7 +13,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getParams } from '../../../globalLib';
+import {getParams} from '../../../globalLib';
 import request from '../../../utils/request';
 import validateContent from 'utils/validateContent';
 import SuccessDialog from '../../../components/SuccessDialog';
@@ -37,17 +37,17 @@ import {
   Grid,
   ConfigProvider,
 } from '@alifd/next';
-import { resolve } from 'url';
+import {resolve} from 'url';
 
-const { Row, Col } = Grid;
+const {Row, Col} = Grid;
 
 const LANGUAGE_LIST = [
-  { value: 'text', label: 'TEXT' },
-  { value: 'json', label: 'JSON' },
-  { value: 'xml', label: 'XML' },
-  { value: 'yaml', label: 'YAML' },
-  { value: 'html', label: 'HTML' },
-  { value: 'properties', label: 'Properties' },
+  {value: 'text', label: 'TEXT'},
+  {value: 'json', label: 'JSON'},
+  {value: 'xml', label: 'XML'},
+  {value: 'yaml', label: 'YAML'},
+  {value: 'html', label: 'HTML'},
+  {value: 'properties', label: 'Properties'},
 ];
 
 const TAB_LIST = ['production', 'beta'];
@@ -89,7 +89,7 @@ class ConfigEditor extends React.Component {
   componentDidMount() {
     const isNewConfig = !getParams('dataId');
     const group = getParams('group').trim();
-    this.setState({ isNewConfig }, () => {
+    this.setState({isNewConfig}, () => {
       if (!isNewConfig) {
         this.changeForm(
           {
@@ -111,7 +111,7 @@ class ConfigEditor extends React.Component {
         );
       } else {
         if (group) {
-          this.setState({ group });
+          this.setState({group});
         }
         this.initMoacoEditor('text', '');
       }
@@ -174,12 +174,12 @@ class ConfigEditor extends React.Component {
 
   clickTab(tabActiveKey) {
     console.log('tabActiveKey', tabActiveKey, tabActiveKey === 'beta');
-    this.setState({ tabActiveKey }, () => this.getConfig(tabActiveKey === 'beta'));
+    this.setState({tabActiveKey}, () => this.getConfig(tabActiveKey === 'beta'));
   }
 
   getCodeVal() {
-    const { locale = {} } = this.props;
-    const { type, content } = this.state.form;
+    const {locale = {}} = this.props;
+    const {type, content} = this.state.form;
     const codeVal = this.monacoEditor ? this.monacoEditor.getValue() : content;
     if (!codeVal) {
       Message.error({
@@ -192,8 +192,8 @@ class ConfigEditor extends React.Component {
   }
 
   publish() {
-    const { locale = {} } = this.props;
-    const { type } = this.state.form;
+    const {locale = {}} = this.props;
+    const {type} = this.state.form;
     if (this.state.isNewConfig) {
       this.validation();
     }
@@ -201,7 +201,7 @@ class ConfigEditor extends React.Component {
     if (!content) {
       return;
     }
-    if (validateContent.validate({ content, type })) {
+    if (validateContent.validate({content, type})) {
       return this._publishConfig();
     } else {
       return new Promise((resolve, reject) => {
@@ -215,19 +215,19 @@ class ConfigEditor extends React.Component {
   }
 
   _publishConfig(beta = false) {
-    const { locale } = this.props;
-    const { betaIps, isNewConfig } = this.state;
-    const headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
+    const {locale} = this.props;
+    const {betaIps, isNewConfig} = this.state;
+    const headers = {'Content-Type': 'application/x-www-form-urlencoded'};
     if (beta) {
       headers.betaIps = betaIps;
     }
-    const data = { ...this.state.form, content: this.getCodeVal() };
+    const data = {...this.state.form, content: this.getCodeVal()};
     return request({
       url: 'v1/cs/configs',
       method: 'post',
       data,
       transformRequest: [
-        function(data) {
+        function (data) {
           let ret = '';
           for (let it in data) {
             ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&';
@@ -239,7 +239,7 @@ class ConfigEditor extends React.Component {
     }).then(res => {
       if (res) {
         if (isNewConfig) {
-          this.setState({ isNewConfig: false });
+          this.setState({isNewConfig: false});
         }
         this.getConfig(beta);
       }
@@ -260,8 +260,8 @@ class ConfigEditor extends React.Component {
   }
 
   stopBeta() {
-    const { locale } = this.props;
-    const { dataId, group } = this.state.form;
+    const {locale} = this.props;
+    const {dataId, group} = this.state.form;
     const tenant = getParams('namespace');
     return request
       .delete('v1/cs/configs', {
@@ -288,8 +288,8 @@ class ConfigEditor extends React.Component {
   }
 
   changeForm(item, cb) {
-    const { form } = this.state;
-    this.setState({ form: { ...form, ...item } }, () => {
+    const {form} = this.state;
+    this.setState({form: {...form, ...item}}, () => {
       if (cb) {
         cb();
       }
@@ -297,10 +297,10 @@ class ConfigEditor extends React.Component {
   }
 
   setConfigTags(tags) {
-    const { tagDataSource } = this.state;
+    const {tagDataSource} = this.state;
     const lastTag = tags[tags.length - 1];
     if (tagDataSource.indexOf(lastTag) < 0) {
-      this.setState({ tagDataSource: [...tagDataSource, lastTag] });
+      this.setState({tagDataSource: [...tagDataSource, lastTag]});
     }
     if (tags.length > 5) {
       tags.pop();
@@ -310,7 +310,7 @@ class ConfigEditor extends React.Component {
         tags.splice(i, 1);
       }
     });
-    this.changeForm({ config_tags: tags });
+    this.changeForm({config_tags: tags});
   }
 
   goBack() {
@@ -325,7 +325,7 @@ class ConfigEditor extends React.Component {
 
   getConfig(beta = false, decide = false) {
     const namespace = getParams('namespace');
-    const { dataId, group } = this.state.form;
+    const {dataId, group} = this.state.form;
     const params = {
       dataId,
       group,
@@ -338,12 +338,12 @@ class ConfigEditor extends React.Component {
     if (!beta) {
       params.show = 'all';
     }
-    return request.get('v1/cs/configs', { params }).then(res => {
+    return request.get('v1/cs/configs', {params}).then(res => {
       const form = beta ? res.data : res;
       if (!form) return false;
-      const { type, content, configTags, betaIps } = form;
-      this.setState({ betaIps });
-      this.changeForm({ ...form, config_tags: configTags ? configTags.split(',') : [] });
+      const {type, content, configTags, betaIps} = form;
+      this.setState({betaIps});
+      this.changeForm({...form, config_tags: configTags ? configTags.split(',') : []});
       this.initMoacoEditor(type, content);
       this.codeVal = content;
       return res;
@@ -351,9 +351,9 @@ class ConfigEditor extends React.Component {
   }
 
   validation() {
-    const { locale } = this.props;
-    const { form } = this.state;
-    const { dataId, group } = form;
+    const {locale} = this.props;
+    const {form} = this.state;
+    const {dataId, group} = form;
     if (!dataId) {
       this.setState({
         dataIdError: {
@@ -389,209 +389,369 @@ class ConfigEditor extends React.Component {
       dataIdError = {},
       groupError = {},
     } = this.state;
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
 
     return (
-      <div className="config-editor">
-        <Loading
-          shape="flower"
-          style={{ position: 'relative', width: '100%' }}
-          visible={loading}
-          tip="Loading..."
-          color="#333"
-        >
-          <h1 className="func-title">
-            <div>{locale.toedit}</div>
-          </h1>
-          {betaPublishSuccess && (
-            <Tab shape="wrapped" activeKey={tabActiveKey} onChange={key => this.clickTab(key)}>
-              {TAB_LIST.map(key => (
-                <Tab.Item title={locale[key]} key={key}>
-                  {locale[key]}
-                </Tab.Item>
-              ))}
-            </Tab>
-          )}
-          <Form className="form">
-            <Form.Item label="Data ID:" required {...dataIdError}>
-              <Input
-                value={form.dataId}
-                onChange={dataId =>
-                  this.changeForm({ dataId }, () => this.setState({ dataIdError: {} }))
-                }
-                disabled={!isNewConfig}
-              />
-            </Form.Item>
-            <Form.Item label="Group:" required {...groupError}>
-              <Input
-                value={form.group}
-                onChange={group =>
-                  this.changeForm({ group }, () => this.setState({ groupError: {} }))
-                }
-                disabled={!isNewConfig}
-              />
-            </Form.Item>
-            <Form.Item label=" ">
-              <div
-                className="switch"
-                onClick={() => this.setState({ openAdvancedSettings: !openAdvancedSettings })}
-              >
-                {openAdvancedSettings ? locale.collapse : locale.groupNotEmpty}
-              </div>
-            </Form.Item>
-            {openAdvancedSettings && (
-              <>
-                <Form.Item label={locale.tags}>
-                  <Select
-                    size="medium"
-                    hasArrow
-                    autoWidth
-                    mode="tag"
-                    filterLocal
-                    value={form.config_tags}
-                    dataSource={tagDataSource}
-                    onChange={config_tags => this.setConfigTags(config_tags)}
-                    hasClear
-                  />
-                </Form.Item>
-                <Form.Item label={locale.targetEnvironment}>
-                  <Input value={form.appName} onChange={appName => this.changeForm({ appName })} />
-                </Form.Item>
-              </>
-            )}
-            <Form.Item label={locale.description}>
-              <Input.TextArea
-                value={form.desc}
-                aria-label="TextArea"
-                onChange={desc => this.changeForm({ desc })}
-              />
-            </Form.Item>
-            {!isNewConfig && tabActiveKey !== 'production' && (
-              <Form.Item label={locale.betaPublish}>
-                {!betaPublishSuccess && (
-                  <Checkbox checked={isBeta} onChange={isBeta => this.setState({ isBeta })}>
-                    {locale.betaSwitchPrompt}
-                  </Checkbox>
-                )}
-                {isBeta && (
-                  <Input.TextArea
-                    aria-label="TextArea"
-                    placeholder="127.0.0.1,127.0.0.2"
-                    value={betaIps}
-                    onChange={betaIps => this.setState({ betaIps })}
-                  />
-                )}
-              </Form.Item>
-            )}
-            <Form.Item label={locale.format}>
-              <Radio.Group
-                defaultValue="text"
-                value={form.type}
-                onChange={type => {
-                  this.initMoacoEditor(type, form.content);
-                  this.changeForm({ type });
-                }}
-              >
-                {LANGUAGE_LIST.map(item => (
-                  <Radio value={item.value} key={item.value}>
-                    {item.label}
-                  </Radio>
-                ))}
-              </Radio.Group>
-            </Form.Item>
-            <Form.Item
-              label={
-                <div className="help-label">
-                  <span>{locale.configcontent}</span>
-                  <Balloon
-                    trigger={<Icon type="help" size="small" />}
-                    align="t"
-                    style={{ marginRight: 5 }}
-                    triggerType="hover"
-                  >
-                    <p>{locale.escExit}</p>
-                    <p>{locale.releaseBeta}</p>
-                  </Balloon>
-                  <span>:</span>
-                </div>
-              }
-            >
-              <div style={{ clear: 'both', height: 300 }} id="container" />
-            </Form.Item>
-          </Form>
-          <Row>
-            <Col span="24" className="button-list">
-              {isBeta && betaPublishSuccess && tabActiveKey !== 'production' && (
-                <Button
-                  size="large"
-                  type="primary"
-                  onClick={() =>
-                    this.stopBeta().then(() => {
-                      this.successDialog.current.getInstance().openDialog({
-                        title: <div>{locale.stopPublishBeta}</div>,
-                        isok: true,
-                        ...form,
-                      });
-                    })
-                  }
-                >
-                  {locale.stopPublishBeta}
-                </Button>
-              )}
-              {isBeta && tabActiveKey !== 'production' && (
-                <Button
-                  size="large"
-                  type="primary"
-                  disabled={!betaIps || betaPublishSuccess}
-                  onClick={() => this.openDiff('publishBeta')}
-                >
-                  {locale.release}
-                </Button>
-              )}
-              <Button
-                size="large"
-                type="primary"
-                disabled={tabActiveKey === 'production'}
-                onClick={() => this.openDiff('publish')}
-              >
-                {locale.publish}
-              </Button>
-              <Button size="large" type="normal" onClick={() => this.goBack()}>
-                {locale.back}
-              </Button>
-            </Col>
-          </Row>
-          <DiffEditorDialog
-            ref={this.diffEditorDialog}
-            publishConfig={() => {
-              const res = this[this.diffcb]();
-              res.then(res => {
-                if (!res) {
-                  return;
-                }
-                let title = locale.toedit;
-                if (isNewConfig) {
-                  title = locale.newConfigEditor;
-                }
-                if (this.diffcb === 'publishBeta') {
-                  title = locale.betaPublish;
-                }
-                if (this.diffcb === 'publish' && tabActiveKey === 'beta') {
-                  title = locale.stopPublishBeta;
-                  this.stopBeta();
-                }
-                this.successDialog.current.getInstance().openDialog({
-                  title: <div>{title}</div>,
-                  isok: true,
-                  ...form,
-                });
-              });
-            }}
-          />
-          <SuccessDialog ref={this.successDialog} />
-        </Loading>
-      </div>
-    );
+      < div
+    className = "config-editor" >
+      < Loading
+    shape = "flower"
+    style = {
+    {
+      position: 'relative', width
+    :
+      '100%'
+    }
+  }
+    visible = {loading}
+    tip = "Loading..."
+    color = "#333"
+      >
+      < h1
+    className = "func-title" >
+      < div > {locale.toedit} < /div>
+      < /h1>
+    {
+      betaPublishSuccess && (
+      < Tab
+      shape = "wrapped"
+      activeKey = {tabActiveKey}
+      onChange = {key
+    =>
+      this.clickTab(key)
+    }>
+      {
+        TAB_LIST.map(key => (
+          < Tab.Item
+        title = {locale[key]}
+        key = {key} >
+          {locale[key]}
+          < /Tab.Item>
+      ))
+      }
+    <
+      /Tab>
+    )
+    }
+  <
+    Form
+    className = "form" >
+      < Form.Item
+    label = "Data ID:"
+    required
+    {...
+      dataIdError
+    }
+  >
+  <
+    Input
+    value = {form.dataId}
+    onChange = {dataId
+  =>
+    this.changeForm({dataId}, () => this.setState({dataIdError: {}}))
+  }
+    disabled = {
+    !isNewConfig
+  }
+    />
+    < /Form.Item>
+    < Form.Item
+    label = "Group:"
+    required
+    {...
+      groupError
+    }
+  >
+  <
+    Input
+    value = {form.group}
+    onChange = {group
+  =>
+    this.changeForm({group}, () => this.setState({groupError: {}}))
+  }
+    disabled = {
+    !isNewConfig
+  }
+    />
+    < /Form.Item>
+    < Form.Item
+    label = " " >
+      < div
+    className = "switch"
+    onClick = {()
+  =>
+    this.setState({openAdvancedSettings: !openAdvancedSettings})
+  }
+  >
+    {
+      openAdvancedSettings ? locale.collapse : locale.groupNotEmpty
+    }
+  <
+    /div>
+    < /Form.Item>
+    {
+      openAdvancedSettings && (
+      < >
+      < Form.Item
+      label = {locale.tags} >
+        < Select
+      size = "medium"
+      hasArrow
+      autoWidth
+      mode = "tag"
+      filterLocal
+      value = {form.config_tags}
+      dataSource = {tagDataSource}
+      onChange = {config_tags
+    =>
+      this.setConfigTags(config_tags)
+    }
+      hasClear
+      / >
+      < /Form.Item>
+      < Form.Item
+      label = {locale.targetEnvironment} >
+        < Input
+      value = {form.appName}
+      onChange = {appName
+    =>
+      this.changeForm({appName})
+    }
+      />
+      < /Form.Item>
+      < />
+    )
+    }
+  <
+    Form.Item
+    label = {locale.description} >
+      < Input.TextArea
+    value = {form.desc}
+    aria - label = "TextArea"
+    onChange = {desc
+  =>
+    this.changeForm({desc})
+  }
+    />
+    < /Form.Item>
+    {
+      !isNewConfig && tabActiveKey !== 'production' && (
+      < Form.Item
+      label = {locale.betaPublish} >
+        {
+      !betaPublishSuccess && (
+      < Checkbox
+      checked = {isBeta}
+      onChange = {isBeta
+    =>
+      this.setState({isBeta})
+    }>
+      {
+        locale.betaSwitchPrompt
+      }
+    <
+      /Checkbox>
+    )
+    }
+      {
+        isBeta && (
+        < Input.TextArea
+        aria - label = "TextArea"
+        placeholder = "127.0.0.1,127.0.0.2"
+        value = {betaIps}
+        onChange = {betaIps
+      =>
+        this.setState({betaIps})
+      }
+        />
+      )
+      }
+    <
+      /Form.Item>
+    )
+    }
+  <
+    Form.Item
+    label = {locale.format} >
+      < Radio.Group
+    defaultValue = "text"
+    value = {form.type}
+    onChange = {type
+  =>
+    {
+      this.initMoacoEditor(type, form.content);
+      this.changeForm({type});
+    }
+  }
+  >
+    {
+      LANGUAGE_LIST.map(item => (
+        < Radio
+      value = {item.value}
+      key = {item.value} >
+        {item.label}
+        < /Radio>
+    ))
+    }
+  <
+    /Radio.Group>
+    < /Form.Item>
+    < Form.Item
+    label = {
+      < div
+    className = "help-label" >
+      < span > {locale.configcontent} < /span>
+      < Balloon
+    trigger = { < Icon
+    type = "help"
+    size = "small" / >
+  }
+    align = "t"
+    style = {
+    {
+      marginRight: 5
+    }
+  }
+    triggerType = "hover"
+      >
+      < p > {locale.escExit} < /p>
+      < p > {locale.releaseBeta} < /p>
+      < /Balloon>
+      < span >
+  :<
+    /span>
+    < /div>
+  }
+  >
+  <
+    div
+    style = {
+    {
+      clear: 'both', height
+    :
+      300
+    }
+  }
+    id = "container" / >
+      < /Form.Item>
+      < /Form>
+      < Row >
+      < Col
+    span = "24"
+    className = "button-list" >
+      {isBeta && betaPublishSuccess && tabActiveKey !== 'production' && (
+      < Button
+    size = "large"
+    type = "primary"
+    onClick = {()
+  =>
+    this.stopBeta().then(() => {
+      this.successDialog.current.getInstance().openDialog({
+        title: < div > {locale.stopPublishBeta} < /div>,
+      isok: true,
+    ...
+      form,
+    })
+      ;
+    })
+  }
+  >
+    {
+      locale.stopPublishBeta
+    }
+  <
+    /Button>
+  )
+  }
+    {
+      isBeta && tabActiveKey !== 'production' && (
+      < Button
+      size = "large"
+      type = "primary"
+      disabled = {
+      !betaIps || betaPublishSuccess
+    }
+      onClick = {()
+    =>
+      this.openDiff('publishBeta')
+    }
+    >
+      {
+        locale.release
+      }
+    <
+      /Button>
+    )
+    }
+  <
+    Button
+    size = "large"
+    type = "primary"
+    disabled = {tabActiveKey === 'production'
+  }
+    onClick = {()
+  =>
+    this.openDiff('publish')
+  }
+  >
+    {
+      locale.publish
+    }
+  <
+    /Button>
+    < Button
+    size = "large"
+    type = "normal"
+    onClick = {()
+  =>
+    this.goBack()
+  }>
+    {
+      locale.back
+    }
+  <
+    /Button>
+    < /Col>
+    < /Row>
+    < DiffEditorDialog
+    ref = {this.diffEditorDialog}
+    publishConfig = {()
+  =>
+    {
+      const res = this[this.diffcb]();
+      res.then(res => {
+        if (!res) {
+          return;
+        }
+        let title = locale.toedit;
+        if (isNewConfig) {
+          title = locale.newConfigEditor;
+        }
+        if (this.diffcb === 'publishBeta') {
+          title = locale.betaPublish;
+        }
+        if (this.diffcb === 'publish' && tabActiveKey === 'beta') {
+          title = locale.stopPublishBeta;
+          this.stopBeta();
+        }
+        this.successDialog.current.getInstance().openDialog({
+          title: < div > {title} < /div>,
+        isok: true,
+      ...
+        form,
+      })
+        ;
+      });
+    }
+  }
+    />
+    < SuccessDialog
+    ref = {this.successDialog}
+    />
+    < /Loading>
+    < /div>
+  )
+    ;
   }
 }
 

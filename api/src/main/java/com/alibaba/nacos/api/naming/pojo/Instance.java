@@ -213,7 +213,7 @@ public class Instance {
         return getMetaDataByKeyWithDefault(PreservedMetadataKeys.INSTANCE_ID_GENERATOR, Constants.DEFAULT_INSTANCE_ID_GENERATOR);
     }
 
-    private long getMetaDataByKeyWithDefault( String key, long defaultValue) {
+    private long getMetaDataByKeyWithDefault(String key, long defaultValue) {
         if (getMetadata() == null || getMetadata().isEmpty()) {
             return defaultValue;
         }
@@ -224,7 +224,7 @@ public class Instance {
         return defaultValue;
     }
 
-    private String getMetaDataByKeyWithDefault( String key, String defaultValue) {
+    private String getMetaDataByKeyWithDefault(String key, String defaultValue) {
         if (getMetadata() == null || getMetadata().isEmpty()) {
             return defaultValue;
         }

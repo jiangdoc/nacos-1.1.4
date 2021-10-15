@@ -38,7 +38,6 @@ import java.util.Map;
  * Http tool
  *
  * @author Nacos
- *
  */
 public class HttpSimpleClient {
 
@@ -55,10 +54,10 @@ public class HttpSimpleClient {
         HttpURLConnection conn = null;
 
         try {
-            conn = (HttpURLConnection)new URL(url).openConnection();
+            conn = (HttpURLConnection) new URL(url).openConnection();
             conn.setRequestMethod("GET");
             conn.setConnectTimeout(ParamUtil.getConnectTimeout() > 100 ? ParamUtil.getConnectTimeout() : 100);
-            conn.setReadTimeout((int)readTimeoutMs);
+            conn.setReadTimeout((int) readTimeoutMs);
             List<String> newHeaders = getHeaders(url, headers, paramValues);
             setHeaders(conn, newHeaders, encoding);
 
@@ -111,10 +110,10 @@ public class HttpSimpleClient {
         }
         HttpURLConnection conn = null;
         try {
-            conn = (HttpURLConnection)new URL(url).openConnection();
+            conn = (HttpURLConnection) new URL(url).openConnection();
             conn.setRequestMethod("POST");
             conn.setConnectTimeout(ParamUtil.getConnectTimeout() > 3000 ? ParamUtil.getConnectTimeout() : 3000);
-            conn.setReadTimeout((int)readTimeoutMs);
+            conn.setReadTimeout((int) readTimeoutMs);
             conn.setDoOutput(true);
             conn.setDoInput(true);
             List<String> newHeaders = getHeaders(url, headers, paramValues);
@@ -167,10 +166,10 @@ public class HttpSimpleClient {
         HttpURLConnection conn = null;
 
         try {
-            conn = (HttpURLConnection)new URL(url).openConnection();
+            conn = (HttpURLConnection) new URL(url).openConnection();
             conn.setRequestMethod("DELETE");
             conn.setConnectTimeout(ParamUtil.getConnectTimeout() > 100 ? ParamUtil.getConnectTimeout() : 100);
-            conn.setReadTimeout((int)readTimeoutMs);
+            conn.setReadTimeout((int) readTimeoutMs);
             List<String> newHeaders = getHeaders(url, headers, paramValues);
             setHeaders(conn, newHeaders, encoding);
 

@@ -53,7 +53,7 @@ public class NotifyService {
     static public HttpResult invokeURL(String url, List<String> headers, String encoding) throws IOException {
         HttpURLConnection conn = null;
         try {
-            conn = (HttpURLConnection)new URL(url).openConnection();
+            conn = (HttpURLConnection) new URL(url).openConnection();
 
             conn.setConnectTimeout(TIMEOUT);
             conn.setReadTimeout(TIMEOUT);

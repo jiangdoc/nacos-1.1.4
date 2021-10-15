@@ -75,10 +75,10 @@ public class StartingSpringApplicationRunListener implements SpringApplicationRu
             System.setProperty(MODE_PROPERTY_KEY_STAND_MODE, "cluster");
         }
         if (FUNCTION_MODE == null) {
-           System.setProperty(MODE_PROPERTY_KEY_FUNCTION_MODE, "All");
-        } else if(SystemUtils.FUNCTION_MODE_CONFIG.equals(FUNCTION_MODE)){
+            System.setProperty(MODE_PROPERTY_KEY_FUNCTION_MODE, "All");
+        } else if (SystemUtils.FUNCTION_MODE_CONFIG.equals(FUNCTION_MODE)) {
             System.setProperty(MODE_PROPERTY_KEY_FUNCTION_MODE, SystemUtils.FUNCTION_MODE_CONFIG);
-        } else if(SystemUtils.FUNCTION_MODE_NAMING.equals(FUNCTION_MODE)) {
+        } else if (SystemUtils.FUNCTION_MODE_NAMING.equals(FUNCTION_MODE)) {
             System.setProperty(MODE_PROPERTY_KEY_FUNCTION_MODE, SystemUtils.FUNCTION_MODE_NAMING);
         }
 

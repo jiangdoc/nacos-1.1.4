@@ -89,9 +89,9 @@ public interface NamingMaintainService {
     /**
      * create service to Nacos
      *
-     * @param serviceName           name of service
-     * @param groupName             group of service
-     * @param protectThreshold      protectThreshold of service
+     * @param serviceName      name of service
+     * @param groupName        group of service
+     * @param protectThreshold protectThreshold of service
      * @throws NacosException
      */
     void createService(String serviceName, String groupName, float protectThreshold) throws NacosException;
@@ -99,10 +99,10 @@ public interface NamingMaintainService {
     /**
      * create service to Nacos
      *
-     * @param serviceName       name of service
-     * @param groupName         group of service
-     * @param protectThreshold  protectThreshold of service
-     * @param expression        expression of selector
+     * @param serviceName      name of service
+     * @param groupName        group of service
+     * @param protectThreshold protectThreshold of service
+     * @param expression       expression of selector
      * @throws NacosException
      */
     void createService(String serviceName, String groupName, float protectThreshold, String expression) throws NacosException;
@@ -110,8 +110,8 @@ public interface NamingMaintainService {
     /**
      * create service to Nacos
      *
-     * @param service   name of service
-     * @param selector  selector
+     * @param service  name of service
+     * @param selector selector
      * @throws NacosException
      */
     void createService(Service service, AbstractSelector selector) throws NacosException;
@@ -138,9 +138,9 @@ public interface NamingMaintainService {
     /**
      * update service to Nacos
      *
-     * @param serviceName       name of service
-     * @param groupName         group of service
-     * @param protectThreshold  protectThreshold of service
+     * @param serviceName      name of service
+     * @param groupName        group of service
+     * @param protectThreshold protectThreshold of service
      * @throws NacosException
      */
     void updateService(String serviceName, String groupName, float protectThreshold) throws NacosException;
@@ -148,10 +148,10 @@ public interface NamingMaintainService {
     /**
      * update service to Nacos
      *
-     * @param serviceName       name of service
-     * @param groupName         group of service
-     * @param protectThreshold  protectThreshold of service
-     * @param metadata          metadata of service
+     * @param serviceName      name of service
+     * @param groupName        group of service
+     * @param protectThreshold protectThreshold of service
+     * @param metadata         metadata of service
      * @throws NacosException
      */
     void updateService(String serviceName, String groupName, float protectThreshold, Map<String, String> metadata) throws NacosException;
@@ -159,8 +159,8 @@ public interface NamingMaintainService {
     /**
      * update service to Nacos with selector
      *
-     * @param service    {@link Service} pojo of service
-     * @param selector   {@link AbstractSelector} pojo of selector
+     * @param service  {@link Service} pojo of service
+     * @param selector {@link AbstractSelector} pojo of selector
      * @throws NacosException
      */
     void updateService(Service service, AbstractSelector selector) throws NacosException;

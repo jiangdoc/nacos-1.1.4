@@ -69,7 +69,7 @@ public class IOUtils {
     }
 
     static private BufferedReader toBufferedReader(Reader reader) {
-        return reader instanceof BufferedReader ? (BufferedReader)reader : new BufferedReader(
+        return reader instanceof BufferedReader ? (BufferedReader) reader : new BufferedReader(
             reader);
     }
 

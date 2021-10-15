@@ -384,7 +384,7 @@ public class ServerListManager {
 
         List<Server> newHealthyList = new ArrayList<>(servers.size());
         long now = System.currentTimeMillis();
-        for (Server s: servers) {
+        for (Server s : servers) {
             Long lastBeat = distroBeats.get(s.getKey());
             if (null == lastBeat) {
                 continue;

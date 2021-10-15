@@ -52,12 +52,12 @@ public class Unsubscribe_ITCase {
     private int port;
 
     @Before
-    public void init() throws Exception{
+    public void init() throws Exception {
         NamingBase.prepareServer(port);
         instances = Collections.emptyList();
         if (naming == null) {
             //TimeUnit.SECONDS.sleep(10);
-            naming = NamingFactory.createNamingService("127.0.0.1"+":"+port);
+            naming = NamingFactory.createNamingService("127.0.0.1" + ":" + port);
         }
         while (true) {
             if (!"UP".equals(naming.getServerStatus())) {
@@ -72,6 +72,7 @@ public class Unsubscribe_ITCase {
 
     /**
      * 取消订阅，添加IP，不会收到通知
+     *
      * @throws Exception
      */
     @Test
@@ -81,9 +82,9 @@ public class Unsubscribe_ITCase {
         EventListener listener = new EventListener() {
             @Override
             public void onEvent(Event event) {
-                System.out.println(((NamingEvent)event).getServiceName());
-                System.out.println(((NamingEvent)event).getInstances());
-                instances = ((NamingEvent)event).getInstances();
+                System.out.println(((NamingEvent) event).getServiceName());
+                System.out.println(((NamingEvent) event).getInstances());
+                instances = ((NamingEvent) event).getInstances();
             }
         };
 
@@ -115,6 +116,7 @@ public class Unsubscribe_ITCase {
 
     /**
      * 取消订阅，在指定cluster添加IP，不会收到通知
+     *
      * @throws Exception
      */
     @Test
@@ -124,9 +126,9 @@ public class Unsubscribe_ITCase {
         EventListener listener = new EventListener() {
             @Override
             public void onEvent(Event event) {
-                System.out.println(((NamingEvent)event).getServiceName());
-                System.out.println(((NamingEvent)event).getInstances());
-                instances = ((NamingEvent)event).getInstances();
+                System.out.println(((NamingEvent) event).getServiceName());
+                System.out.println(((NamingEvent) event).getInstances());
+                instances = ((NamingEvent) event).getInstances();
             }
         };
 

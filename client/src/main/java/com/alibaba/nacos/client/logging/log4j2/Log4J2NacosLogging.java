@@ -48,7 +48,7 @@ public class Log4J2NacosLogging extends AbstractNacosLogging {
 
     @Override
     public void loadConfiguration() {
-        final LoggerContext loggerContext = (LoggerContext)LogManager.getContext(false);
+        final LoggerContext loggerContext = (LoggerContext) LogManager.getContext(false);
         final Configuration contextConfiguration = loggerContext.getConfiguration();
 
         // load and start nacos configuration
@@ -57,7 +57,7 @@ public class Log4J2NacosLogging extends AbstractNacosLogging {
 
         // append loggers and appenders to contextConfiguration
         Map<String, Appender> appenders = configuration.getAppenders();
-        for (Appender appender: appenders.values()) {
+        for (Appender appender : appenders.values()) {
             contextConfiguration.addAppender(appender);
         }
         Map<String, LoggerConfig> loggers = configuration.getLoggers();

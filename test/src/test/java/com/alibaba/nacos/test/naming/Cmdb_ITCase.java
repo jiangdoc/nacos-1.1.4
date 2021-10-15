@@ -21,6 +21,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.nacos.api.common.Constants;
@@ -80,8 +81,8 @@ public class Cmdb_ITCase {
     }
 
     /**
-     * @TCDescription : cmdb注册的label,同机房优先
      * @throws Exception
+     * @TCDescription : cmdb注册的label,同机房优先
      */
     @Test
     public void cmdb_getInstanceList_1() throws Exception {
@@ -106,7 +107,7 @@ public class Cmdb_ITCase {
         JSONObject json = new JSONObject();
         json.put("type", "label");
         json.put("expression", "CONSUMER.label.label1 = PROVIDER.label.label1");
-        ResponseEntity<String>  httpResult = request("/nacos/v1/ns/service",
+        ResponseEntity<String> httpResult = request("/nacos/v1/ns/service",
             Params.newParams()
                 .appendParam("serviceName", serviceName)
                 .appendParam("protectThreshold", "0")
@@ -130,8 +131,8 @@ public class Cmdb_ITCase {
 
 
     /**
-     * @TCDescription : cmdb未注册的label,获取所有的instance
      * @throws Exception
+     * @TCDescription : cmdb未注册的label,获取所有的instance
      */
     @Test
     public void cmdb_getInstanceList_2() throws Exception {
@@ -156,7 +157,7 @@ public class Cmdb_ITCase {
         JSONObject json = new JSONObject();
         json.put("type", "label");
         json.put("expression", "CONSUMER.label.label1 = PROVIDER.label.label1");
-        ResponseEntity<String>  httpResult = request("/nacos/v1/ns/service",
+        ResponseEntity<String> httpResult = request("/nacos/v1/ns/service",
             Params.newParams()
                 .appendParam("serviceName", serviceName)
                 .appendParam("protectThreshold", "0")
@@ -178,8 +179,8 @@ public class Cmdb_ITCase {
     }
 
     /**
-     * @TCDescription : cmdb规则不同,根据IP获取优先的instance
      * @throws Exception
+     * @TCDescription : cmdb规则不同,根据IP获取优先的instance
      */
     @Test
     public void cmdb_getInstanceList_3() throws Exception {
@@ -205,7 +206,7 @@ public class Cmdb_ITCase {
         json.put("type", "label");
         json.put("expression", "CONSUMER.label.label1 = PROVIDER.label.label1 & CONSUMER.label.label2 = PROVIDER.label.label2");
 
-        ResponseEntity<String>  httpResult = request("/nacos/v1/ns/service",
+        ResponseEntity<String> httpResult = request("/nacos/v1/ns/service",
             Params.newParams()
                 .appendParam("serviceName", serviceName)
                 .appendParam("protectThreshold", "0")
@@ -229,8 +230,8 @@ public class Cmdb_ITCase {
     }
 
     /**
-     * @TCDescription : cmdb规则不同,对不同的serviceName的不影响
      * @throws Exception
+     * @TCDescription : cmdb规则不同,对不同的serviceName的不影响
      */
     @Test
     public void cmdb_getInstanceList_4() throws Exception {
@@ -256,7 +257,7 @@ public class Cmdb_ITCase {
         JSONObject json = new JSONObject();
         json.put("type", "label");
         json.put("expression", "CONSUMER.label.label1 = PROVIDER.label.label1 & CONSUMER.label.label2 = PROVIDER.label.label2");
-        ResponseEntity<String>  httpResult = request("/nacos/v1/ns/service",
+        ResponseEntity<String> httpResult = request("/nacos/v1/ns/service",
             Params.newParams()
                 .appendParam("serviceName", serviceName)
                 .appendParam("protectThreshold", "0")
@@ -266,10 +267,10 @@ public class Cmdb_ITCase {
             HttpMethod.PUT);
         Assert.assertEquals(HttpURLConnection.HTTP_OK, httpResult.getStatusCodeValue());
 
-        httpResult = request( "/nacos/v1/ns/service",
+        httpResult = request("/nacos/v1/ns/service",
             Params.newParams()
                 .appendParam("serviceName", serviceName)
-                .appendParam( "namespaceId", Constants.DEFAULT_NAMESPACE_ID)
+                .appendParam("namespaceId", Constants.DEFAULT_NAMESPACE_ID)
                 .done(),
             String.class,
             HttpMethod.GET);
@@ -291,8 +292,8 @@ public class Cmdb_ITCase {
 
 
     /**
-     * @TCDescription : cmdb规则不同,根据IP获取优先的instance,对不同的serviceName的不影响
      * @throws Exception
+     * @TCDescription : cmdb规则不同,根据IP获取优先的instance,对不同的serviceName的不影响
      */
     @Test
     public void cmdb_getInstanceList_5() throws Exception {
@@ -318,7 +319,7 @@ public class Cmdb_ITCase {
         JSONObject json = new JSONObject();
         json.put("type", "label");
         json.put("expression", "CONSUMER.label.label1 = PROVIDER.label.label1 & CONSUMER.label.label2 = PROVIDER.label.label2");
-        ResponseEntity<String>  httpResult = request("/nacos/v1/ns/service",
+        ResponseEntity<String> httpResult = request("/nacos/v1/ns/service",
             Params.newParams()
                 .appendParam("serviceName", serviceName)
                 .appendParam("protectThreshold", "0")
@@ -342,8 +343,8 @@ public class Cmdb_ITCase {
     }
 
     /**
-     * @TCDescription : cmdb规则不同,selector为空时
      * @throws Exception
+     * @TCDescription : cmdb规则不同,selector为空时
      */
     @Test
     public void cmdb_getInstanceList_6() throws Exception {
@@ -369,7 +370,7 @@ public class Cmdb_ITCase {
         JSONObject json = new JSONObject();
         json.put("type", "label");
         json.put("expression", "CONSUMER.label.label1 = PROVIDER.label.label1 & CONSUMER.label.label2 = PROVIDER.label.label2");
-        ResponseEntity<String>  httpResult = request("/nacos/v1/ns/service",
+        ResponseEntity<String> httpResult = request("/nacos/v1/ns/service",
             Params.newParams()
                 .appendParam("serviceName", serviceName)
                 .appendParam("protectThreshold", "0")
@@ -394,8 +395,8 @@ public class Cmdb_ITCase {
     }
 
     /**
-     * @TCDescription : cmdb规则不同,selector规则改变
      * @throws Exception
+     * @TCDescription : cmdb规则不同,selector规则改变
      */
     @Test
     public void cmdb_getInstanceList_7() throws Exception {
@@ -425,7 +426,7 @@ public class Cmdb_ITCase {
         List<String> params = Arrays.asList("serviceName", serviceName, "protectThreshold", "0", "selector", json.toString());
 
 
-        ResponseEntity<String>  httpResult = request("/nacos/v1/ns/service",
+        ResponseEntity<String> httpResult = request("/nacos/v1/ns/service",
             Params.newParams()
                 .appendParam("serviceName", serviceName)
                 .appendParam("protectThreshold", "0")
@@ -473,8 +474,8 @@ public class Cmdb_ITCase {
 
 
     /**
-     * @TCDescription : cmdb规则不同,expression为空
      * @throws Exception
+     * @TCDescription : cmdb规则不同,expression为空
      */
     @Test
     public void cmdb_getInstanceList_8() throws Exception {
@@ -500,7 +501,7 @@ public class Cmdb_ITCase {
         JSONObject json = new JSONObject();
         json.put("type", "label");
         json.put("expression", "");
-        ResponseEntity<String>  httpResult = request("/nacos/v1/ns/service",
+        ResponseEntity<String> httpResult = request("/nacos/v1/ns/service",
             Params.newParams()
                 .appendParam("serviceName", serviceName)
                 .appendParam("protectThreshold", "0")
@@ -524,8 +525,8 @@ public class Cmdb_ITCase {
     }
 
     /**
-     * @TCDescription : cmdb规则不同,expression为null,获取所有的instance
      * @throws Exception
+     * @TCDescription : cmdb规则不同,expression为null,获取所有的instance
      */
     @Test
     public void cmdb_getInstanceList_9() throws Exception {
@@ -552,7 +553,7 @@ public class Cmdb_ITCase {
         JSONObject json = new JSONObject();
         json.put("type", "label");
         json.put("expression", "");
-        ResponseEntity<String>  httpResult = request("/nacos/v1/ns/service",
+        ResponseEntity<String> httpResult = request("/nacos/v1/ns/service",
             Params.newParams()
                 .appendParam("serviceName", serviceName)
                 .appendParam("protectThreshold", "0")
@@ -576,8 +577,8 @@ public class Cmdb_ITCase {
     }
 
     /**
-     * @TCDescription : cmdb规则不同,type为label填写异常
      * @throws Exception
+     * @TCDescription : cmdb规则不同,type为label填写异常
      */
     @Test
     public void cmdb_getInstanceList_10() throws Exception {
@@ -603,7 +604,7 @@ public class Cmdb_ITCase {
         JSONObject json = new JSONObject();
         json.put("type", "label1");
         json.put("expression", "CONSUMER.label.label1 = PROVIDER.label.label1 & CONSUMER.label.label2 = PROVIDER.label.label2");
-        ResponseEntity<String>  httpResult = request("/nacos/v1/ns/service",
+        ResponseEntity<String> httpResult = request("/nacos/v1/ns/service",
             Params.newParams()
                 .appendParam("serviceName", serviceName)
                 .appendParam("protectThreshold", "0")
@@ -616,7 +617,7 @@ public class Cmdb_ITCase {
 
     public void instanceRegister(String serviceName, String namespace, String groupName, String ip, String port, String clusterName) throws
         IOException {
-        ResponseEntity<String>  httpResult = request( "/nacos/v1/ns/instance",
+        ResponseEntity<String> httpResult = request("/nacos/v1/ns/instance",
             Params.newParams()
                 .appendParam("serviceName", serviceName)
                 .appendParam("ip", ip)
@@ -637,11 +638,11 @@ public class Cmdb_ITCase {
 
     public void namingServiceCreate(String serviceName, String namespace, String groupName) throws IOException {
         List<String> listParams = Arrays.asList("serviceName", serviceName, "protectThreshold", "0.3", "namespaceId", namespace, "groupName", groupName);
-        ResponseEntity<String>  httpResult = request("/nacos/v1/ns/service",
+        ResponseEntity<String> httpResult = request("/nacos/v1/ns/service",
             Params.newParams()
                 .appendParam("serviceName", serviceName)
                 .appendParam("protectThreshold", "0.3")
-                .appendParam( "namespaceId", namespace)
+                .appendParam("namespaceId", namespace)
                 .appendParam("groupName", groupName)
                 .done(),
             String.class,
@@ -650,7 +651,7 @@ public class Cmdb_ITCase {
     }
 
     private <T> ResponseEntity<T> request(String path, MultiValueMap<String, String> params, Class<T> clazz) {
-        return  request(path, params, clazz, org.springframework.http.HttpMethod.GET);
+        return request(path, params, clazz, org.springframework.http.HttpMethod.GET);
     }
 
     private <T> ResponseEntity<T> request(String path, MultiValueMap<String, String> params, Class<T> clazz, org.springframework.http.HttpMethod httpMethod) {

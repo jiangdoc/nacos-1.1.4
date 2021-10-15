@@ -49,7 +49,7 @@ public class JsonAdapter implements ObjectDeserializer, ObjectSerializer {
 
         Class target = HealthCheckType.ofHealthCheckerClass(checkType);
 
-        if(target != null){
+        if (target != null) {
             return (T) JSON.parseObject(jsonObj.toJSONString(), target);
         }
 

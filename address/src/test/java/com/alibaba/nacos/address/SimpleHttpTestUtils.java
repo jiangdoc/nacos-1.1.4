@@ -138,7 +138,7 @@ public class SimpleHttpTestUtils {
                 }
 
                 if (params.length() > 0 &&
-                        (REQUEST_METHOD_GET.equals(reqMethod) || REQUEST_METHOD_DELETE.equals(reqMethod))) {
+                    (REQUEST_METHOD_GET.equals(reqMethod) || REQUEST_METHOD_DELETE.equals(reqMethod))) {
                     reqUrl = reqUrl + "?" + params.toString();
                 }
             }

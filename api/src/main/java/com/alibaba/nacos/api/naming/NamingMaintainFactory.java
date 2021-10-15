@@ -31,7 +31,7 @@ public class NamingMaintainFactory {
         try {
             Class<?> driverImplClass = Class.forName("com.alibaba.nacos.client.naming.NacosNamingMaintainService");
             Constructor constructor = driverImplClass.getConstructor(String.class);
-            NamingMaintainService vendorImpl = (NamingMaintainService)constructor.newInstance(serverList);
+            NamingMaintainService vendorImpl = (NamingMaintainService) constructor.newInstance(serverList);
             return vendorImpl;
         } catch (Throwable e) {
             throw new NacosException(NacosException.CLIENT_INVALID_PARAM, e);
@@ -42,7 +42,7 @@ public class NamingMaintainFactory {
         try {
             Class<?> driverImplClass = Class.forName("com.alibaba.nacos.client.naming.NacosNamingMaintainService");
             Constructor constructor = driverImplClass.getConstructor(Properties.class);
-            NamingMaintainService vendorImpl = (NamingMaintainService)constructor.newInstance(properties);
+            NamingMaintainService vendorImpl = (NamingMaintainService) constructor.newInstance(properties);
             return vendorImpl;
         } catch (Throwable e) {
             throw new NacosException(NacosException.CLIENT_INVALID_PARAM, e);

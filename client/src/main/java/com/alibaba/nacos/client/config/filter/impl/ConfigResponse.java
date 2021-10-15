@@ -33,7 +33,7 @@ public class ConfigResponse implements IConfigResponse {
     private IConfigContext configContext = new ConfigContext();
 
     public String getTenant() {
-        return (String)param.get("tenant");
+        return (String) param.get("tenant");
     }
 
     public void setTenant(String tenant) {
@@ -41,7 +41,7 @@ public class ConfigResponse implements IConfigResponse {
     }
 
     public String getDataId() {
-        return (String)param.get("dataId");
+        return (String) param.get("dataId");
     }
 
     public void setDataId(String dataId) {
@@ -49,7 +49,7 @@ public class ConfigResponse implements IConfigResponse {
     }
 
     public String getGroup() {
-        return (String)param.get("group");
+        return (String) param.get("group");
     }
 
     public void setGroup(String group) {
@@ -57,7 +57,7 @@ public class ConfigResponse implements IConfigResponse {
     }
 
     public String getContent() {
-        return (String)param.get("content");
+        return (String) param.get("content");
     }
 
     public void setContent(String content) {

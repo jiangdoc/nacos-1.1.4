@@ -33,6 +33,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.slf4j.Logger;
+
 import java.io.IOException;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
@@ -102,7 +103,7 @@ public class ServerHttpAgent implements HttpAgent {
             if (serverListMgr.getIterator().hasNext()) {
                 currentServerAddr = serverListMgr.getIterator().next();
             } else {
-                maxRetry --;
+                maxRetry--;
                 if (maxRetry < 0) {
                     throw new ConnectException("[NACOS HTTP-GET] The maximum number of tolerable server reconnection errors has been reached");
                 }
@@ -157,7 +158,7 @@ public class ServerHttpAgent implements HttpAgent {
             if (serverListMgr.getIterator().hasNext()) {
                 currentServerAddr = serverListMgr.getIterator().next();
             } else {
-                maxRetry --;
+                maxRetry--;
                 if (maxRetry < 0) {
                     throw new ConnectException("[NACOS HTTP-POST] The maximum number of tolerable server reconnection errors has been reached");
                 }
@@ -210,7 +211,7 @@ public class ServerHttpAgent implements HttpAgent {
             if (serverListMgr.getIterator().hasNext()) {
                 currentServerAddr = serverListMgr.getIterator().next();
             } else {
-                maxRetry --;
+                maxRetry--;
                 if (maxRetry < 0) {
                     throw new ConnectException("[NACOS HTTP-DELETE] The maximum number of tolerable server reconnection errors has been reached");
                 }

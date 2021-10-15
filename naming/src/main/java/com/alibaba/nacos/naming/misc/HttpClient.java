@@ -248,7 +248,7 @@ public class HttpClient {
                 HeaderElement[] headerElements = entity.getContentType().getElements();
 
                 if (headerElements != null && headerElements.length > 0 && headerElements[0] != null &&
-                        headerElements[0].getParameterByName("charset") != null) {
+                    headerElements[0].getParameterByName("charset") != null) {
                     charset = headerElements[0].getParameterByName("charset").getValue();
                 }
             }
@@ -383,7 +383,7 @@ public class HttpClient {
             String charset = headerElements[0].getParameterByName("charset").getValue();
 
             return new HttpResult(response.getStatusLine().getStatusCode(),
-                    IOUtils.toString(entity.getContent(), charset), Collections.<String, String>emptyMap());
+                IOUtils.toString(entity.getContent(), charset), Collections.<String, String>emptyMap());
         } catch (Exception e) {
             return new HttpResult(500, e.toString(), Collections.<String, String>emptyMap());
         }
@@ -447,14 +447,14 @@ public class HttpClient {
         }
 
         conn.addRequestProperty("Content-Type", "application/x-www-form-urlencoded;charset="
-                + encoding);
+            + encoding);
         conn.addRequestProperty("Accept-Charset", encoding);
         conn.addRequestProperty(HttpHeaderConsts.CLIENT_VERSION_HEADER, VersionUtils.VERSION);
         conn.addRequestProperty(HttpHeaderConsts.USER_AGENT_HEADER, UtilsAndCommons.SERVER_VERSION);
     }
 
     public static String encodingParams(Map<String, String> params, String encoding)
-            throws UnsupportedEncodingException {
+        throws UnsupportedEncodingException {
         StringBuilder sb = new StringBuilder();
         if (null == params || params.isEmpty()) {
             return null;

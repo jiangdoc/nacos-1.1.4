@@ -1,10 +1,10 @@
 import React from 'react';
-import { Card, Form, Input, Message, ConfigProvider, Field } from '@alifd/next';
-import { withRouter } from 'react-router-dom';
+import {Card, Form, Input, Message, ConfigProvider, Field} from '@alifd/next';
+import {withRouter} from 'react-router-dom';
 
 import './index.scss';
 import Header from '../../layouts/Header';
-import { request } from '../../globalLib';
+import {request} from '../../globalLib';
 import PropTypes from 'prop-types';
 
 const FormItem = Form.Item;
@@ -25,7 +25,7 @@ class Login extends React.Component {
   }
 
   handleSubmit = () => {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     this.field.validate((errors, values) => {
       if (errors) {
         return;
@@ -34,7 +34,7 @@ class Login extends React.Component {
         type: 'post',
         url: 'v1/auth/login',
         data: values,
-        success: ({ code, data }) => {
+        success: ({code, data}) => {
           if (code === 200) {
             // TODO: 封装一个方法存储、读取token
             localStorage.setItem('token', data);
@@ -66,11 +66,11 @@ class Login extends React.Component {
   };
 
   render() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
 
     return (
       <div className="home-page">
-        <Header />
+        <Header/>
         <section
           className="top-section"
           style={{
@@ -79,17 +79,17 @@ class Login extends React.Component {
           }}
         >
           <div className="vertical-middle product-area">
-            <img className="product-logo" src="img/nacos.png" />
+            <img className="product-logo" src="img/nacos.png"/>
             <p className="product-desc">
               an easy-to-use dynamic service discovery, configuration and service management
               platform for building cloud native applications
             </p>
           </div>
-          <div className="animation animation1" />
-          <div className="animation animation2" />
-          <div className="animation animation3" />
-          <div className="animation animation4" />
-          <div className="animation animation5" />
+          <div className="animation animation1"/>
+          <div className="animation animation2"/>
+          <div className="animation animation3"/>
+          <div className="animation animation4"/>
+          <div className="animation animation5"/>
           <Card className="login-panel" contentHeight="auto">
             <div className="login-header">{locale.login}</div>
             <Form className="login-form" field={this.field}>

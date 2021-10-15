@@ -44,7 +44,7 @@ public class NotifySingleService {
 
         @Override
         public boolean process(String taskType, AbstractTask task) {
-            NotifySingleTask notifyTask = (NotifySingleTask)task;
+            NotifySingleTask notifyTask = (NotifySingleTask) task;
             return notifyToDump(notifyTask.getDataId(), notifyTask.getGroup(), notifyTask.getTenant(),
                 notifyTask.getLastModified(), notifyTask.target);
         }
@@ -73,14 +73,14 @@ public class NotifySingleService {
                 LogUtil.notifyLog.error("[notify-exception] target:{} dataid:{} group:{} ts:{}", target, getDataId(),
                     getGroup(), getLastModified());
                 LogUtil.notifyLog.debug("[notify-exception] target:{} dataid:{} group:{} ts:{}",
-                    new Object[] {target, getDataId(), getGroup(), getLastModified()}, e);
+                    new Object[]{target, getDataId(), getGroup(), getLastModified()}, e);
             }
 
             if (!this.isSuccess) {
                 LogUtil.notifyLog.error("[notify-retry] target:{} dataid:{} group:{} ts:{}", target, getDataId(),
                     getGroup(), getLastModified());
                 try {
-                    ((ScheduledThreadPoolExecutor)executor).schedule(this, 500L, TimeUnit.MILLISECONDS);
+                    ((ScheduledThreadPoolExecutor) executor).schedule(this, 500L, TimeUnit.MILLISECONDS);
                 } catch (Exception e) { // 通知虽然失败，但是同时此前节点也下线了
                     logger.warn("[notify-thread-pool] cluster remove node {}, current thread was tear down.", target,
                         e);
@@ -132,7 +132,7 @@ public class NotifySingleService {
              *  集群节点下线
              */
             if (!clusterIps.contains(target)) {
-                ThreadPoolExecutor executor = (ThreadPoolExecutor)entry.getValue();
+                ThreadPoolExecutor executor = (ThreadPoolExecutor) entry.getValue();
                 executor.shutdown();
                 executors.remove(target);
                 logger.warn("[notify-thread-pool] tear down thread target ip {} ok.", target);

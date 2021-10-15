@@ -85,7 +85,7 @@ public class CollectionUtils {
         Map count = new HashMap(coll.size());
         for (Iterator it = coll.iterator(); it.hasNext(); ) {
             Object obj = it.next();
-            Integer c = (Integer)(count.get(obj));
+            Integer c = (Integer) (count.get(obj));
             if (c == null) {
                 count.put(obj, INTEGER_ONE);
             } else {
@@ -143,7 +143,7 @@ public class CollectionUtils {
     }
 
     private static int getFreq(final Object obj, final Map freqMap) {
-        Integer count = (Integer)freqMap.get(obj);
+        Integer count = (Integer) freqMap.get(obj);
         if (count != null) {
             return count.intValue();
         }

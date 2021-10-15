@@ -13,9 +13,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ConfigProvider, Field, Form, Input, Loading, Pagination, Table } from '@alifd/next';
+import {ConfigProvider, Field, Form, Input, Loading, Pagination, Table} from '@alifd/next';
 import RegionGroup from 'components/RegionGroup';
-import { getParams, setParams, request, aliwareIntl } from '@/globalLib';
+import {getParams, setParams, request, aliwareIntl} from '@/globalLib';
 
 import './index.scss';
 
@@ -104,9 +104,11 @@ class HistoryRollback extends React.Component {
     window.removeEventListener('keydown', this.keyDownSearch.bind(this));
   }
 
-  onSearch() {}
+  onSearch() {
+  }
 
-  onChange() {}
+  onChange() {
+  }
 
   cleanAndGetData(needclean = false) {
     if (needclean) {
@@ -151,21 +153,44 @@ class HistoryRollback extends React.Component {
     });
   }
 
-  showMore() {}
+  showMore() {
+  }
 
   renderCol(value, index, record) {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     return (
-      <div>
-        <a onClick={this.goDetail.bind(this, record)} style={{ marginRight: 5 }}>
-          {locale.details}
-        </a>
-        <span style={{ marginRight: 5 }}>|</span>
-        <a style={{ marginRight: 5 }} onClick={this.goRollBack.bind(this, record)}>
-          {locale.rollback}
-        </a>
-      </div>
-    );
+      < div >
+      < a
+    onClick = {this.goDetail.bind(this, record)}
+    style = {
+    {
+      marginRight: 5
+    }
+  }>
+    {
+      locale.details
+    }
+  <
+    /a>
+    < span
+    style = {
+    {
+      marginRight: 5
+    }
+  }>|<
+    /span>
+    < a
+    style = {
+    {
+      marginRight: 5
+    }
+  }
+    onClick = {this.goRollBack.bind(this, record)} >
+      {locale.rollback}
+      < /a>
+      < /div>
+  )
+    ;
   }
 
   changePage(value) {
@@ -175,7 +200,8 @@ class HistoryRollback extends React.Component {
     this.getData(value);
   }
 
-  onInputUpdate() {}
+  onInputUpdate() {
+  }
 
   chooseFieldChange(fieldValue) {
     this.setState({
@@ -263,7 +289,8 @@ class HistoryRollback extends React.Component {
     });
   }
 
-  chooseEnv(value) {}
+  chooseEnv(value) {
+  }
 
   renderLastTime(value, index, record) {
     return aliwareIntl.intlTimeFormat(record.lastModifiedTime);
@@ -290,107 +317,213 @@ class HistoryRollback extends React.Component {
   }
 
   render() {
-    const { locale = {} } = this.props;
-    const { init } = this.field;
+    const {locale = {}} = this.props;
+    const {init} = this.field;
     this.init = init;
     return (
-      <div style={{ padding: 10 }}>
-        <Loading
-          shape="flower"
-          style={{ position: 'relative', width: '100%' }}
-          visible={this.state.loading}
-          tip="Loading..."
-          color="#333"
-        >
-          <RegionGroup
-            left={locale.toConfigure}
-            namespaceCallBack={this.cleanAndGetData.bind(this)}
-          />
-          <div>
-            <Form inline field={this.field}>
-              <Form.Item label="Data ID:" required>
-                <Input
-                  placeholder={locale.dataId}
-                  style={{ width: 200 }}
-                  {...this.init('dataId', {
-                    rules: [
-                      {
-                        required: true,
-                        message: locale.dataIdCanNotBeEmpty,
-                      },
-                    ],
-                  })}
-                />
-              </Form.Item>
-              <Form.Item label="Group:" required>
-                <Input
-                  placeholder={locale.group}
-                  style={{ width: 200 }}
-                  {...this.init('group', {
-                    rules: [
-                      {
-                        required: true,
-                        message: locale.groupCanNotBeEmpty,
-                      },
-                    ],
-                  })}
-                />
-              </Form.Item>
+      < div
+    style = {
+    {
+      padding: 10
+    }
+  }>
+  <
+    Loading
+    shape = "flower"
+    style = {
+    {
+      position: 'relative', width
+    :
+      '100%'
+    }
+  }
+    visible = {this.state.loading}
+    tip = "Loading..."
+    color = "#333"
+      >
+      < RegionGroup
+    left = {locale.toConfigure}
+    namespaceCallBack = {this.cleanAndGetData.bind(this)}
+    />
+    < div >
+    < Form
+    inline
+    field = {this.field} >
+      < Form.Item
+    label = "Data ID:"
+    required >
+    < Input
+    placeholder = {locale.dataId}
+    style = {
+    {
+      width: 200
+    }
+  }
+    {...
+      this.init('dataId', {
+        rules: [
+          {
+            required: true,
+            message: locale.dataIdCanNotBeEmpty,
+          },
+        ],
+      })
+    }
+    />
+    < /Form.Item>
+    < Form.Item
+    label = "Group:"
+    required >
+    < Input
+    placeholder = {locale.group}
+    style = {
+    {
+      width: 200
+    }
+  }
+    {...
+      this.init('group', {
+        rules: [
+          {
+            required: true,
+            message: locale.groupCanNotBeEmpty,
+          },
+        ],
+      })
+    }
+    />
+    < /Form.Item>
 
-              <Form.Item label="">
-                <Form.Submit
-                  validate
-                  type="primary"
-                  onClick={this.selectAll.bind(this)}
-                  style={{ marginRight: 10 }}
-                >
-                  {locale.query}
-                </Form.Submit>
-              </Form.Item>
-            </Form>
-          </div>
-          <div style={{ position: 'relative', width: '100%', overflow: 'hidden', height: '40px' }}>
-            <h3
-              style={{
-                height: 30,
-                width: '100%',
-                lineHeight: '30px',
-                padding: 0,
-                margin: 0,
-                paddingLeft: 10,
-                borderLeft: '3px solid #09c',
-                fontSize: 16,
-              }}
-            >
-              {locale.queryResult}
-              <strong style={{ fontWeight: 'bold' }}> {this.state.total} </strong>
-              {locale.articleMeet}
-            </h3>
-          </div>
-          <div>
-            <Table dataSource={this.state.dataSource} locale={{ empty: locale.pubNoData }}>
-              <Table.Column title="Data ID" dataIndex="dataId" />
-              <Table.Column title="Group" dataIndex="group" />
-              <Table.Column
-                title={locale.lastUpdateTime}
-                dataIndex="time"
-                cell={this.renderLastTime.bind(this)}
-              />
-              <Table.Column title={locale.operation} cell={this.renderCol.bind(this)} />
-            </Table>
-          </div>
-          <div style={{ marginTop: 10, textAlign: 'right' }}>
-            <Pagination
-              current={this.state.currentPage}
-              total={this.state.total}
-              pageSize={this.state.pageSize}
-              onChange={this.changePage.bind(this)}
-            />
-            ,
-          </div>
-        </Loading>
-      </div>
-    );
+    < Form.Item
+    label = "" >
+      < Form.Submit
+    validate
+    type = "primary"
+    onClick = {this.selectAll.bind(this)}
+    style = {
+    {
+      marginRight: 10
+    }
+  }
+  >
+    {
+      locale.query
+    }
+  <
+    /Form.Submit>
+    < /Form.Item>
+    < /Form>
+    < /div>
+    < div
+    style = {
+    {
+      position: 'relative', width
+    :
+      '100%', overflow
+    :
+      'hidden', height
+    :
+      '40px'
+    }
+  }>
+  <
+    h3
+    style = {
+    {
+      height: 30,
+        width
+    :
+      '100%',
+        lineHeight
+    :
+      '30px',
+        padding
+    :
+      0,
+        margin
+    :
+      0,
+        paddingLeft
+    :
+      10,
+        borderLeft
+    :
+      '3px solid #09c',
+        fontSize
+    :
+      16,
+    }
+  }
+  >
+    {
+      locale.queryResult
+    }
+  <
+    strong
+    style = {
+    {
+      fontWeight: 'bold'
+    }
+  }>
+    {
+      this.state.total
+    }
+  <
+    /strong>
+    {
+      locale.articleMeet
+    }
+  <
+    /h3>
+    < /div>
+    < div >
+    < Table
+    dataSource = {this.state.dataSource}
+    locale = {
+    {
+      empty: locale.pubNoData
+    }
+  }>
+  <
+    Table.Column
+    title = "Data ID"
+    dataIndex = "dataId" / >
+      < Table.Column
+    title = "Group"
+    dataIndex = "group" / >
+      < Table.Column
+    title = {locale.lastUpdateTime}
+    dataIndex = "time"
+    cell = {this.renderLastTime.bind(this)}
+    />
+    < Table.Column
+    title = {locale.operation}
+    cell = {this.renderCol.bind(this)}
+    />
+    < /Table>
+    < /div>
+    < div
+    style = {
+    {
+      marginTop: 10, textAlign
+    :
+      'right'
+    }
+  }>
+  <
+    Pagination
+    current = {this.state.currentPage}
+    total = {this.state.total}
+    pageSize = {this.state.pageSize}
+    onChange = {this.changePage.bind(this)}
+    />
+      ,
+  <
+    /div>
+    < /Loading>
+    < /div>
+  )
+    ;
   }
 }
 

@@ -62,10 +62,10 @@ public class ConfigExportAndImportAPI_ITCase {
 
     @Before
     public void setUp() throws Exception {
-        SERVER_ADDR = "http://127.0.0.1"+":"+ port + "/nacos";
+        SERVER_ADDR = "http://127.0.0.1" + ":" + port + "/nacos";
 
         Properties properties = new Properties();
-        properties.put(PropertyKeyConst.SERVER_ADDR, "127.0.0.1"+":"+port);
+        properties.put(PropertyKeyConst.SERVER_ADDR, "127.0.0.1" + ":" + port);
         agent = new MetricsHttpAgent(new ServerHttpAgent(properties));
         agent.start();
 
@@ -75,24 +75,24 @@ public class ConfigExportAndImportAPI_ITCase {
         prarm.put("content", "test: test");
         prarm.put("desc", "testNoAppname1");
         prarm.put("type", "yaml");
-        Assert.assertEquals("true", httpClient.post(SERVER_ADDR + CONFIG_CONTROLLER_PATH , prarm,null));
+        Assert.assertEquals("true", httpClient.post(SERVER_ADDR + CONFIG_CONTROLLER_PATH, prarm, null));
         prarm.put("dataId", "testNoAppname2.txt");
         prarm.put("group", "TEST1_GROUP");
         prarm.put("content", "test: test");
         prarm.put("desc", "testNoAppname2");
         prarm.put("type", "text");
-        Assert.assertEquals("true", httpClient.post(SERVER_ADDR + CONFIG_CONTROLLER_PATH , prarm,null));
+        Assert.assertEquals("true", httpClient.post(SERVER_ADDR + CONFIG_CONTROLLER_PATH, prarm, null));
         prarm.put("dataId", "testHasAppname1.properties");
         prarm.put("group", "DEFAULT_GROUP");
         prarm.put("content", "test.test1.value=test");
         prarm.put("desc", "testHasAppname1");
         prarm.put("type", "properties");
         prarm.put("appName", "testApp1");
-        Assert.assertEquals("true", httpClient.post(SERVER_ADDR + CONFIG_CONTROLLER_PATH , prarm,null));
+        Assert.assertEquals("true", httpClient.post(SERVER_ADDR + CONFIG_CONTROLLER_PATH, prarm, null));
     }
 
     @After
-    public void cleanup(){
+    public void cleanup() {
         HttpSimpleClient.HttpResult result;
         try {
             List<String> params2 = Arrays.asList("dataId", "testNoAppname1.yml", "group", "DEFAULT_GROUP", "beta", "false");
@@ -123,8 +123,8 @@ public class ConfigExportAndImportAPI_ITCase {
         }
     }
 
-    @Test(timeout = 3*TIME_OUT)
-    public void testExportByIds(){
+    @Test(timeout = 3 * TIME_OUT)
+    public void testExportByIds() {
         String getDataUrl = "?search=accurate&dataId=&group=&appName=&config_tags=&pageNo=1&pageSize=10&tenant=&namespaceId=";
         String queryResult = httpClient.get(SERVER_ADDR + CONFIG_CONTROLLER_PATH + getDataUrl, null);
         JSONObject resultObj = JSON.parseObject(queryResult);
@@ -139,15 +139,15 @@ public class ConfigExportAndImportAPI_ITCase {
         Assert.assertEquals(2, zipItemList.size());
         String config1Name = config1.getString("group") + "/" + config1.getString("dataId");
         String config2Name = config2.getString("group") + "/" + config2.getString("dataId");
-        for(ZipUtils.ZipItem zipItem : zipItemList){
-            if(!(config1Name.equals(zipItem.getItemName()) || config2Name.equals(zipItem.getItemName()))){
+        for (ZipUtils.ZipItem zipItem : zipItemList) {
+            if (!(config1Name.equals(zipItem.getItemName()) || config2Name.equals(zipItem.getItemName()))) {
                 Assert.fail();
             }
         }
     }
 
-    @Test(timeout = 3*TIME_OUT)
-    public void testExportByGroup(){
+    @Test(timeout = 3 * TIME_OUT)
+    public void testExportByGroup() {
         String getDataUrl = "?search=accurate&dataId=&group=DEFAULT_GROUP&appName=&config_tags=&pageNo=1&pageSize=10&tenant=&namespaceId=";
         String queryResult = httpClient.get(SERVER_ADDR + CONFIG_CONTROLLER_PATH + getDataUrl, null);
         JSONObject resultObj = JSON.parseObject(queryResult);
@@ -167,10 +167,10 @@ public class ConfigExportAndImportAPI_ITCase {
 
         System.out.println(config1Name + ", " + config2Name + ", " + config3Name);
 
-        for(ZipUtils.ZipItem zipItem : zipItemList){
-            if(!(config1Name.equals(zipItem.getItemName())
+        for (ZipUtils.ZipItem zipItem : zipItemList) {
+            if (!(config1Name.equals(zipItem.getItemName())
                 || config2Name.equals(zipItem.getItemName())
-                || config3Name.equals(zipItem.getItemName()))){
+                || config3Name.equals(zipItem.getItemName()))) {
                 Assert.fail();
             }
         }
@@ -182,8 +182,8 @@ public class ConfigExportAndImportAPI_ITCase {
         Assert.assertEquals("testApp1", appName);
     }
 
-    @Test(timeout = 3*TIME_OUT)
-    public void testExportByGroupAndApp(){
+    @Test(timeout = 3 * TIME_OUT)
+    public void testExportByGroupAndApp() {
         String getDataUrl = "?search=accurate&dataId=&group=DEFAULT_GROUP&appName=testApp1&config_tags=&pageNo=1&pageSize=10&tenant=&namespaceId=";
         String queryResult = httpClient.get(SERVER_ADDR + CONFIG_CONTROLLER_PATH + getDataUrl, null);
         JSONObject resultObj = JSON.parseObject(queryResult);
@@ -196,8 +196,8 @@ public class ConfigExportAndImportAPI_ITCase {
         List<ZipUtils.ZipItem> zipItemList = unZiped.getZipItemList();
         Assert.assertEquals(1, zipItemList.size());
         String config1Name = config1.getString("group") + "/" + config1.getString("dataId");
-        for(ZipUtils.ZipItem zipItem : zipItemList){
-            if(!config1Name.equals(zipItem.getItemName())){
+        for (ZipUtils.ZipItem zipItem : zipItemList) {
+            if (!config1Name.equals(zipItem.getItemName())) {
                 Assert.fail();
             }
         }
@@ -209,8 +209,8 @@ public class ConfigExportAndImportAPI_ITCase {
         Assert.assertEquals("testApp1", appName);
     }
 
-    @Test(timeout = 3*TIME_OUT)
-    public void testExportAll(){
+    @Test(timeout = 3 * TIME_OUT)
+    public void testExportAll() {
         String exportByIdsUrl = "?export=true&tenant=&group=&appName=&ids=";
         byte[] zipData = httpClient.download(SERVER_ADDR + CONFIG_CONTROLLER_PATH + exportByIdsUrl, null);
         ZipUtils.UnZipResult unZiped = ZipUtils.unzip(zipData);
@@ -219,9 +219,9 @@ public class ConfigExportAndImportAPI_ITCase {
         String config2Name = "TEST1_GROUP/testNoAppname2.txt";
         String config3Name = "DEFAULT_GROUP/testHasAppname1.properties";
         int successCount = 0;
-        for(ZipUtils.ZipItem zipItem : zipItemList){
-            if(config1Name.equals(zipItem.getItemName()) || config2Name.equals(zipItem.getItemName()) ||
-            config3Name.equals(zipItem.getItemName())){
+        for (ZipUtils.ZipItem zipItem : zipItemList) {
+            if (config1Name.equals(zipItem.getItemName()) || config2Name.equals(zipItem.getItemName()) ||
+                config3Name.equals(zipItem.getItemName())) {
                 successCount++;
             }
         }
@@ -234,8 +234,8 @@ public class ConfigExportAndImportAPI_ITCase {
         Assert.assertEquals("testApp1", appName);
     }
 
-    @Test(timeout = 3*TIME_OUT)
-    public void testImport(){
+    @Test(timeout = 3 * TIME_OUT)
+    public void testImport() {
         List<ZipUtils.ZipItem> zipItemList = new ArrayList<>(3);
         zipItemList.add(new ZipUtils.ZipItem("TEST_IMPORT/test1.yml", "test: test1"));
         zipItemList.add(new ZipUtils.ZipItem("TEST_IMPORT/test2.txt", "test: test1"));
@@ -256,12 +256,12 @@ public class ConfigExportAndImportAPI_ITCase {
         JSONObject resultObj = JSON.parseObject(queryResult);
         JSONArray resultConfigs = resultObj.getJSONArray("pageItems");
         Assert.assertEquals(3, resultConfigs.size());
-        for(int i = 0; i < resultConfigs.size(); i++){
+        for (int i = 0; i < resultConfigs.size(); i++) {
             JSONObject config = resultConfigs.getJSONObject(i);
-            if(!"TEST_IMPORT".equals(config.getString("group"))){
+            if (!"TEST_IMPORT".equals(config.getString("group"))) {
                 Assert.fail();
             }
-            switch (config.getString("dataId")){
+            switch (config.getString("dataId")) {
                 case "test1.yml":
                 case "test2.txt":
                 case "test3.properties":
@@ -272,12 +272,12 @@ public class ConfigExportAndImportAPI_ITCase {
         }
     }
 
-    private Map<String, String> processMetaData(ZipUtils.ZipItem metaDataZipItem){
+    private Map<String, String> processMetaData(ZipUtils.ZipItem metaDataZipItem) {
         Map<String, String> metaDataMap = new HashMap<>(16);
-        if(metaDataZipItem != null){
+        if (metaDataZipItem != null) {
             String metaDataStr = metaDataZipItem.getItemData();
             String[] metaDataArr = metaDataStr.split("\r\n");
-            for(String metaDataItem : metaDataArr){
+            for (String metaDataItem : metaDataArr) {
                 String[] metaDataItemArr = metaDataItem.split("=");
                 Assert.assertEquals(2, metaDataItemArr.length);
                 metaDataMap.put(metaDataItemArr[0], metaDataItemArr[1]);
@@ -286,9 +286,9 @@ public class ConfigExportAndImportAPI_ITCase {
         return metaDataMap;
     }
 
-    private String packageMetaName(String group, String dataId){
+    private String packageMetaName(String group, String dataId) {
         String tempDataId = dataId;
-        if(tempDataId.contains(".")){
+        if (tempDataId.contains(".")) {
             tempDataId = tempDataId.substring(0, tempDataId.lastIndexOf("."))
                 + "~" + tempDataId.substring(tempDataId.lastIndexOf(".") + 1);
         }

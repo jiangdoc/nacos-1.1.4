@@ -28,7 +28,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class ParamUtils {
 
-    private static char[] validChars = new char[] {'_', '-', '.', ':'};
+    private static char[] validChars = new char[]{'_', '-', '.', ':'};
 
     /**
      * 白名单的方式检查, 合法的参数只能包含字母、数字、以及validChars中的字符, 并且不能为空

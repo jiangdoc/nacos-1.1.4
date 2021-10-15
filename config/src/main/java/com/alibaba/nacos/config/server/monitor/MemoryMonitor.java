@@ -88,7 +88,7 @@ class NotifyTaskQueueMonitorTask implements Runnable {
 
     @Override
     public void run() {
-        int size = ((ScheduledThreadPoolExecutor)notifySingleService.getExecutor()).getQueue().size();
+        int size = ((ScheduledThreadPoolExecutor) notifySingleService.getExecutor()).getQueue().size();
         memoryLog.info("toNotifyTaskSize={}", size);
         MetricsMonitor.getNotifyTaskMonitor().set(size);
     }

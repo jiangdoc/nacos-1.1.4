@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Message } from '@alifd/next';
+import {Message} from '@alifd/next';
 // import { SUCCESS_RESULT_CODE } from '../constants';
 
 const API_GENERAL_ERROR_MESSAGE = 'Request error, please try again later!';
@@ -9,7 +9,7 @@ const request = () => {
 
   instance.interceptors.response.use(
     response => {
-      const { success, resultCode, resultMessage = API_GENERAL_ERROR_MESSAGE } = response.data;
+      const {success, resultCode, resultMessage = API_GENERAL_ERROR_MESSAGE} = response.data;
       // if (!success && resultCode !== SUCCESS_RESULT_CODE) {
       //   Message.error(resultMessage);
       //   return Promise.reject(new Error(resultMessage));
@@ -18,7 +18,7 @@ const request = () => {
     },
     error => {
       if (error.response) {
-        const { data, status } = error.response;
+        const {data, status} = error.response;
         Message.error(data && typeof data === 'string' ? data : `HTTP ERROR: ${status}`);
       } else {
         Message.error(API_GENERAL_ERROR_MESSAGE);

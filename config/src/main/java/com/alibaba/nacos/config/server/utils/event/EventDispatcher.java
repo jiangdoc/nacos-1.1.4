@@ -99,7 +99,7 @@ public class EventDispatcher {
             if (this == obj) {
                 return true;
             }
-            return eventType == ((Entry)obj).eventType;
+            return eventType == ((Entry) obj).eventType;
         }
 
         @Override

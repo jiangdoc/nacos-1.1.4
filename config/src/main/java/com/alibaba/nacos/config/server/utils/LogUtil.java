@@ -29,7 +29,7 @@ public class LogUtil {
     /**
      * 默认的日志
      */
-    public static  final Logger defaultLog = LoggerFactory.getLogger("com.alibaba.nacos.config.startLog");
+    public static final Logger defaultLog = LoggerFactory.getLogger("com.alibaba.nacos.config.startLog");
 
     /**
      * 致命错误，需要告警

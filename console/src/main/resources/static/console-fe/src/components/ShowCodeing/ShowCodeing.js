@@ -13,8 +13,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getParams } from '../../globalLib';
-import { ConfigProvider, Dialog, Loading, Tab } from '@alifd/next';
+import {getParams} from '../../globalLib';
+import {ConfigProvider, Dialog, Loading, Tab} from '@alifd/next';
 
 import './index.scss';
 
@@ -90,7 +90,8 @@ public class ConfigController {
 }`;
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+  }
 
   openLoading() {
     this.setState({
@@ -142,7 +143,7 @@ import com.alibaba.nacos.api.exception.NacosException;
 
 /**
  * Config service example
- * 
+ *
  * @author Nacos
  *
  */
@@ -168,10 +169,10 @@ public class ConfigExample {
 				return null;
 			}
 		});
-		
+
 		boolean isPublishOk = configService.publishConfig(dataId, group, "content");
 		System.out.println(isPublishOk);
-		
+
 		Thread.sleep(3000);
 		content = configService.getConfig(dataId, group, 5000);
 		System.out.println(content);
@@ -260,68 +261,101 @@ public class ConfigExample {
   }
 
   render() {
-    const { locale = {} } = this.props;
-    const footer = <div />;
+    const {locale = {}} = this.props;
+    const footer =
+  <
+    div / >;
     return (
-      <div>
-        <Dialog
-          title={locale.sampleCode}
-          style={{ width: '80%' }}
-          visible={this.state.dialogvisible}
-          footer={footer}
-          onClose={this.closeDialog.bind(this)}
-        >
-          <div style={{ height: 500 }}>
-            <Loading tip={locale.loading} style={{ width: '100%' }} visible={this.state.loading}>
-              <Tab shape={'text'} style={{ height: 40, paddingBottom: 10 }}>
-                <TabPane
-                  title={'Java'}
-                  key={1}
-                  onClick={this.changeTab.bind(this, 'commoneditor1', this.defaultCode)}
-                />
-                <TabPane
-                  title={'Spring Boot'}
-                  key={2}
-                  onClick={this.changeTab.bind(this, 'commoneditor2', this.sprigboot_code)}
-                />
+      < div >
+      < Dialog
+    title = {locale.sampleCode}
+    style = {
+    {
+      width: '80%'
+    }
+  }
+    visible = {this.state.dialogvisible}
+    footer = {footer}
+    onClose = {this.closeDialog.bind(this)}
+      >
+      < div
+    style = {
+    {
+      height: 500
+    }
+  }>
+  <
+    Loading
+    tip = {locale.loading}
+    style = {
+    {
+      width: '100%'
+    }
+  }
+    visible = {this.state.loading} >
+      < Tab
+    shape = {'text'}
+    style = {
+    {
+      height: 40, paddingBottom
+    :
+      10
+    }
+  }>
+  <
+    TabPane
+    title = {'Java'}
+    key = {1}
+    onClick = {this.changeTab.bind(this, 'commoneditor1', this.defaultCode)}
+    />
+    < TabPane
+    title = {'Spring Boot'}
+    key = {2}
+    onClick = {this.changeTab.bind(this, 'commoneditor2', this.sprigboot_code)}
+    />
 
-                <TabPane
-                  title={'Spring Cloud'}
-                  key={21}
-                  onClick={this.changeTab.bind(this, 'commoneditor21', this.sprigcloud_code)}
-                />
+    < TabPane
+    title = {'Spring Cloud'}
+    key = {21}
+    onClick = {this.changeTab.bind(this, 'commoneditor21', this.sprigcloud_code)}
+    />
 
-                <TabPane
-                  title={'Node.js'}
-                  key={3}
-                  onClick={this.changeTab.bind(this, 'commoneditor3', this.nodejsCode)}
-                />
+    < TabPane
+    title = {'Node.js'}
+    key = {3}
+    onClick = {this.changeTab.bind(this, 'commoneditor3', this.nodejsCode)}
+    />
 
-                <TabPane
-                  title={'C++'}
-                  key={4}
-                  onClick={this.changeTab.bind(this, 'commoneditor4', this.cppCode)}
-                />
+    < TabPane
+    title = {'C++'}
+    key = {4}
+    onClick = {this.changeTab.bind(this, 'commoneditor4', this.cppCode)}
+    />
 
-                <TabPane
-                  title={'Shell'}
-                  key={5}
-                  onClick={this.changeTab.bind(this, 'commoneditor5', this.shellCode)}
-                />
+    < TabPane
+    title = {'Shell'}
+    key = {5}
+    onClick = {this.changeTab.bind(this, 'commoneditor5', this.shellCode)}
+    />
 
-                <TabPane
-                  title={'Python'}
-                  key={6}
-                  onClick={this.changeTab.bind(this, 'commoneditor6', this.pythonCode)}
-                />
-                {}
-              </Tab>
-              <div ref={'codepreview'} />
-            </Loading>
-          </div>
-        </Dialog>
-      </div>
-    );
+    < TabPane
+    title = {'Python'}
+    key = {6}
+    onClick = {this.changeTab.bind(this, 'commoneditor6', this.pythonCode)}
+    />
+    {
+    }
+  <
+    /Tab>
+    < div
+    ref = {'codepreview'}
+    />
+    < /Loading>
+    < /div>
+    < /Dialog>
+    < /div>
+  )
+    ;
   }
 }
 

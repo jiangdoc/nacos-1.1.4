@@ -273,6 +273,7 @@ public class PropertyUtil {
     public static void setCorrectUsageDelay(int correctUsageDelay) {
         PropertyUtil.correctUsageDelay = correctUsageDelay;
     }
+
     public static void setStandaloneUseMysql(boolean standaloneUseMysql) {
         PropertyUtil.standaloneUseMysql = standaloneUseMysql;
     }

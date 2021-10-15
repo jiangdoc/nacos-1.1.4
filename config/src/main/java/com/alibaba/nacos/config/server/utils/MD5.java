@@ -17,6 +17,7 @@ package com.alibaba.nacos.config.server.utils;
 
 import com.alibaba.nacos.config.server.constant.Constants;
 import com.google.common.collect.Maps;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.util.Map;
@@ -147,7 +148,7 @@ public class MD5 {
         for (int i = 0; i < DIGITS_COUNT; ++i) {
             int h = rDigits.get(chs[i * 2]).intValue();
             int l = rDigits.get(chs[i * 2 + 1]).intValue();
-            data[i] = (byte)((h & 0x0F) << 4 | (l & 0x0F));
+            data[i] = (byte) ((h & 0x0F) << 4 | (l & 0x0F));
         }
         return data;
     }

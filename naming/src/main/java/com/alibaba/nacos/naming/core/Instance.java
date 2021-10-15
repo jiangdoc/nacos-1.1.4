@@ -314,6 +314,7 @@ public class Instance extends com.alibaba.nacos.api.naming.pojo.Instance impleme
 
     /**
      * Generate instance id which could be used for snowflake algorithm.
+     *
      * @param currentInstanceIds existing instance ids, which can not be used by new instance.
      * @return
      */

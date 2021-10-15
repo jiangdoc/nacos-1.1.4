@@ -12,8 +12,8 @@
  */
 
 import React from 'react';
-import { isParentEdas } from '@/lib';
-import { Balloon, Button, ConfigProvider, Dialog, Form, Icon, Select, Upload } from '@alifd/next';
+import {isParentEdas} from '@/lib';
+import {Balloon, Button, ConfigProvider, Dialog, Form, Icon, Select, Upload} from '@alifd/next';
 
 import './index.scss';
 
@@ -48,13 +48,13 @@ class ImportDialog extends React.Component {
   }
 
   componentDidMount() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     this.setState({
       policyLabel: locale.terminate,
       allPolicy: [
-        { value: 'abort', label: locale.terminate },
-        { value: 'skip', label: locale.skip },
-        { value: 'overwrite', label: locale.overwrite },
+        {value: 'abort', label: locale.terminate},
+        {value: 'skip', label: locale.skip},
+        {value: 'overwrite', label: locale.overwrite},
       ],
     });
   }
@@ -99,7 +99,7 @@ class ImportDialog extends React.Component {
   };
 
   render() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     let uploadLink = `/diamond-ops/batch/import/serverId/${this.state.serverId}/tenant/${
       this.state.tenant.id
     }?policy=${this.state.policy}`;
@@ -108,89 +108,175 @@ class ImportDialog extends React.Component {
       uploadLink = `/authgw/${window.edasprefix}${uploadLink}`;
     }
     const helpTip = (
-      <Balloon
-        trigger={
-          <span>
-            Data ID{' '}
-            <Icon
-              type="help"
-              size="small"
-              style={{ color: '#1DC11D', marginRight: 5, verticalAlign: 'middle' }}
-            />
-          </span>
-        }
-        align="t"
-        style={{ marginRight: 5 }}
-        triggerType="hover"
+      < Balloon
+    trigger = {
+      < span >
+      Data
+    ID
+    {
+      ' '
+    }
+  <
+    Icon
+    type = "help"
+    size = "small"
+    style = {
+    {
+      color: '#1DC11D', marginRight
+    :
+      5, verticalAlign
+    :
+      'middle'
+    }
+  }
+    />
+    < /span>
+  }
+    align = "t"
+    style = {
+    {
+      marginRight: 5
+    }
+  }
+    triggerType = "hover"
       >
-        <a href={window._getLink && window._getLink('knowDataid')} target="_blank">
-          {locale.zipFileFormat}
-        </a>
-      </Balloon>
-    );
+      < a
+    href = {window._getLink && window._getLink('knowDataid')}
+    target = "_blank" >
+      {locale.zipFileFormat}
+      < /a>
+      < /Balloon>
+  )
+    ;
     const footer = (
-      <div>
-        <Upload
-          listType={'text'}
-          action={uploadLink}
-          limit={1}
-          accept={'.zip'}
-          onSuccess={(...args) => {
-            this.callback(args[0].retData, this.state.policyLabel);
-            this.closeDialog();
-          }}
-          onError={(...args) => {
-            this.callback(args[0].response.retData, this.state.policyLabel);
-            this.closeDialog();
-          }}
-          formatter={this.formatter}
-          headers={{ poweredBy: 'simpleMVC', projectName: 'nacos' }}
-        >
-          <Button type={'primary'}>{locale.uploadFile}</Button>
-        </Upload>
-      </div>
-    );
+      < div >
+      < Upload
+    listType = {'text'}
+    action = {uploadLink}
+    limit = {1}
+    accept = {'.zip'}
+    onSuccess = {(...args)
+  =>
+    {
+      this.callback(args[0].retData, this.state.policyLabel);
+      this.closeDialog();
+    }
+  }
+    onError = {(...args)
+  =>
+    {
+      this.callback(args[0].response.retData, this.state.policyLabel);
+      this.closeDialog();
+    }
+  }
+    formatter = {this.formatter}
+    headers = {
+    {
+      poweredBy: 'simpleMVC', projectName
+    :
+      'nacos'
+    }
+  }
+  >
+  <
+    Button
+    type = {'primary'} > {locale.uploadFile} < /Button>
+      < /Upload>
+      < /div>
+  )
+    ;
 
     return (
-      <div>
-        <Dialog
-          visible={this.state.visible}
-          footer={footer}
-          footerAlign="center"
-          style={{ width: 480 }}
-          onCancel={this.closeDialog}
-          onClose={this.closeDialog}
-          title={`${locale.importLabel + this.state.serverId}）`}
-        >
-          <Form>
-            <FormItem label={locale.target} {...this.formItemLayout}>
-              <p>
-                <span style={{ color: '#33cde5' }}>{this.state.tenant.name}</span>
-                {` | ${this.state.tenant.id}`}
-              </p>
-            </FormItem>
-            <FormItem label={locale.conflict} {...this.formItemLayout}>
-              <Select
-                size={'medium'}
-                hasArrow
-                defaultValue={this.defaultPolicy}
-                dataSource={this.state.allPolicy}
-                onChange={this.setPolicy}
-              />
-            </FormItem>
-          </Form>
+      < div >
+      < Dialog
+    visible = {this.state.visible}
+    footer = {footer}
+    footerAlign = "center"
+    style = {
+    {
+      width: 480
+    }
+  }
+    onCancel = {this.closeDialog}
+    onClose = {this.closeDialog}
+    title = {`${locale.importLabel + this.state.serverId}）`
+  }
+  >
+  <
+    Form >
+    < FormItem
+    label = {locale.target}
+    {...
+      this.formItemLayout
+    }
+  >
+  <
+    p >
+    < span
+    style = {
+    {
+      color: '#33cde5'
+    }
+  }>
+    {
+      this.state.tenant.name
+    }
+  <
+    /span>
+    {
+      ` | ${this.state.tenant.id}`
+    }
+  <
+    /p>
+    < /FormItem>
+    < FormItem
+    label = {locale.conflict}
+    {...
+      this.formItemLayout
+    }
+  >
+  <
+    Select
+    size = {'medium'}
+    hasArrow
+    defaultValue = {this.defaultPolicy}
+    dataSource = {this.state.allPolicy}
+    onChange = {this.setPolicy}
+    />
+    < /FormItem>
+    < /Form>
 
-          <div style={{ textAlign: 'center' }}>
-            <Icon
-              type={'warning'}
-              style={{ color: '#ff8a00', marginRight: 5, verticalAlign: 'middle' }}
-            />
-            {locale.beSureExerciseCaution}
-            {helpTip}
-          </div>
-        </Dialog>
-      </div>
-    );
+    < div
+    style = {
+    {
+      textAlign: 'center'
+    }
+  }>
+  <
+    Icon
+    type = {'warning'}
+    style = {
+    {
+      color: '#ff8a00', marginRight
+    :
+      5, verticalAlign
+    :
+      'middle'
+    }
+  }
+    />
+    {
+      locale.beSureExerciseCaution
+    }
+    {
+      helpTip
+    }
+  <
+    /div>
+    < /Dialog>
+    < /div>
+  )
+    ;
   }
 }
 

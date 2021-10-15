@@ -38,7 +38,6 @@ import com.alibaba.nacos.client.utils.*;
 import org.slf4j.Logger;
 
 
-
 /**
  * Serverlist Manager
  *
@@ -128,7 +127,7 @@ public class ServerListManager {
             isFixed = true;
             List<String> serverAddrs = new ArrayList<String>();
             String[] serverAddrsArr = serverAddrsStr.split(",");
-            for (String serverAddr: serverAddrsArr) {
+            for (String serverAddr : serverAddrsArr) {
                 if (serverAddr.startsWith(HTTPS) || serverAddr.startsWith(HTTP)) {
                     serverAddrs.add(serverAddr);
                 } else {

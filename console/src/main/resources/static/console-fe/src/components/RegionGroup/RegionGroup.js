@@ -14,9 +14,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import $ from 'jquery';
-import { Button } from '@alifd/next';
+import {Button} from '@alifd/next';
 import NameSpaceList from '../NameSpaceList';
-import { setParams, request } from '../../globalLib';
+import {setParams, request} from '../../globalLib';
 
 import './index.scss';
 
@@ -85,7 +85,7 @@ class RegionGroup extends React.Component {
 
   componentWillUnmount() {
     $(window).unbind('resize', this.handleResize);
-    window.postMessage({ type: 'CONSOLE_HIDE_REGION' }, window.location);
+    window.postMessage({type: 'CONSOLE_HIDE_REGION'}, window.location);
     $('.aliyun-console-regionbar').hide();
   }
 
@@ -98,7 +98,7 @@ class RegionGroup extends React.Component {
   }
 
   handleAliyunNav(event = {}) {
-    const { type, payload } = (event && event.data) || {};
+    const {type, payload} = (event && event.data) || {};
 
     switch (type) {
       case 'TOPBAR_SIDEBAR_DID_MOUNT':
@@ -147,7 +147,8 @@ class RegionGroup extends React.Component {
       this.setState({
         regionWidth: regionWidth > 100 ? regionWidth : 100,
       });
-    } catch (error) {}
+    } catch (error) {
+    }
   }
 
   getRegionList() {
@@ -175,7 +176,7 @@ class RegionGroup extends React.Component {
 
   handleRegionList(data = {}) {
     let envcontent = '';
-    const { envGroups } = data;
+    const {envGroups} = data;
     let instanceData = [];
     for (let i = 0; i < envGroups.length; i++) {
       const obj = envGroups[i].envs || [];
@@ -211,7 +212,7 @@ class RegionGroup extends React.Component {
       return;
     }
     this.currRegionId = serverId;
-    const { instanceData } = this.state;
+    const {instanceData} = this.state;
 
     let inEdas = false;
     if (window.globalConfig.isParentEdas()) {
@@ -244,7 +245,7 @@ class RegionGroup extends React.Component {
     if (window.viewframeSetting) {
       window.viewframeSetting.regionList = regionList;
       window.postMessage(
-        { type: 'TOGGLE_REGIONBAR_STATUS', payload: { regionList, defaultRegionId: regionId } },
+        {type: 'TOGGLE_REGIONBAR_STATUS', payload: {regionList, defaultRegionId: regionId}},
         window.location
       );
     }
@@ -253,77 +254,158 @@ class RegionGroup extends React.Component {
   changeRegionBarRegionId(regionId) {
     window.viewframeSetting && (window.viewframeSetting.defaultRegionId = regionId);
     window.postMessage(
-      { type: 'SET_ACTIVE_REGION_ID', payload: { defaultRegionId: regionId } },
+      {type: 'SET_ACTIVE_REGION_ID', payload: {defaultRegionId: regionId}},
       window.location
     );
   }
 
   render() {
     return (
-      <div>
-        <div ref={ref => (this.mainRef = ref)} className="clearfix">
-          <div style={{ overflow: 'hidden' }}>
-            <div id="left" style={{ float: 'left', display: 'inline-block', marginRight: 20 }}>
-              <div
-                ref={ref => (this.titleRef = ref)}
-                style={{ display: 'inline-block', verticalAlign: 'top' }}
-              >
-                {typeof this.state.left === 'string' ? (
-                  <h5 style={this.styles.title}>{this.state.left}</h5>
-                ) : (
-                  this.state.left
-                )}
-              </div>
-              {this.state.hideRegionList ? null : (
-                <div
-                  ref={ref => (this.regionRef = ref)}
-                  style={{
-                    width: this.state.regionWidth,
-                    display: 'inline-block',
-                    lineHeight: '40px',
-                    marginLeft: 20,
-                  }}
-                >
-                  {this.state.instanceData.map((val, key) => (
-                    <Button
-                      key={val.serverId}
-                      type={this.state.currRegionId === val.serverId ? 'primary' : 'normal'}
-                      style={{
-                        fontSize: '12px',
-                        marginRight: 10,
-                        backgroundColor:
-                          this.state.currRegionId === val.serverId ? '#546478' : '#D9DEE4',
-                      }}
-                      onClick={this.changeTableData.bind(this, val.serverId)}
-                    >
-                      {' '}
-                      {val.name}{' '}
-                    </Button>
-                  ))}
-                </div>
-              )}
-            </div>
-            <div
-              ref={ref => (this.extraRef = ref)}
-              style={{ float: 'right', display: 'inline-block', paddingTop: 6 }}
-            >
-              {Object.prototype.toString.call(this.state.right) === '[object Function]'
-                ? this.state.right()
-                : this.state.right}
-            </div>
-          </div>
-          {this.props.namespaceCallBack && (
-            <div>
-              <NameSpaceList
-                ref={this.nameSpaceList}
-                namespaceCallBack={this.props.namespaceCallBack}
-                setNowNameSpace={this.props.setNowNameSpace}
-              />
-            </div>
-          )}
-        </div>
-      </div>
-    );
+      < div >
+      < div
+    ref = {ref
+  =>
+    (this.mainRef = ref)
+  }
+    className = "clearfix" >
+      < div
+    style = {
+    {
+      overflow: 'hidden'
+    }
+  }>
+  <
+    div
+    id = "left"
+    style = {
+    {
+      float: 'left', display
+    :
+      'inline-block', marginRight
+    :
+      20
+    }
+  }>
+  <
+    div
+    ref = {ref
+  =>
+    (this.titleRef = ref)
+  }
+    style = {
+    {
+      display: 'inline-block', verticalAlign
+    :
+      'top'
+    }
+  }
+  >
+    {
+      typeof this.state.left === 'string' ? (
+        < h5 style = {this.styles.title} > {this.state.left} < /h5>
+    ) :
+      (
+        this.state.left
+      )
+    }
+  <
+    /div>
+    {
+      this.state.hideRegionList ? null : (
+        < div
+      ref = {ref
+    =>
+      (this.regionRef = ref)
+    }
+      style = {
+      {
+        width: this.state.regionWidth,
+          display
+      :
+        'inline-block',
+          lineHeight
+      :
+        '40px',
+          marginLeft
+      :
+        20,
+      }
+    }
+    >
+      {
+        this.state.instanceData.map((val, key) => (
+          < Button
+        key = {val.serverId}
+        type = {this.state.currRegionId === val.serverId ? 'primary' : 'normal'}
+        style = {
+        {
+          fontSize: '12px',
+            marginRight
+        :
+          10,
+            backgroundColor
+        :
+          this.state.currRegionId === val.serverId ? '#546478' : '#D9DEE4',
+        }
+      }
+        onClick = {this.changeTableData.bind(this, val.serverId)}
+          >
+          {' '}
+        {
+          val.name
+        }
+        {
+          ' '
+        }
+      <
+        /Button>
+      ))
+      }
+    <
+      /div>
+    )
+    }
+  <
+    /div>
+    < div
+    ref = {ref
+  =>
+    (this.extraRef = ref)
+  }
+    style = {
+    {
+      float: 'right', display
+    :
+      'inline-block', paddingTop
+    :
+      6
+    }
+  }
+  >
+    {
+      Object.prototype.toString.call(this.state.right) === '[object Function]'
+        ? this.state.right()
+        : this.state.right
+    }
+  <
+    /div>
+    < /div>
+    {
+      this.props.namespaceCallBack && (
+      < div >
+      < NameSpaceList
+      ref = {this.nameSpaceList}
+      namespaceCallBack = {this.props.namespaceCallBack}
+      setNowNameSpace = {this.props.setNowNameSpace}
+      />
+      < /div>
+    )
+    }
+  <
+    /div>
+    < /div>
+  )
+    ;
   }
 }
 

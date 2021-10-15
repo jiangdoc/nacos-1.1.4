@@ -24,14 +24,14 @@ import {
   Table,
   ConfigProvider,
 } from '@alifd/next';
-import { request } from '../../../globalLib';
+import {request} from '../../../globalLib';
 import RegionGroup from '../../../components/RegionGroup';
 
 import './ClusterNodeList.scss';
 
 const FormItem = Form.Item;
-const { Row, Col } = Grid;
-const { Column } = Table;
+const {Row, Col} = Grid;
+const {Column} = Table;
 
 @ConfigProvider.config
 class ClusterNodeList extends React.Component {
@@ -55,21 +55,22 @@ class ClusterNodeList extends React.Component {
   }
 
   openLoading() {
-    this.setState({ loading: true });
+    this.setState({loading: true});
   }
 
   closeLoading() {
-    this.setState({ loading: false });
+    this.setState({loading: false});
   }
 
   openEditServiceDialog() {
     try {
       this.editServiceDialog.current.getInstance().show(this.state.service);
-    } catch (error) {}
+    } catch (error) {
+    }
   }
 
   queryClusterStateList() {
-    const { currentPage, pageSize, keyword, withInstances = false } = this.state;
+    const {currentPage, pageSize, keyword, withInstances = false} = this.state;
     const parameter = [
       `withInstances=${withInstances}`,
       `pageNo=${currentPage}`,
@@ -79,7 +80,7 @@ class ClusterNodeList extends React.Component {
     request({
       url: `v1/ns/operator/cluster/states?${parameter.join('&')}`,
       beforeSend: () => this.openLoading(),
-      success: ({ count = 0, clusterStateList = [] } = {}) => {
+      success: ({count = 0, clusterStateList = []} = {}) => {
         this.setState({
           dataSource: clusterStateList,
           total: count,
@@ -105,95 +106,187 @@ class ClusterNodeList extends React.Component {
       nowNamespaceId,
     });
 
-  rowColor = row => ({ className: !row.voteFor ? '' : '' });
+  rowColor = row => ({className: !row.voteFor ? '' : ''});
 
   render() {
-    const { locale = {} } = this.props;
-    const { pubNoData, clusterNodeList, nodeIp, nodeIpPlaceholder, query } = locale;
-    const { keyword, nowNamespaceName, nowNamespaceId } = this.state;
-    const { init, getValue } = this.field;
+    const {locale = {}} = this.props;
+    const {pubNoData, clusterNodeList, nodeIp, nodeIpPlaceholder, query} = locale;
+    const {keyword, nowNamespaceName, nowNamespaceId} = this.state;
+    const {init, getValue} = this.field;
     this.init = init;
     this.getValue = getValue;
 
     return (
-      <div className="main-container cluster-management">
-        <Loading
-          shape="flower"
-          style={{ position: 'relative', width: '100%' }}
-          visible={this.state.loading}
-          tip="Loading..."
-          color="#333"
-        >
-          <div style={{ marginTop: -15 }}>
-            <RegionGroup
-              setNowNameSpace={this.setNowNameSpace}
-              namespaceCallBack={this.getQueryLater}
-            />
-          </div>
-          <h3 className="page-title">
-            <span className="title-item">{clusterNodeList}</span>
-            <span className="title-item">|</span>
-            <span className="title-item">{nowNamespaceName}</span>
-            <span className="title-item">{nowNamespaceId}</span>
-          </h3>
-          <Row className="demo-row" style={{ marginBottom: 10, padding: 0 }}>
-            <Col span="24">
-              <Form inline field={this.field}>
-                <FormItem label={nodeIp}>
-                  <Input
-                    placeholder={nodeIpPlaceholder}
-                    style={{ width: 200 }}
-                    value={keyword}
-                    onChange={keyword => this.setState({ keyword })}
-                    onPressEnter={() =>
-                      this.setState({ currentPage: 1 }, () => this.queryClusterStateList())
-                    }
-                  />
-                </FormItem>
-                <FormItem label="">
-                  <Button
-                    type="primary"
-                    onClick={() =>
-                      this.setState({ currentPage: 1 }, () => this.queryClusterStateList())
-                    }
-                    style={{ marginRight: 10 }}
-                  >
-                    {query}
-                  </Button>
-                </FormItem>
-              </Form>
-            </Col>
-          </Row>
-          <Row style={{ padding: 0 }}>
-            <Col span="24" style={{ padding: 0 }}>
-              <Table
-                dataSource={this.state.dataSource}
-                locale={{ empty: pubNoData }}
-                getRowProps={row => this.rowColor(row)}
-              >
-                <Column title={locale.nodeIp} dataIndex="nodeIp" />
-                <Column title={locale.nodeState} dataIndex="nodeState" />
-                <Column title={locale.clusterTerm} dataIndex="clusterTerm" />
-                <Column title={locale.leaderDueMs} dataIndex="leaderDueMs" />
-                <Column title={locale.heartbeatDueMs} dataIndex="heartbeatDueMs" />
-              </Table>
-            </Col>
-          </Row>
-          {this.state.total > this.state.pageSize && (
-            <div style={{ marginTop: 10, textAlign: 'right' }}>
-              <Pagination
-                current={this.state.currentPage}
-                total={this.state.total}
-                pageSize={this.state.pageSize}
-                onChange={currentPage =>
-                  this.setState({ currentPage }, () => this.queryClusterStateList())
-                }
-              />
-            </div>
-          )}
-        </Loading>
-      </div>
-    );
+      < div
+    className = "main-container cluster-management" >
+      < Loading
+    shape = "flower"
+    style = {
+    {
+      position: 'relative', width
+    :
+      '100%'
+    }
+  }
+    visible = {this.state.loading}
+    tip = "Loading..."
+    color = "#333"
+      >
+      < div
+    style = {
+    {
+      marginTop: -15
+    }
+  }>
+  <
+    RegionGroup
+    setNowNameSpace = {this.setNowNameSpace}
+    namespaceCallBack = {this.getQueryLater}
+    />
+    < /div>
+    < h3
+    className = "page-title" >
+      < span
+    className = "title-item" > {clusterNodeList} < /span>
+      < span
+    className = "title-item" > | < /span>
+      < span
+    className = "title-item" > {nowNamespaceName} < /span>
+      < span
+    className = "title-item" > {nowNamespaceId} < /span>
+      < /h3>
+      < Row
+    className = "demo-row"
+    style = {
+    {
+      marginBottom: 10, padding
+    :
+      0
+    }
+  }>
+  <
+    Col
+    span = "24" >
+      < Form
+    inline
+    field = {this.field} >
+      < FormItem
+    label = {nodeIp} >
+      < Input
+    placeholder = {nodeIpPlaceholder}
+    style = {
+    {
+      width: 200
+    }
+  }
+    value = {keyword}
+    onChange = {keyword
+  =>
+    this.setState({keyword})
+  }
+    onPressEnter = {()
+  =>
+    this.setState({currentPage: 1}, () => this.queryClusterStateList())
+  }
+    />
+    < /FormItem>
+    < FormItem
+    label = "" >
+      < Button
+    type = "primary"
+    onClick = {()
+  =>
+    this.setState({currentPage: 1}, () => this.queryClusterStateList())
+  }
+    style = {
+    {
+      marginRight: 10
+    }
+  }
+  >
+    {
+      query
+    }
+  <
+    /Button>
+    < /FormItem>
+    < /Form>
+    < /Col>
+    < /Row>
+    < Row
+    style = {
+    {
+      padding: 0
+    }
+  }>
+  <
+    Col
+    span = "24"
+    style = {
+    {
+      padding: 0
+    }
+  }>
+  <
+    Table
+    dataSource = {this.state.dataSource}
+    locale = {
+    {
+      empty: pubNoData
+    }
+  }
+    getRowProps = {row
+  =>
+    this.rowColor(row)
+  }
+  >
+  <
+    Column
+    title = {locale.nodeIp}
+    dataIndex = "nodeIp" / >
+      < Column
+    title = {locale.nodeState}
+    dataIndex = "nodeState" / >
+      < Column
+    title = {locale.clusterTerm}
+    dataIndex = "clusterTerm" / >
+      < Column
+    title = {locale.leaderDueMs}
+    dataIndex = "leaderDueMs" / >
+      < Column
+    title = {locale.heartbeatDueMs}
+    dataIndex = "heartbeatDueMs" / >
+      < /Table>
+      < /Col>
+      < /Row>
+    {
+      this.state.total > this.state.pageSize && (
+      < div
+      style = {
+      {
+        marginTop: 10, textAlign
+      :
+        'right'
+      }
+    }>
+    <
+      Pagination
+      current = {this.state.currentPage}
+      total = {this.state.total}
+      pageSize = {this.state.pageSize}
+      onChange = {currentPage
+    =>
+      this.setState({currentPage}, () => this.queryClusterStateList())
+    }
+      />
+      < /div>
+    )
+    }
+  <
+    /Loading>
+    < /div>
+  )
+    ;
   }
 }
 

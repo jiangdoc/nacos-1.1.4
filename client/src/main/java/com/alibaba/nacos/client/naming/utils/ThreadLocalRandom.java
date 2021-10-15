@@ -177,7 +177,7 @@ public class ThreadLocalRandom extends Random {
     @Override
     protected int next(int bits) {
         rnd = (rnd * multiplier + addend) & mask;
-        return (int)(rnd >>> (48 - bits));
+        return (int) (rnd >>> (48 - bits));
     }
 
     /**
@@ -223,7 +223,7 @@ public class ThreadLocalRandom extends Random {
             }
             n = nextn;
         }
-        return offset + nextInt((int)n);
+        return offset + nextInt((int) n);
     }
 
     /**

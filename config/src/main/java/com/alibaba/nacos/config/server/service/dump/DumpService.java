@@ -92,7 +92,7 @@ public class DumpService {
                         int pageSize = 1000;
                         int removeTime = (totalCount + pageSize - 1) / pageSize;
                         log.warn("clearConfigHistory, getBeforeStamp:{}, totalCount:{}, pageSize:{}, removeTime:{}",
-                            new Object[] {startTime, totalCount, pageSize, removeTime});
+                            new Object[]{startTime, totalCount, pageSize, removeTime});
                         while (removeTime > 0) {
                             // 分页删除，以免批量太大报错
                             persistService.removeConfigHistory(startTime, pageSize);
@@ -328,7 +328,7 @@ public class DumpService {
                 try {
                     List<ConfigInfoAggr> datumList = new ArrayList<ConfigInfoAggr>();
                     int rowCount = persistService.aggrConfigInfoCount(dataId, group, tenant);
-                    int pageCount = (int)Math.ceil(rowCount * 1.0 / PAGE_SIZE);
+                    int pageCount = (int) Math.ceil(rowCount * 1.0 / PAGE_SIZE);
                     for (int pageNo = 1; pageNo <= pageCount; pageNo++) {
                         Page<ConfigInfoAggr> page = persistService.findConfigInfoAggrByPage(dataId, group, tenant,
                             pageNo, PAGE_SIZE);

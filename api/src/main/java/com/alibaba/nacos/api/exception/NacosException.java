@@ -124,7 +124,7 @@ public class NacosException extends Exception {
      */
     public static final int NO_RIGHT = 403;
     /**
-     *  not found
+     * not found
      */
     public static final int NOT_FOUND = 404;
     /**

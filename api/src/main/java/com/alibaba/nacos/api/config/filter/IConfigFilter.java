@@ -39,7 +39,7 @@ public interface IConfigFilter {
      * @throws NacosException exception
      */
     void doFilter(IConfigRequest request, IConfigResponse response, IConfigFilterChain filterChain)
-            throws NacosException;
+        throws NacosException;
 
     /**
      * deploy

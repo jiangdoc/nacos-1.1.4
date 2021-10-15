@@ -242,8 +242,8 @@ public class ServiceManager implements RecordListener<Service> {
         matchList.add(localRaftPeer);
         Set<String> otherServerSet = raftPeerSet.allServersWithoutMySelf();
         if (null != otherServerSet && otherServerSet.size() > 0) {
-            for (String server: otherServerSet) {
-                String path =  UtilsAndCommons.NACOS_NAMING_OPERATOR_CONTEXT + UtilsAndCommons.NACOS_NAMING_CLUSTER_CONTEXT + "/state";
+            for (String server : otherServerSet) {
+                String path = UtilsAndCommons.NACOS_NAMING_OPERATOR_CONTEXT + UtilsAndCommons.NACOS_NAMING_CLUSTER_CONTEXT + "/state";
                 Map<String, String> params = Maps.newHashMapWithExpectedSize(2);
                 try {
                     String content = NamingProxy.reqCommon(path, params, server, false);

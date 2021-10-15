@@ -81,7 +81,7 @@ public class GroupCapacityPersistService {
         String sql
             = "SELECT id, quota, `usage`, `max_size`, max_aggr_count, max_aggr_size, group_id FROM group_capacity "
             + "WHERE group_id=?";
-        List<GroupCapacity> list = jdbcTemplate.query(sql, new Object[] {groupId},
+        List<GroupCapacity> list = jdbcTemplate.query(sql, new Object[]{groupId},
             GROUP_CAPACITY_ROW_MAPPER);
         if (list.isEmpty()) {
             return null;
@@ -282,7 +282,7 @@ public class GroupCapacityPersistService {
             sql = "SELECT id, group_id FROM group_capacity WHERE id>? OFFSET 0 ROWS FETCH NEXT ? ROWS ONLY";
         }
         try {
-            return jdbcTemplate.query(sql, new Object[] {lastId, pageSize},
+            return jdbcTemplate.query(sql, new Object[]{lastId, pageSize},
                 new RowMapper<GroupCapacity>() {
                     @Override
                     public GroupCapacity mapRow(ResultSet rs, int rowNum) throws SQLException {

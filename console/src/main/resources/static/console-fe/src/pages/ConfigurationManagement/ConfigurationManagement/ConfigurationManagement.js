@@ -38,13 +38,13 @@ import RegionGroup from 'components/RegionGroup';
 import ShowCodeing from 'components/ShowCodeing';
 import DeleteDialog from 'components/DeleteDialog';
 import DashboardCard from './DashboardCard';
-import { getParams, setParams, request, aliwareIntl } from '@/globalLib';
+import {getParams, setParams, request, aliwareIntl} from '@/globalLib';
 
 import './index.scss';
-import { LANGUAGE_KEY } from '../../../constants';
+import {LANGUAGE_KEY} from '../../../constants';
 
-const { Panel } = Collapse;
-const { Row, Col } = Grid;
+const {Panel} = Collapse;
+const {Row, Col} = Grid;
 const configsTableSelected = new Map();
 
 @ConfigProvider.config
@@ -116,7 +116,7 @@ class ConfigurationManagement extends React.Component {
   }
 
   componentDidMount() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     // this.getGroup();
     this.setIsCn();
     if (window._getLink && window._getLink('isCn') === 'true') {
@@ -128,27 +128,49 @@ class ConfigurationManagement extends React.Component {
               width: '60%',
             },
             content: (
-              <div>
-                <div style={{ fontSize: '15px', lineHeight: '22px' }}>
-                  {locale.ad}
-                  <a href={'https://survey.aliyun.com/survey/k0BjJ2ARC'} target={'_blank'}>
-                    {locale.questionnaire2}
-                  </a>
-                </div>
-                <div style={{ fontSize: '15px' }}>
-                  {locale.noLongerDisplay4}
-                  <Checkbox onChange={this.toggleShowQuestionnaire} />
-                </div>
-              </div>
-            ),
-          });
+              < div >
+              < div style = {
+          {
+            fontSize: '15px', lineHeight
+          :
+            '22px'
+          }
+        }>
+          {
+            locale.ad
+          }
+        <
+          a
+          href = {'https://survey.aliyun.com/survey/k0BjJ2ARC'}
+          target = {'_blank'} >
+            {locale.questionnaire2}
+            < /a>
+            < /div>
+            < div
+          style = {
+          {
+            fontSize: '15px'
+          }
+        }>
+          {
+            locale.noLongerDisplay4
+          }
+        <
+          Checkbox
+          onChange = {this.toggleShowQuestionnaire}
+          />
+          < /div>
+          < /div>
+        ),
+        })
+          ;
         }
       }
     }
   }
 
   setIsCn() {
-    this.setState({ isCn: localStorage.getItem(LANGUAGE_KEY) === 'zh-CN' });
+    this.setState({isCn: localStorage.getItem(LANGUAGE_KEY) === 'zh-CN'});
   }
 
   /**
@@ -236,9 +258,11 @@ class ConfigurationManagement extends React.Component {
     window.removeEventListener('keydown', this.keyDownSearch.bind(this));
   }
 
-  onSearch() {}
+  onSearch() {
+  }
 
-  onChange() {}
+  onChange() {
+  }
 
   cleanAndGetData(needclean = false) {
     if (needclean) {
@@ -255,9 +279,9 @@ class ConfigurationManagement extends React.Component {
     }
     this.getData();
     configsTableSelected.clear();
-    const { rowSelection } = this.state;
+    const {rowSelection} = this.state;
     rowSelection.selectedRowKeys = [];
-    this.setState({ rowSelection });
+    this.setState({rowSelection});
   }
 
   getData(pageNo = 1, clearSelect = true) {
@@ -311,7 +335,8 @@ class ConfigurationManagement extends React.Component {
     });
   }
 
-  showMore() {}
+  showMore() {
+  }
 
   chooseNav(record, key) {
     const self = this;
@@ -330,55 +355,124 @@ class ConfigurationManagement extends React.Component {
   }
 
   removeConfig(record) {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const self = this;
     Dialog.confirm({
       title: locale.removeConfiguration,
       content: (
-        <div style={{ marginTop: '-20px' }}>
-          <h3>{locale.sureDelete}</h3>
-          <p>
-            <span style={{ color: '#999', marginRight: 5 }}>Data ID:</span>
-            <span style={{ color: '#c7254e' }}>{record.dataId}</span>
-          </p>
-          <p>
-            <span style={{ color: '#999', marginRight: 5 }}>Group:</span>
-            <span style={{ color: '#c7254e' }}>{record.group}</span>
-          </p>
-          <p>
-            <span style={{ color: '#999', marginRight: 5 }}>{locale.environment}</span>
-            <span style={{ color: '#c7254e' }}>{self.serverId || ''}</span>
-          </p>
-        </div>
-      ),
-      onOk: () => {
-        const url = `v1/cs/configs?dataId=${record.dataId}&group=${record.group}`;
-        request({
-          url,
-          type: 'delete',
-          success(res) {
-            const _payload = {};
+        < div style = {
+    {
+      marginTop: '-20px'
+    }
+  }>
+  <
+    h3 > {locale.sureDelete} < /h3>
+    < p >
+    < span
+    style = {
+    {
+      color: '#999', marginRight
+    :
+      5
+    }
+  }>
+    Data
+    ID:<
+    /span>
+    < span
+    style = {
+    {
+      color: '#c7254e'
+    }
+  }>
+    {
+      record.dataId
+    }
+  <
+    /span>
+    < /p>
+    < p >
+    < span
+    style = {
+    {
+      color: '#999', marginRight
+    :
+      5
+    }
+  }>
+    Group:<
+    /span>
+    < span
+    style = {
+    {
+      color: '#c7254e'
+    }
+  }>
+    {
+      record.group
+    }
+  <
+    /span>
+    < /p>
+    < p >
+    < span
+    style = {
+    {
+      color: '#999', marginRight
+    :
+      5
+    }
+  }>
+    {
+      locale.environment
+    }
+  <
+    /span>
+    < span
+    style = {
+    {
+      color: '#c7254e'
+    }
+  }>
+    {
+      self.serverId || ''
+    }
+  <
+    /span>
+    < /p>
+    < /div>
+  ),
+    onOk: () => {
+      const url = `v1/cs/configs?dataId=${record.dataId}&group=${record.group}`;
+      request({
+        url,
+        type: 'delete',
+        success(res) {
+          const _payload = {};
 
-            _payload.title = locale.configurationManagement;
-            _payload.content = '';
-            _payload.dataId = record.dataId;
-            _payload.group = record.group;
-            if (res === true) {
-              _payload.isok = true;
-            } else {
-              _payload.isok = false;
-              _payload.message = res.message;
-            }
-            self.deleteDialog.current.getInstance().openDialog(_payload);
-            self.getData();
-          },
-        });
-      },
-    });
+          _payload.title = locale.configurationManagement;
+          _payload.content = '';
+          _payload.dataId = record.dataId;
+          _payload.group = record.group;
+          if (res === true) {
+            _payload.isok = true;
+          } else {
+            _payload.isok = false;
+            _payload.message = res.message;
+          }
+          self.deleteDialog.current.getInstance().openDialog(_payload);
+          self.getData();
+        },
+      });
+    },
+  })
+    ;
   }
 
   renderLastTime(value, index, record) {
-    return <div>{aliwareIntl.intlNumberFormat(record.lastModifiedTime)}</div>;
+    return
+  <
+    div > {aliwareIntl.intlNumberFormat(record.lastModifiedTime)} < /div>;
   }
 
   showCode(record) {
@@ -386,42 +480,108 @@ class ConfigurationManagement extends React.Component {
   }
 
   renderCol(value, index, record) {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     return (
-      <div>
-        <a onClick={this.goDetail.bind(this, record)} style={{ marginRight: 5 }}>
-          {locale.details}
-        </a>
-        <span style={{ marginRight: 5 }}>|</span>
-        <a style={{ marginRight: 5 }} onClick={this.showCode.bind(this, record)}>
-          {locale.sampleCode}
-        </a>
-        <span style={{ marginRight: 5 }}>|</span>
-        <a style={{ marginRight: 5 }} onClick={this.goEditor.bind(this, record)}>
-          {locale.edit}
-        </a>
-        <span style={{ marginRight: 5 }}>|</span>
-        <a style={{ marginRight: 5 }} onClick={this.removeConfig.bind(this, record)}>
-          {locale.deleteAction}
-        </a>
-        <span style={{ marginRight: 5 }}>|</span>
+      < div >
+      < a
+    onClick = {this.goDetail.bind(this, record)}
+    style = {
+    {
+      marginRight: 5
+    }
+  }>
+    {
+      locale.details
+    }
+  <
+    /a>
+    < span
+    style = {
+    {
+      marginRight: 5
+    }
+  }>|<
+    /span>
+    < a
+    style = {
+    {
+      marginRight: 5
+    }
+  }
+    onClick = {this.showCode.bind(this, record)} >
+      {locale.sampleCode}
+      < /a>
+      < span
+    style = {
+    {
+      marginRight: 5
+    }
+  }>|<
+    /span>
+    < a
+    style = {
+    {
+      marginRight: 5
+    }
+  }
+    onClick = {this.goEditor.bind(this, record)} >
+      {locale.edit}
+      < /a>
+      < span
+    style = {
+    {
+      marginRight: 5
+    }
+  }>|<
+    /span>
+    < a
+    style = {
+    {
+      marginRight: 5
+    }
+  }
+    onClick = {this.removeConfig.bind(this, record)} >
+      {locale.deleteAction}
+      < /a>
+      < span
+    style = {
+    {
+      marginRight: 5
+    }
+  }>|<
+    /span>
 
-        <Dropdown
-          trigger={
-            <span style={{ color: '#33cde5' }}>
-              {locale.more}
-              <Icon type={'arrow-down-filling'} size={'xxs'} />
-            </span>
-          }
-          triggerType={'click'}
-        >
-          <Menu onItemClick={this.chooseNav.bind(this, record)}>
-            <Menu.Item key={'nav1'}>{locale.version}</Menu.Item>
-            <Menu.Item key={'nav3'}>{locale.listenerQuery}</Menu.Item>
-          </Menu>
-        </Dropdown>
-      </div>
-    );
+    < Dropdown
+    trigger = {
+      < span
+    style = {
+    {
+      color: '#33cde5'
+    }
+  }>
+    {
+      locale.more
+    }
+  <
+    Icon
+    type = {'arrow-down-filling'}
+    size = {'xxs'}
+    />
+    < /span>
+  }
+    triggerType = {'click'}
+      >
+      < Menu
+    onItemClick = {this.chooseNav.bind(this, record)} >
+      < Menu.Item
+    key = {'nav1'} > {locale.version} < /Menu.Item>
+      < Menu.Item
+    key = {'nav3'} > {locale.listenerQuery} < /Menu.Item>
+      < /Menu>
+      < /Dropdown>
+      < /div>
+  )
+    ;
   }
 
   changePage(value) {
@@ -446,7 +606,8 @@ class ConfigurationManagement extends React.Component {
     );
   }
 
-  onInputUpdate() {}
+  onInputUpdate() {
+  }
 
   chooseFieldChange(fieldValue) {
     this.setState({
@@ -609,61 +770,140 @@ class ConfigurationManagement extends React.Component {
     });
   }
 
-  onPageSelectAll(selected, records) {}
+  onPageSelectAll(selected, records) {
+  }
 
   getBatchFailedContent(res) {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     return (
-      <div>
-        <div style={{ fontSize: 18, color: '#373D41', overflow: 'auto' }}>{res.message}</div>
-        {'data' in res && res.data != null && (
-          <Collapse style={{ width: '500px' }}>
-            {'failedItems' in res.data && res.data.failedItems.length > 0 ? (
-              <Panel title={locale.failedEntry + res.data.failedItems.length}>
-                <Table dataSource={res.data.failedItems} fixedHeader maxBodyHeight={400}>
-                  <Table.Column title={'Data ID'} dataIndex={'dataId'} />
-                  <Table.Column title={'Group'} dataIndex={'group'} />
-                </Table>
-              </Panel>
-            ) : (
-              <Panel style={{ display: 'none' }} />
-            )}
-            {'succeededItems' in res.data && res.data.succeededItems.length > 0 ? (
-              <Panel title={locale.successfulEntry + res.data.succeededItems.length}>
-                <Table dataSource={res.data.succeededItems} fixedHeader maxBodyHeight={400}>
-                  <Table.Column title={'Data ID'} dataIndex={'dataId'} />
-                  <Table.Column title={'Group'} dataIndex={'group'} />
-                </Table>
-              </Panel>
-            ) : (
-              <Panel style={{ display: 'none' }} />
-            )}
-            {'unprocessedItems' in res.data && res.data.unprocessedItems.length > 0 ? (
-              <Panel title={locale.unprocessedEntry + res.data.unprocessedItems.length}>
-                <Table dataSource={res.data.unprocessedItems} fixedHeader maxBodyHeight={400}>
-                  <Table.Column title={'Data ID'} dataIndex={'dataId'} />
-                  <Table.Column title={'Group'} dataIndex={'group'} />
-                </Table>
-              </Panel>
-            ) : (
-              <Panel style={{ display: 'none' }} />
-            )}
-          </Collapse>
-        )}
-      </div>
-    );
+      < div >
+      < div
+    style = {
+    {
+      fontSize: 18, color
+    :
+      '#373D41', overflow
+    :
+      'auto'
+    }
+  }>
+    {
+      res.message
+    }
+  <
+    /div>
+    {
+      'data' in res && res.data != null && (
+      < Collapse
+      style = {
+      {
+        width: '500px'
+      }
+    }>
+      {
+        'failedItems' in res.data && res.data.failedItems.length > 0 ? (
+          < Panel title = {locale.failedEntry + res.data.failedItems.length} >
+          < Table
+        dataSource = {res.data.failedItems}
+        fixedHeader
+        maxBodyHeight = {400} >
+          < Table.Column
+        title = {'Data ID'}
+        dataIndex = {'dataId'}
+        />
+        < Table.Column
+        title = {'Group'}
+        dataIndex = {'group'}
+        />
+        < /Table>
+        < /Panel>
+      ) :
+        (
+        < Panel
+        style = {
+        {
+          display: 'none'
+        }
+      }
+        />
+      )
+      }
+      {
+        'succeededItems' in res.data && res.data.succeededItems.length > 0 ? (
+          < Panel title = {locale.successfulEntry + res.data.succeededItems.length} >
+          < Table
+        dataSource = {res.data.succeededItems}
+        fixedHeader
+        maxBodyHeight = {400} >
+          < Table.Column
+        title = {'Data ID'}
+        dataIndex = {'dataId'}
+        />
+        < Table.Column
+        title = {'Group'}
+        dataIndex = {'group'}
+        />
+        < /Table>
+        < /Panel>
+      ) :
+        (
+        < Panel
+        style = {
+        {
+          display: 'none'
+        }
+      }
+        />
+      )
+      }
+      {
+        'unprocessedItems' in res.data && res.data.unprocessedItems.length > 0 ? (
+          < Panel title = {locale.unprocessedEntry + res.data.unprocessedItems.length} >
+          < Table
+        dataSource = {res.data.unprocessedItems}
+        fixedHeader
+        maxBodyHeight = {400} >
+          < Table.Column
+        title = {'Data ID'}
+        dataIndex = {'dataId'}
+        />
+        < Table.Column
+        title = {'Group'}
+        dataIndex = {'group'}
+        />
+        < /Table>
+        < /Panel>
+      ) :
+        (
+        < Panel
+        style = {
+        {
+          display: 'none'
+        }
+      }
+        />
+      )
+      }
+    <
+      /Collapse>
+    )
+    }
+  <
+    /div>
+  )
+    ;
   }
 
   onClickBatchHandle() {
     this.batchHandle &&
-      this.batchHandle.openDialog({
-        serverId: this.serverId,
-        group: this.group,
-        dataId: this.dataId,
-        appName: this.appName,
-        config_tags: this.state.config_tags || '',
-        pageSize: this.state.pageSize,
-      });
+    this.batchHandle.openDialog({
+      serverId: this.serverId,
+      group: this.group,
+      dataId: this.dataId,
+      appName: this.appName,
+      config_tags: this.state.config_tags || '',
+      pageSize: this.state.pageSize,
+    });
   }
 
   changeAdvancedQuery = () => {
@@ -689,7 +929,7 @@ class ConfigurationManagement extends React.Component {
   }
 
   exportSelectedData() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     if (configsTableSelected.size === 0) {
       Dialog.alert({
         title: locale.exportSelectedAlertTitle,
@@ -706,7 +946,7 @@ class ConfigurationManagement extends React.Component {
   }
 
   multipleSelectionDeletion() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const self = this;
     if (configsTableSelected.size === 0) {
       Dialog.alert({
@@ -724,35 +964,46 @@ class ConfigurationManagement extends React.Component {
       Dialog.confirm({
         title: locale.removeConfiguration,
         content: (
-          <div style={{ marginTop: '-20px' }}>
-            <h3>{locale.sureDelete}</h3>
-            <Table dataSource={toShowDatas}>
-              <Table.Column title="Data Id" dataIndex="dataId" />
-              <Table.Column title="Group" dataIndex="group" />
-            </Table>
-          </div>
-        ),
-        onOk: () => {
-          let idsStr = '';
-          configsTableSelected.forEach((value, key, map) => {
-            idsStr = `${idsStr + key},`;
-          });
-          const url = `v1/cs/configs?delType=ids&ids=${idsStr}`;
-          request({
-            url,
-            type: 'delete',
-            success(res) {
-              Message.success(locale.delSuccessMsg);
-              self.getData();
-            },
-          });
-        },
-      });
+          < div style = {
+      {
+        marginTop: '-20px'
+      }
+    }>
+    <
+      h3 > {locale.sureDelete} < /h3>
+      < Table
+      dataSource = {toShowDatas} >
+        < Table.Column
+      title = "Data Id"
+      dataIndex = "dataId" / >
+        < Table.Column
+      title = "Group"
+      dataIndex = "group" / >
+        < /Table>
+        < /div>
+    ),
+      onOk: () => {
+        let idsStr = '';
+        configsTableSelected.forEach((value, key, map) => {
+          idsStr = `${idsStr + key},`;
+        });
+        const url = `v1/cs/configs?delType=ids&ids=${idsStr}`;
+        request({
+          url,
+          type: 'delete',
+          success(res) {
+            Message.success(locale.delSuccessMsg);
+            self.getData();
+          },
+        });
+      },
+    })
+      ;
     }
   }
 
   cloneSelectedDataConfirm() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const self = this;
     self.field.setValue('sameConfigPolicy', 'ABORT');
     self.field.setValue('cloneTargetSpace', undefined);
@@ -794,117 +1045,269 @@ class ConfigurationManagement extends React.Component {
           title: locale.cloningConfiguration,
           footer: false,
           content: (
-            <div>
-              <div style={{ marginBottom: 10 }}>
-                <span style={{ color: '#999', marginRight: 5 }}>{locale.source}</span>
-                <span style={{ color: '#49D2E7' }}>{self.state.nownamespace_name} </span>|{' '}
-                {self.state.nownamespace_id}
-              </div>
-              <div style={{ marginBottom: 10 }}>
-                <span style={{ color: '#999', marginRight: 5 }}>{locale.configurationNumber}</span>
-                <span style={{ color: '#49D2E7' }}>{configsTableSelected.size} </span>
-                {locale.selectedEntry}
-              </div>
-              <div style={{ marginBottom: 10 }}>
-                <span style={{ color: 'red', marginRight: 2, marginLeft: -10 }}>{'*'}</span>
-                <span style={{ color: '#999', marginRight: 5 }}>{locale.target}</span>
-                <Select
-                  style={{ width: 450 }}
-                  placeholder={locale.selectNamespace}
-                  size={'medium'}
-                  hasArrow
-                  showSearch
-                  hasClear={false}
-                  mode="single"
-                  dataSource={namespaceSelectData}
-                  onChange={(value, actionType, item) => {
-                    if (value) {
-                      document.getElementById('cloneTargetSpaceSelectErr').style.display = 'none';
-                      self.field.setValue('cloneTargetSpace', value);
-                    }
-                  }}
-                />
-                <br />
-                <span id={'cloneTargetSpaceSelectErr'} style={{ color: 'red', display: 'none' }}>
-                  {locale.selectNamespace}
-                </span>
-              </div>
-              <div style={{ marginBottom: 10 }}>
-                <span style={{ color: '#999', marginRight: 5 }}>{locale.samePreparation}:</span>
-                <Select
-                  style={{ width: 130 }}
-                  size={'medium'}
-                  hasArrow
-                  mode="single"
-                  filterLocal={false}
-                  defaultValue={'ABORT'}
-                  dataSource={[
-                    {
-                      label: locale.abortImport,
-                      value: 'ABORT',
-                    },
-                    {
-                      label: locale.skipImport,
-                      value: 'SKIP',
-                    },
-                    {
-                      label: locale.overwriteImport,
-                      value: 'OVERWRITE',
-                    },
-                  ]}
-                  hasClear={false}
-                  onChange={(value, actionType, item) => {
-                    if (value) {
-                      self.field.setValue('sameConfigPolicy', value);
-                    }
-                  }}
-                />
-              </div>
-              <div>
-                <Button
-                  type={'primary'}
-                  style={{ marginRight: 10 }}
-                  onClick={() => {
-                    if (!self.field.getValue('cloneTargetSpace')) {
-                      document.getElementById('cloneTargetSpaceSelectErr').style.display = 'inline';
-                      return;
-                    } else {
-                      document.getElementById('cloneTargetSpaceSelectErr').style.display = 'none';
-                    }
-                    let idsStr = '';
-                    configsTableSelected.forEach((value, key, map) => {
-                      idsStr = `${idsStr + key},`;
-                    });
-                    let cloneTargetSpace = self.field.getValue('cloneTargetSpace');
-                    let sameConfigPolicy = self.field.getValue('sameConfigPolicy');
-                    request({
-                      url: `v1/cs/configs?clone=true&tenant=${cloneTargetSpace}&policy=${sameConfigPolicy}&ids=${idsStr}`,
-                      beforeSend() {
-                        self.openLoading();
-                      },
-                      success(ret) {
-                        self.processImportAndCloneResult(ret, locale, cloneConfirm, false);
-                      },
-                      error(data) {
-                        self.setState({
-                          dataSource: [],
-                          total: 0,
-                          currentPage: 0,
-                        });
-                      },
-                      complete() {
-                        self.closeLoading();
-                      },
-                    });
-                  }}
-                  data-spm-click={'gostr=/aliyun;locaid=doClone'}
-                >
-                  {locale.startCloning}
-                </Button>
-              </div>
-            </div>
-          ),
-        });
+            < div >
+            < div style = {
+        {
+          marginBottom: 10
+        }
+      }>
+      <
+        span
+        style = {
+        {
+          color: '#999', marginRight
+        :
+          5
+        }
+      }>
+        {
+          locale.source
+        }
+      <
+        /span>
+        < span
+        style = {
+        {
+          color: '#49D2E7'
+        }
+      }>
+        {
+          self.state.nownamespace_name
+        }
+      <
+        /span>|{' '}
+        {
+          self.state.nownamespace_id
+        }
+      <
+        /div>
+        < div
+        style = {
+        {
+          marginBottom: 10
+        }
+      }>
+      <
+        span
+        style = {
+        {
+          color: '#999', marginRight
+        :
+          5
+        }
+      }>
+        {
+          locale.configurationNumber
+        }
+      <
+        /span>
+        < span
+        style = {
+        {
+          color: '#49D2E7'
+        }
+      }>
+        {
+          configsTableSelected.size
+        }
+      <
+        /span>
+        {
+          locale.selectedEntry
+        }
+      <
+        /div>
+        < div
+        style = {
+        {
+          marginBottom: 10
+        }
+      }>
+      <
+        span
+        style = {
+        {
+          color: 'red', marginRight
+        :
+          2, marginLeft
+        :
+          -10
+        }
+      }>
+        {
+          '*'
+        }
+      <
+        /span>
+        < span
+        style = {
+        {
+          color: '#999', marginRight
+        :
+          5
+        }
+      }>
+        {
+          locale.target
+        }
+      <
+        /span>
+        < Select
+        style = {
+        {
+          width: 450
+        }
+      }
+        placeholder = {locale.selectNamespace}
+        size = {'medium'}
+        hasArrow
+        showSearch
+        hasClear = {false}
+        mode = "single"
+        dataSource = {namespaceSelectData}
+        onChange = {(value, actionType, item)
+      =>
+        {
+          if (value) {
+            document.getElementById('cloneTargetSpaceSelectErr').style.display = 'none';
+            self.field.setValue('cloneTargetSpace', value);
+          }
+        }
+      }
+        />
+        < br / >
+        < span
+        id = {'cloneTargetSpaceSelectErr'}
+        style = {
+        {
+          color: 'red', display
+        :
+          'none'
+        }
+      }>
+        {
+          locale.selectNamespace
+        }
+      <
+        /span>
+        < /div>
+        < div
+        style = {
+        {
+          marginBottom: 10
+        }
+      }>
+      <
+        span
+        style = {
+        {
+          color: '#999', marginRight
+        :
+          5
+        }
+      }>
+        {
+          locale.samePreparation
+        }
+      :<
+        /span>
+        < Select
+        style = {
+        {
+          width: 130
+        }
+      }
+        size = {'medium'}
+        hasArrow
+        mode = "single"
+        filterLocal = {false}
+        defaultValue = {'ABORT'}
+        dataSource = {
+          [
+            {
+              label: locale.abortImport,
+              value: 'ABORT',
+            },
+        {
+          label: locale.skipImport,
+            value
+        :
+          'SKIP',
+        }
+      ,
+        {
+          label: locale.overwriteImport,
+            value
+        :
+          'OVERWRITE',
+        }
+      ,
+      ]
+      }
+        hasClear = {false}
+        onChange = {(value, actionType, item)
+      =>
+        {
+          if (value) {
+            self.field.setValue('sameConfigPolicy', value);
+          }
+        }
+      }
+        />
+        < /div>
+        < div >
+        < Button
+        type = {'primary'}
+        style = {
+        {
+          marginRight: 10
+        }
+      }
+        onClick = {()
+      =>
+        {
+          if (!self.field.getValue('cloneTargetSpace')) {
+            document.getElementById('cloneTargetSpaceSelectErr').style.display = 'inline';
+            return;
+          } else {
+            document.getElementById('cloneTargetSpaceSelectErr').style.display = 'none';
+          }
+          let idsStr = '';
+          configsTableSelected.forEach((value, key, map) => {
+            idsStr = `${idsStr + key},`;
+          });
+          let cloneTargetSpace = self.field.getValue('cloneTargetSpace');
+          let sameConfigPolicy = self.field.getValue('sameConfigPolicy');
+          request({
+            url: `v1/cs/configs?clone=true&tenant=${cloneTargetSpace}&policy=${sameConfigPolicy}&ids=${idsStr}`,
+            beforeSend() {
+              self.openLoading();
+            },
+            success(ret) {
+              self.processImportAndCloneResult(ret, locale, cloneConfirm, false);
+            },
+            error(data) {
+              self.setState({
+                dataSource: [],
+                total: 0,
+                currentPage: 0,
+              });
+            },
+            complete() {
+              self.closeLoading();
+            },
+          });
+        }
+      }
+        data - spm - click = {'gostr=/aliyun;locaid=doClone'}
+          >
+          {locale.startCloning}
+          < /Button>
+          < /div>
+          < /div>
+      ),
+      })
+        ;
       },
       error(data) {
         self.setState({
@@ -927,48 +1330,99 @@ class ConfigurationManagement extends React.Component {
         Dialog.alert({
           title: isImport ? locale.importAbort : locale.cloneAbort,
           content: (
-            <div style={{ width: '500px' }}>
-              <h4>
-                {locale.conflictConfig}：{ret.data.failData[0].group}/{ret.data.failData[0].dataId}
-              </h4>
-              <div style={{ marginTop: 20 }}>
-                <h5>
-                  {locale.failureEntries}: {ret.data.failData.length}
-                </h5>
-                <Table dataSource={ret.data.failData}>
-                  <Table.Column title="Data Id" dataIndex="dataId" />
-                  <Table.Column title="Group" dataIndex="group" />
-                </Table>
-              </div>
-              <div>
-                <h5>
-                  {locale.unprocessedEntries}: {ret.data.skipData ? ret.data.skipData.length : 0}
-                </h5>
-                <Table dataSource={ret.data.skipData}>
-                  <Table.Column title="Data Id" dataIndex="dataId" />
-                  <Table.Column title="Group" dataIndex="group" />
-                </Table>
-              </div>
-            </div>
-          ),
-        });
+            < div style = {
+        {
+          width: '500px'
+        }
+      }>
+      <
+        h4 >
+        {locale.conflictConfig}：{
+          ret.data.failData[0].group
+        }
+        /{ret.data.failData[0].dataId}
+        < /h4>
+        < div
+        style = {
+        {
+          marginTop: 20
+        }
+      }>
+      <
+        h5 >
+        {locale.failureEntries}
+      :
+        {
+          ret.data.failData.length
+        }
+      <
+        /h5>
+        < Table
+        dataSource = {ret.data.failData} >
+          < Table.Column
+        title = "Data Id"
+        dataIndex = "dataId" / >
+          < Table.Column
+        title = "Group"
+        dataIndex = "group" / >
+          < /Table>
+          < /div>
+          < div >
+          < h5 >
+          {locale.unprocessedEntries}
+      :
+        {
+          ret.data.skipData ? ret.data.skipData.length : 0
+        }
+      <
+        /h5>
+        < Table
+        dataSource = {ret.data.skipData} >
+          < Table.Column
+        title = "Data Id"
+        dataIndex = "dataId" / >
+          < Table.Column
+        title = "Group"
+        dataIndex = "group" / >
+          < /Table>
+          < /div>
+          < /div>
+      ),
+      })
+        ;
       } else if (ret.data.skipCount && ret.data.skipCount > 0) {
         Dialog.alert({
           title: isImport ? locale.importSucc : locale.cloneSucc,
           content: (
-            <div style={{ width: '500px' }}>
-              <div>
-                <h5>
-                  {locale.skippedEntries}: {ret.data.skipData.length}
-                </h5>
-                <Table dataSource={ret.data.skipData}>
-                  <Table.Column title="Data Id" dataIndex="dataId" />
-                  <Table.Column title="Group" dataIndex="group" />
-                </Table>
-              </div>
-            </div>
-          ),
-        });
+            < div style = {
+        {
+          width: '500px'
+        }
+      }>
+      <
+        div >
+        < h5 >
+        {locale.skippedEntries}
+      :
+        {
+          ret.data.skipData.length
+        }
+      <
+        /h5>
+        < Table
+        dataSource = {ret.data.skipData} >
+          < Table.Column
+        title = "Data Id"
+        dataIndex = "dataId" / >
+          < Table.Column
+        title = "Group"
+        dataIndex = "group" / >
+          < /Table>
+          < /div>
+          < /div>
+      ),
+      })
+        ;
       } else {
         let message = `${isImport ? locale.importSuccBegin : locale.cloneSuccBegin}${
           ret.data.succCount
@@ -995,7 +1449,7 @@ class ConfigurationManagement extends React.Component {
   }
 
   importData() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const self = this;
     self.field.setValue('sameConfigPolicy', 'ABORT');
     const uploadProps = {
@@ -1024,64 +1478,149 @@ class ConfigurationManagement extends React.Component {
       title: locale.import,
       footer: false,
       content: (
-        <div>
-          <div style={{ marginBottom: 10 }}>
-            <span style={{ color: '#999', marginRight: 5 }}>{locale.targetNamespace}:</span>
-            <span style={{ color: '#49D2E7' }}>{this.state.nownamespace_name} </span>|{' '}
-            {this.state.nownamespace_id}
-          </div>
-          <div style={{ marginBottom: 10 }}>
-            <span style={{ color: '#999', marginRight: 5 }}>{locale.samePreparation}:</span>
-            <Select
-              style={{ width: 130 }}
-              size={'medium'}
-              hasArrow
-              mode="single"
-              filterLocal={false}
-              defaultValue={'ABORT'}
-              dataSource={[
-                {
-                  label: locale.abortImport,
-                  value: 'ABORT',
-                },
-                {
-                  label: locale.skipImport,
-                  value: 'SKIP',
-                },
-                {
-                  label: locale.overwriteImport,
-                  value: 'OVERWRITE',
-                },
-              ]}
-              hasClear={false}
-              onChange={function(value, actionType, item) {
-                self.field.setValue('sameConfigPolicy', value);
-              }}
-            />
-          </div>
-          <div style={{ marginBottom: 10 }}>
-            <Icon type="prompt" style={{ color: '#FFA003', marginRight: '10px' }} />
-            {locale.importRemind}
-          </div>
-          <div>
-            <Upload
-              name={'file'}
-              listType="text"
-              data-spm-click={'gostr=/aliyun;locaid=configsImport'}
-              {...uploadProps}
-            >
-              <Button type="primary">{locale.uploadBtn}</Button>
-            </Upload>
-          </div>
-        </div>
-      ),
-    });
+        < div >
+        < div style = {
+    {
+      marginBottom: 10
+    }
+  }>
+  <
+    span
+    style = {
+    {
+      color: '#999', marginRight
+    :
+      5
+    }
+  }>
+    {
+      locale.targetNamespace
+    }
+  :<
+    /span>
+    < span
+    style = {
+    {
+      color: '#49D2E7'
+    }
+  }>
+    {
+      this.state.nownamespace_name
+    }
+  <
+    /span>|{' '}
+    {
+      this.state.nownamespace_id
+    }
+  <
+    /div>
+    < div
+    style = {
+    {
+      marginBottom: 10
+    }
+  }>
+  <
+    span
+    style = {
+    {
+      color: '#999', marginRight
+    :
+      5
+    }
+  }>
+    {
+      locale.samePreparation
+    }
+  :<
+    /span>
+    < Select
+    style = {
+    {
+      width: 130
+    }
+  }
+    size = {'medium'}
+    hasArrow
+    mode = "single"
+    filterLocal = {false}
+    defaultValue = {'ABORT'}
+    dataSource = {
+      [
+        {
+          label: locale.abortImport,
+          value: 'ABORT',
+        },
+    {
+      label: locale.skipImport,
+        value
+    :
+      'SKIP',
+    }
+  ,
+    {
+      label: locale.overwriteImport,
+        value
+    :
+      'OVERWRITE',
+    }
+  ,
+  ]
+  }
+    hasClear = {false}
+    onChange = {
+      function(value, actionType, item) {
+        self.field.setValue('sameConfigPolicy', value);
+      }
+    }
+    />
+    < /div>
+    < div
+    style = {
+    {
+      marginBottom: 10
+    }
+  }>
+  <
+    Icon
+    type = "prompt"
+    style = {
+    {
+      color: '#FFA003', marginRight
+    :
+      '10px'
+    }
+  }
+    />
+    {
+      locale.importRemind
+    }
+  <
+    /div>
+    < div >
+    < Upload
+    name = {'file'}
+    listType = "text"
+    data - spm - click = {'gostr=/aliyun;locaid=configsImport'}
+    {...
+      uploadProps
+    }
+  >
+  <
+    Button
+    type = "primary" > {locale.uploadBtn} < /Button>
+      < /Upload>
+      < /div>
+      < /div>
+  ),
+  })
+    ;
   }
 
   configDataTableOnChange(ids, records) {
-    const { rowSelection } = this.state;
+    const {rowSelection} = this.state;
     rowSelection.selectedRowKeys = ids;
-    this.setState({ rowSelection });
+    this.setState({rowSelection});
     configsTableSelected.clear();
     ids.forEach((id, i) => {
       configsTableSelected.set(id, id);
@@ -1089,274 +1628,575 @@ class ConfigurationManagement extends React.Component {
   }
 
   render() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     return (
-      <div>
-        <BatchHandle ref={ref => (this.batchHandle = ref)} />
-        <Loading
-          shape={'flower'}
-          style={{ position: 'relative', width: '100%', overflow: 'auto' }}
-          visible={this.state.loading}
-          tip={'Loading...'}
-          color={'#333'}
-        >
-          <div className={this.state.hasdash ? 'dash-page-container' : ''}>
-            <div
-              className={this.state.hasdash ? 'dash-left-container' : ''}
-              style={{ position: 'relative', padding: 10 }}
-            >
-              <div style={{ display: this.inApp ? 'none' : 'block', marginTop: -15 }}>
-                <RegionGroup
-                  namespaceCallBack={this.cleanAndGetData.bind(this)}
-                  setNowNameSpace={this.setNowNameSpace.bind(this)}
-                />
-              </div>
-              <div
-                style={{
-                  display: this.inApp ? 'none' : 'block',
-                  position: 'relative',
-                  width: '100%',
-                  overflow: 'hidden',
-                  height: '40px',
-                }}
-              >
-                <h3
-                  style={{
-                    height: 30,
-                    width: '100%',
-                    lineHeight: '30px',
-                    padding: 0,
-                    margin: 0,
-                    paddingLeft: 10,
-                    borderLeft: '3px solid #09c',
-                    color: '#ccc',
-                    fontSize: '12px',
-                  }}
-                >
-                  <span style={{ fontSize: '14px', color: '#000', marginRight: 8 }}>
-                    {locale.configurationManagement8}
-                  </span>
-                  <span style={{ fontSize: '14px', color: '#000', marginRight: 8 }}>|</span>
-                  <span style={{ fontSize: '14px', color: '#000', marginRight: 8 }}>
-                    {this.state.nownamespace_name}
-                  </span>
-                  <span style={{ fontSize: '14px', color: '#000', marginRight: 18 }}>
-                    {this.state.nownamespace_id}
-                  </span>
-                  {locale.queryResults}
-                  <strong style={{ fontWeight: 'bold' }}> {this.state.total} </strong>
-                  {locale.articleMeetRequirements}
-                </h3>
-                <div
-                  style={{ position: 'absolute', textAlign: 'right', zIndex: 2, right: 0, top: 0 }}
-                />
-              </div>
-              <div
-                style={{
-                  position: 'relative',
-                  marginTop: 10,
-                  height: this.state.isAdvancedQuery ? 'auto' : 42,
-                  overflow: 'hidden',
-                }}
-              >
-                <Form inline>
-                  <Form.Item label={'Data ID:'}>
-                    <Input
-                      htmlType={'text'}
-                      placeholder={locale.fuzzyd}
-                      style={{ width: 200 }}
-                      value={this.state.dataId}
-                      onChange={this.getDataId.bind(this)}
-                    />
-                  </Form.Item>
+      < div >
+      < BatchHandle
+    ref = {ref
+  =>
+    (this.batchHandle = ref)
+  }
+    />
+    < Loading
+    shape = {'flower'}
+    style = {
+    {
+      position: 'relative', width
+    :
+      '100%', overflow
+    :
+      'auto'
+    }
+  }
+    visible = {this.state.loading}
+    tip = {'Loading...'}
+    color = {'#333'}
+      >
+      < div
+    className = {this.state.hasdash ? 'dash-page-container' : ''} >
+      < div
+    className = {this.state.hasdash ? 'dash-left-container' : ''}
+    style = {
+    {
+      position: 'relative', padding
+    :
+      10
+    }
+  }
+  >
+  <
+    div
+    style = {
+    {
+      display: this.inApp ? 'none' : 'block', marginTop
+    :
+      -15
+    }
+  }>
+  <
+    RegionGroup
+    namespaceCallBack = {this.cleanAndGetData.bind(this)}
+    setNowNameSpace = {this.setNowNameSpace.bind(this)}
+    />
+    < /div>
+    < div
+    style = {
+    {
+      display: this.inApp ? 'none' : 'block',
+        position
+    :
+      'relative',
+        width
+    :
+      '100%',
+        overflow
+    :
+      'hidden',
+        height
+    :
+      '40px',
+    }
+  }
+  >
+  <
+    h3
+    style = {
+    {
+      height: 30,
+        width
+    :
+      '100%',
+        lineHeight
+    :
+      '30px',
+        padding
+    :
+      0,
+        margin
+    :
+      0,
+        paddingLeft
+    :
+      10,
+        borderLeft
+    :
+      '3px solid #09c',
+        color
+    :
+      '#ccc',
+        fontSize
+    :
+      '12px',
+    }
+  }
+  >
+  <
+    span
+    style = {
+    {
+      fontSize: '14px', color
+    :
+      '#000', marginRight
+    :
+      8
+    }
+  }>
+    {
+      locale.configurationManagement8
+    }
+  <
+    /span>
+    < span
+    style = {
+    {
+      fontSize: '14px', color
+    :
+      '#000', marginRight
+    :
+      8
+    }
+  }>|<
+    /span>
+    < span
+    style = {
+    {
+      fontSize: '14px', color
+    :
+      '#000', marginRight
+    :
+      8
+    }
+  }>
+    {
+      this.state.nownamespace_name
+    }
+  <
+    /span>
+    < span
+    style = {
+    {
+      fontSize: '14px', color
+    :
+      '#000', marginRight
+    :
+      18
+    }
+  }>
+    {
+      this.state.nownamespace_id
+    }
+  <
+    /span>
+    {
+      locale.queryResults
+    }
+  <
+    strong
+    style = {
+    {
+      fontWeight: 'bold'
+    }
+  }>
+    {
+      this.state.total
+    }
+  <
+    /strong>
+    {
+      locale.articleMeetRequirements
+    }
+  <
+    /h3>
+    < div
+    style = {
+    {
+      position: 'absolute', textAlign
+    :
+      'right', zIndex
+    :
+      2, right
+    :
+      0, top
+    :
+      0
+    }
+  }
+    />
+    < /div>
+    < div
+    style = {
+    {
+      position: 'relative',
+        marginTop
+    :
+      10,
+        height
+    :
+      this.state.isAdvancedQuery ? 'auto' : 42,
+        overflow
+    :
+      'hidden',
+    }
+  }
+  >
+  <
+    Form
+    inline >
+    < Form.Item
+    label = {'Data ID:'} >
+      < Input
+    htmlType = {'text'}
+    placeholder = {locale.fuzzyd}
+    style = {
+    {
+      width: 200
+    }
+  }
+    value = {this.state.dataId}
+    onChange = {this.getDataId.bind(this)}
+    />
+    < /Form.Item>
 
-                  <Form.Item label={'Group:'}>
-                    <Select.AutoComplete
-                      style={{ width: 200 }}
-                      size={'medium'}
-                      placeholder={locale.fuzzyg}
-                      dataSource={this.state.groups}
-                      value={this.state.group}
-                      onChange={this.setGroup.bind(this)}
-                      hasClear
-                    />
-                  </Form.Item>
-                  <Form.Item label={''}>
-                    <Button
-                      type={'primary'}
-                      style={{ marginRight: 10 }}
-                      onClick={this.selectAll.bind(this)}
-                      data-spm-click={'gostr=/aliyun;locaid=dashsearch'}
-                    >
-                      {locale.query}
-                    </Button>
-                  </Form.Item>
-                  <Form.Item
-                    style={
-                      this.inApp
-                        ? { display: 'none' }
-                        : { verticalAlign: 'middle', marginTop: 0, marginLeft: 10 }
-                    }
-                  >
-                    <div
-                      style={{ color: '#33cde5', fontSize: 12, cursor: 'pointer' }}
-                      onClick={this.changeAdvancedQuery}
-                    >
-                      <span style={{ marginRight: 5, lineHeight: '28px' }}>
-                        {locale.advancedQuery9}
-                      </span>
-                      <Icon
-                        type={
-                          this.state.isAdvancedQuery ? 'arrow-up-filling' : 'arrow-down-filling'
-                        }
-                        size={'xs'}
-                      />
-                    </div>
-                  </Form.Item>
-                  <Form.Item label={''}>
-                    <Button
-                      type={'primary'}
-                      style={{ marginRight: 10 }}
-                      onClick={this.exportData.bind(this)}
-                      data-spm-click={'gostr=/aliyun;locaid=configsExport'}
-                    >
-                      {locale.export}
-                    </Button>
-                  </Form.Item>
-                  <Form.Item label={''}>
-                    <Button
-                      type={'primary'}
-                      style={{ marginRight: 10 }}
-                      onClick={this.importData.bind(this)}
-                      data-spm-click={'gostr=/aliyun;locaid=configsExport'}
-                    >
-                      {locale.import}
-                    </Button>
-                  </Form.Item>
-                  <br />
-                  <Form.Item
-                    style={this.inApp ? { display: 'none' } : {}}
-                    label={locale.application0}
-                  >
-                    <Input
-                      htmlType={'text'}
-                      placeholder={locale.app1}
-                      style={{ width: 200 }}
-                      value={this.state.appName}
-                      onChange={this.setAppName.bind(this)}
-                    />
-                  </Form.Item>
-                  <Form.Item label={locale.tags}>
-                    <Select
-                      style={{ width: 200 }}
-                      size={'medium'}
-                      hasArrow
-                      mode="tag"
-                      filterLocal={false}
-                      placeholder={locale.pleaseEnterTag}
-                      dataSource={this.state.tagLst}
-                      value={this.state.config_tags}
-                      onChange={this.setConfigTags.bind(this)}
-                      hasClear
-                    />
-                  </Form.Item>
-                </Form>
-                <div style={{ position: 'absolute', right: 10, top: 4 }}>
-                  <Icon
-                    type={'add'}
-                    size={'medium'}
-                    style={{
-                      color: 'black',
-                      marginRight: 0,
-                      verticalAlign: 'middle',
-                      cursor: 'pointer',
-                      backgroundColor: '#eee',
-                      border: '1px solid #ddd',
-                      padding: '3px 6px',
-                    }}
-                    onClick={this.chooseEnv.bind(this)}
-                  />
-                </div>
-              </div>
-              <div>
-                <Table
-                  dataSource={this.state.dataSource}
-                  locale={{ empty: locale.pubNoData }}
-                  fixedHeader
-                  maxBodyHeight={400}
-                  ref={'dataTable'}
-                  rowSelection={this.state.rowSelection}
-                >
-                  <Table.Column title={'Data Id'} dataIndex={'dataId'} />
-                  <Table.Column title={'Group'} dataIndex={'group'} />
-                  {!this.inApp ? (
-                    <Table.Column title={locale.application} dataIndex={'appName'} />
-                  ) : (
-                    <div />
-                  )}
-                  <Table.Column title={locale.operation} cell={this.renderCol.bind(this)} />
-                </Table>
-                {this.state.dataSource.length > 0 && (
-                  <div style={{ marginTop: 10, overflow: 'hidden' }}>
-                    <div style={{ float: 'left' }}>
-                      <Button
-                        type={'primary'}
-                        warning
-                        style={{ marginRight: 10 }}
-                        onClick={this.multipleSelectionDeletion.bind(this)}
-                        data-spm-click={'gostr=/aliyun;locaid=configsDelete'}
-                      >
-                        {locale.deleteAction}
-                      </Button>
-                      <Button
-                        type={'primary'}
-                        style={{ marginRight: 10 }}
-                        onClick={this.exportSelectedData.bind(this)}
-                        data-spm-click={'gostr=/aliyun;locaid=configsExport'}
-                      >
-                        {locale.exportSelected}
-                      </Button>
-                      <Button
-                        type={'primary'}
-                        style={{ marginRight: 10 }}
-                        onClick={this.cloneSelectedDataConfirm.bind(this)}
-                        data-spm-click={'gostr=/aliyun;locaid=configsClone'}
-                      >
-                        {locale.clone}
-                      </Button>
-                    </div>
-                    <div style={{ float: 'right' }}>
-                      <Pagination
-                        style={{ float: 'right' }}
-                        pageSizeList={[10, 20, 30]}
-                        pageSizeSelector={'dropdown'}
-                        onPageSizeChange={this.handlePageSizeChange.bind(this)}
-                        current={this.state.currentPage}
-                        total={this.state.total}
-                        pageSize={this.state.pageSize}
-                        onChange={this.changePage.bind(this)}
-                      />
-                    </div>
-                  </div>
-                )}
-              </div>
-              <ShowCodeing ref={this.showcode} />
-              <DeleteDialog ref={this.deleteDialog} />
-            </div>
-            {this.state.hasdash && (
-              <div
-                className={'dash-right-container'}
-                style={{ overflow: 'auto', height: window.innerHeight - 40 }}
-              >
-                {this.state.contentList.map((v, i) => (
-                  <DashboardCard data={v} height={'auto'} key={`show${i}`} />
-                ))}
-              </div>
-            )}
-          </div>
-        </Loading>
-      </div>
-    );
+    < Form.Item
+    label = {'Group:'} >
+      < Select.AutoComplete
+    style = {
+    {
+      width: 200
+    }
+  }
+    size = {'medium'}
+    placeholder = {locale.fuzzyg}
+    dataSource = {this.state.groups}
+    value = {this.state.group}
+    onChange = {this.setGroup.bind(this)}
+    hasClear
+    / >
+    < /Form.Item>
+    < Form.Item
+    label = {''} >
+      < Button
+    type = {'primary'}
+    style = {
+    {
+      marginRight: 10
+    }
+  }
+    onClick = {this.selectAll.bind(this)}
+    data - spm - click = {'gostr=/aliyun;locaid=dashsearch'}
+      >
+      {locale.query}
+      < /Button>
+      < /Form.Item>
+      < Form.Item
+    style = {
+        this.inApp
+        ? {display: 'none'}
+        : {verticalAlign: 'middle', marginTop: 0, marginLeft: 10}
+      }
+      >
+      < div
+    style = {
+    {
+      color: '#33cde5', fontSize
+    :
+      12, cursor
+    :
+      'pointer'
+    }
+  }
+    onClick = {this.changeAdvancedQuery}
+      >
+      < span
+    style = {
+    {
+      marginRight: 5, lineHeight
+    :
+      '28px'
+    }
+  }>
+    {
+      locale.advancedQuery9
+    }
+  <
+    /span>
+    < Icon
+    type = {
+      this.state.isAdvancedQuery ? 'arrow-up-filling' : 'arrow-down-filling'
+    }
+    size = {'xs'}
+    />
+    < /div>
+    < /Form.Item>
+    < Form.Item
+    label = {''} >
+      < Button
+    type = {'primary'}
+    style = {
+    {
+      marginRight: 10
+    }
+  }
+    onClick = {this.exportData.bind(this)}
+    data - spm - click = {'gostr=/aliyun;locaid=configsExport'}
+      >
+      {locale.export}
+      < /Button>
+      < /Form.Item>
+      < Form.Item
+    label = {''} >
+      < Button
+    type = {'primary'}
+    style = {
+    {
+      marginRight: 10
+    }
+  }
+    onClick = {this.importData.bind(this)}
+    data - spm - click = {'gostr=/aliyun;locaid=configsExport'}
+      >
+      {locale.import}
+      < /Button>
+      < /Form.Item>
+      < br / >
+      < Form.Item
+    style = {this.inApp ? {display: 'none'} : {}}
+    label = {locale.application0}
+      >
+      < Input
+    htmlType = {'text'}
+    placeholder = {locale.app1}
+    style = {
+    {
+      width: 200
+    }
+  }
+    value = {this.state.appName}
+    onChange = {this.setAppName.bind(this)}
+    />
+    < /Form.Item>
+    < Form.Item
+    label = {locale.tags} >
+      < Select
+    style = {
+    {
+      width: 200
+    }
+  }
+    size = {'medium'}
+    hasArrow
+    mode = "tag"
+    filterLocal = {false}
+    placeholder = {locale.pleaseEnterTag}
+    dataSource = {this.state.tagLst}
+    value = {this.state.config_tags}
+    onChange = {this.setConfigTags.bind(this)}
+    hasClear
+    / >
+    < /Form.Item>
+    < /Form>
+    < div
+    style = {
+    {
+      position: 'absolute', right
+    :
+      10, top
+    :
+      4
+    }
+  }>
+  <
+    Icon
+    type = {'add'}
+    size = {'medium'}
+    style = {
+    {
+      color: 'black',
+        marginRight
+    :
+      0,
+        verticalAlign
+    :
+      'middle',
+        cursor
+    :
+      'pointer',
+        backgroundColor
+    :
+      '#eee',
+        border
+    :
+      '1px solid #ddd',
+        padding
+    :
+      '3px 6px',
+    }
+  }
+    onClick = {this.chooseEnv.bind(this)}
+    />
+    < /div>
+    < /div>
+    < div >
+    < Table
+    dataSource = {this.state.dataSource}
+    locale = {
+    {
+      empty: locale.pubNoData
+    }
+  }
+    fixedHeader
+    maxBodyHeight = {400}
+    ref = {'dataTable'}
+    rowSelection = {this.state.rowSelection}
+      >
+      < Table.Column
+    title = {'Data Id'}
+    dataIndex = {'dataId'}
+    />
+    < Table.Column
+    title = {'Group'}
+    dataIndex = {'group'}
+    />
+    {
+      !this.inApp ? (
+        < Table.Column title = {locale.application}
+      dataIndex = {'appName'}
+      />
+    ) :
+      (
+      < div / >
+    )
+    }
+  <
+    Table.Column
+    title = {locale.operation}
+    cell = {this.renderCol.bind(this)}
+    />
+    < /Table>
+    {
+      this.state.dataSource.length > 0 && (
+      < div
+      style = {
+      {
+        marginTop: 10, overflow
+      :
+        'hidden'
+      }
+    }>
+    <
+      div
+      style = {
+      {
+        float: 'left'
+      }
+    }>
+    <
+      Button
+      type = {'primary'}
+      warning
+      style = {
+      {
+        marginRight: 10
+      }
+    }
+      onClick = {this.multipleSelectionDeletion.bind(this)}
+      data - spm - click = {'gostr=/aliyun;locaid=configsDelete'}
+        >
+        {locale.deleteAction}
+        < /Button>
+        < Button
+      type = {'primary'}
+      style = {
+      {
+        marginRight: 10
+      }
+    }
+      onClick = {this.exportSelectedData.bind(this)}
+      data - spm - click = {'gostr=/aliyun;locaid=configsExport'}
+        >
+        {locale.exportSelected}
+        < /Button>
+        < Button
+      type = {'primary'}
+      style = {
+      {
+        marginRight: 10
+      }
+    }
+      onClick = {this.cloneSelectedDataConfirm.bind(this)}
+      data - spm - click = {'gostr=/aliyun;locaid=configsClone'}
+        >
+        {locale.clone}
+        < /Button>
+        < /div>
+        < div
+      style = {
+      {
+        float: 'right'
+      }
+    }>
+    <
+      Pagination
+      style = {
+      {
+        float: 'right'
+      }
+    }
+      pageSizeList = {[10, 20, 30
+    ]
+    }
+      pageSizeSelector = {'dropdown'}
+      onPageSizeChange = {this.handlePageSizeChange.bind(this)}
+      current = {this.state.currentPage}
+      total = {this.state.total}
+      pageSize = {this.state.pageSize}
+      onChange = {this.changePage.bind(this)}
+      />
+      < /div>
+      < /div>
+    )
+    }
+  <
+    /div>
+    < ShowCodeing
+    ref = {this.showcode}
+    />
+    < DeleteDialog
+    ref = {this.deleteDialog}
+    />
+    < /div>
+    {
+      this.state.hasdash && (
+      < div
+      className = {'dash-right-container'}
+      style = {
+      {
+        overflow: 'auto', height
+      :
+        window.innerHeight - 40
+      }
+    }
+    >
+      {
+        this.state.contentList.map((v, i) => (
+          < DashboardCard
+        data = {v}
+        height = {'auto'}
+        key = {`show${i}`
+      }
+        />
+      ))
+      }
+    <
+      /div>
+    )
+    }
+  <
+    /div>
+    < /Loading>
+    < /div>
+  )
+    ;
   }
 }
 

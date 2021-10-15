@@ -130,7 +130,7 @@ class DumpProcessor implements TaskProcessor {
 
     @Override
     public boolean process(String taskType, AbstractTask task) {
-        DumpTask dumpTask = (DumpTask)task;
+        DumpTask dumpTask = (DumpTask) task;
         String[] pair = GroupKey2.parseKey(dumpTask.groupKey);
         String dataId = pair[0];
         String group = pair[1];
@@ -292,7 +292,7 @@ class DumpAllBetaProcessor implements TaskProcessor {
     @Override
     public boolean process(String taskType, AbstractTask task) {
         int rowCount = persistService.configInfoBetaCount();
-        int pageCount = (int)Math.ceil(rowCount * 1.0 / PAGE_SIZE);
+        int pageCount = (int) Math.ceil(rowCount * 1.0 / PAGE_SIZE);
 
         int actualRowCount = 0;
         for (int pageNo = 1; pageNo <= pageCount; pageNo++) {
@@ -329,7 +329,7 @@ class DumpAllTagProcessor implements TaskProcessor {
     @Override
     public boolean process(String taskType, AbstractTask task) {
         int rowCount = persistService.configInfoTagCount();
-        int pageCount = (int)Math.ceil(rowCount * 1.0 / PAGE_SIZE);
+        int pageCount = (int) Math.ceil(rowCount * 1.0 / PAGE_SIZE);
 
         int actualRowCount = 0;
         for (int pageNo = 1; pageNo <= pageCount; pageNo++) {
@@ -412,7 +412,7 @@ class DumpChangeProcessor implements TaskProcessor {
             final String md5 = MD5.getInstance().getMD5String(content);
             LogUtil.defaultLog.info(
                 "[dump-change-ok] {}, {}, length={}, md5={}",
-                new Object[] {
+                new Object[]{
                     GroupKey2.getKey(cf.getDataId(), cf.getGroup()),
                     cf.getLastModified(), content.length(), md5});
         }

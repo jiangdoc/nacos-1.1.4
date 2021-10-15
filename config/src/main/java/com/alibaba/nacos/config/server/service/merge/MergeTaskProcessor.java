@@ -52,7 +52,7 @@ public class MergeTaskProcessor implements TaskProcessor {
 
     @Override
     public boolean process(String taskType, AbstractTask task) {
-        MergeDataTask mergeTask = (MergeDataTask)task;
+        MergeDataTask mergeTask = (MergeDataTask) task;
         final String dataId = mergeTask.dataId;
         final String group = mergeTask.groupId;
         final String tenant = mergeTask.tenant;
@@ -61,7 +61,7 @@ public class MergeTaskProcessor implements TaskProcessor {
         try {
             List<ConfigInfoAggr> datumList = new ArrayList<ConfigInfoAggr>();
             int rowCount = persistService.aggrConfigInfoCount(dataId, group, tenant);
-            int pageCount = (int)Math.ceil(rowCount * 1.0 / PAGE_SIZE);
+            int pageCount = (int) Math.ceil(rowCount * 1.0 / PAGE_SIZE);
             for (int pageNo = 1; pageNo <= pageCount; pageNo++) {
                 Page<ConfigInfoAggr> page = persistService.findConfigInfoAggrByPage(dataId, group, tenant, pageNo,
                     PAGE_SIZE);

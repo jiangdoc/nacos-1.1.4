@@ -119,8 +119,8 @@ public class LabelSelector extends ExpressionSelector implements Selector {
                 String consumerLabelValue = getCmdbReader().queryLabel(consumer, PreservedEntityTypes.ip.name(), labelName);
 
                 if (StringUtils.isNotBlank(consumerLabelValue) &&
-                        !StringUtils.equals(consumerLabelValue,
-                            getCmdbReader().queryLabel(instance.getIp(), PreservedEntityTypes.ip.name(), labelName))) {
+                    !StringUtils.equals(consumerLabelValue,
+                        getCmdbReader().queryLabel(instance.getIp(), PreservedEntityTypes.ip.name(), labelName))) {
                     matched = false;
                     break;
                 }
@@ -209,8 +209,8 @@ public class LabelSelector extends ExpressionSelector implements Selector {
                 char ch = chars[index];
                 if (characters.contains(ch)) {
                     terms.add(expression.substring(lastIndex, index));
-                    terms.add(expression.substring(index, index+1));
-                    index ++;
+                    terms.add(expression.substring(index, index + 1));
+                    index++;
                     lastIndex = index;
                 }
             }

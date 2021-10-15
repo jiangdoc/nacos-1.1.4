@@ -12,19 +12,19 @@
  */
 
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { ConfigProvider, Dropdown, Menu } from '@alifd/next';
+import {connect} from 'react-redux';
+import {ConfigProvider, Dropdown, Menu} from '@alifd/next';
 import siteConfig from '../config';
-import { changeLanguage } from '@/reducers/locale';
+import {changeLanguage} from '@/reducers/locale';
 
 import './index.scss';
 
 @withRouter
 @connect(
-  state => ({ ...state.locale }),
-  { changeLanguage }
+  state => ({...state.locale}),
+  {changeLanguage}
 )
 @ConfigProvider.config
 class Header extends React.Component {
@@ -39,7 +39,7 @@ class Header extends React.Component {
   };
 
   switchLang = () => {
-    const { language = 'en-US', changeLanguage } = this.props;
+    const {language = 'en-US', changeLanguage} = this.props;
     const currentLanguage = language === 'en-US' ? 'zh-CN' : 'en-US';
     changeLanguage(currentLanguage);
   };
@@ -68,57 +68,75 @@ class Header extends React.Component {
     const {
       locale = {},
       language = 'en-us',
-      location: { pathname },
+      location: {pathname},
     } = this.props;
-    const { home, docs, blog, community, languageSwitchButton } = locale;
+    const {home, docs, blog, community, languageSwitchButton} = locale;
     const BASE_URL = `https://nacos.io/${language.toLocaleLowerCase()}/`;
     const NAV_MENU = [
-      { id: 1, title: home, link: BASE_URL },
-      { id: 2, title: docs, link: `${BASE_URL}docs/what-is-nacos.html` },
-      { id: 3, title: blog, link: `${BASE_URL}blog/index.html` },
-      { id: 4, title: community, link: `${BASE_URL}community/index.html` },
+      {id: 1, title: home, link: BASE_URL},
+      {id: 2, title: docs, link: `${BASE_URL}docs/what-is-nacos.html`},
+      {id: 3, title: blog, link: `${BASE_URL}blog/index.html`},
+      {id: 4, title: community, link: `${BASE_URL}community/index.html`},
     ];
     return (
-      <header className="header-container header-container-primary">
-        <div className="header-body">
-          <a
-            href={`https://nacos.io/${language.toLocaleLowerCase()}/`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="img/logo-2000-390.svg"
-              className="logo"
-              alt={siteConfig.name}
-              title={siteConfig.name}
-            />
-          </a>
-          {/* if is login page, we will show logout */}
-          {pathname !== '/login' && (
-            <Dropdown trigger={<div className="logout">{this.getUsername()}</div>}>
-              <Menu>
-                <Menu.Item onClick={this.logout}>{locale.logout}</Menu.Item>
-                <Menu.Item onClick={this.changePassword}>{locale.changePassword}</Menu.Item>
-              </Menu>
-            </Dropdown>
-          )}
-          <span className="language-switch language-switch-primary" onClick={this.switchLang}>
-            {languageSwitchButton}
-          </span>
-          <div className="header-menu header-menu-open">
-            <ul>
-              {NAV_MENU.map(item => (
-                <li key={item.id} className="menu-item menu-item-primary">
-                  <a href={item.link} target="_blank" rel="noopener noreferrer">
-                    {item.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </header>
-    );
+      < header
+    className = "header-container header-container-primary" >
+      < div
+    className = "header-body" >
+      < a
+    href = {`https://nacos.io/${language.toLocaleLowerCase()}/`
+  }
+    target = "_blank"
+    rel = "noopener noreferrer"
+      >
+      < img
+    src = "img/logo-2000-390.svg"
+    className = "logo"
+    alt = {siteConfig.name}
+    title = {siteConfig.name}
+    />
+    < /a>
+    {/* if is login page, we will show logout */
+    }
+    {
+      pathname !== '/login' && (
+      < Dropdown
+      trigger = { < div
+      className = "logout" > {this.getUsername()} < /div>}>
+        < Menu >
+        < Menu.Item
+      onClick = {this.logout} > {locale.logout} < /Menu.Item>
+        < Menu.Item
+      onClick = {this.changePassword} > {locale.changePassword} < /Menu.Item>
+        < /Menu>
+        < /Dropdown>
+    )
+    }
+  <
+    span
+    className = "language-switch language-switch-primary"
+    onClick = {this.switchLang} >
+      {languageSwitchButton}
+      < /span>
+      < div
+    className = "header-menu header-menu-open" >
+      < ul >
+      {
+        NAV_MENU.map(item => (
+          < li key = {item.id} className = "menu-item menu-item-primary" >
+        < a href = {item.link} target = "_blank" rel = "noopener noreferrer" >
+        {item.title}
+        < /a>
+        < /li>
+  ))
+  }
+  <
+    /ul>
+    < /div>
+    < /div>
+    < /header>
+  )
+    ;
   }
 }
 

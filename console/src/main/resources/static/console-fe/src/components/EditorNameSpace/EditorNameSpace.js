@@ -13,8 +13,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { request } from '../../globalLib';
-import { Button, ConfigProvider, Dialog, Field, Form, Input, Loading } from '@alifd/next';
+import {request} from '../../globalLib';
+import {Button, ConfigProvider, Dialog, Field, Form, Input, Loading} from '@alifd/next';
 
 import './index.scss';
 
@@ -65,7 +65,7 @@ class EditorNameSpace extends React.Component {
   }
 
   getNamespaceDetail(record) {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     this.field.setValues(record);
     request({
       type: 'get',
@@ -88,7 +88,7 @@ class EditorNameSpace extends React.Component {
   }
 
   handleSubmit() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     this.field.validate((errors, values) => {
       if (errors) {
         return;
@@ -139,7 +139,7 @@ class EditorNameSpace extends React.Component {
   }
 
   validateChart(rule, value, callback) {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const chartReg = /[@#\$%\^&\*]+/g;
     if (chartReg.test(value)) {
       callback(locale.pleaseDo);
@@ -149,63 +149,97 @@ class EditorNameSpace extends React.Component {
   }
 
   render() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const formItemLayout = {
-      labelCol: { fixedSpan: 6 },
-      wrapperCol: { span: 18 },
+      labelCol: {fixedSpan: 6},
+      wrapperCol: {span: 18},
     };
 
     const footer =
       this.state.type === 0 ? (
-        <div />
-      ) : (
-        <Button type="primary" onClick={this.handleSubmit.bind(this)}>
-          {locale.publicSpace}
-        </Button>
-      );
+        < div / >
+  ) :
+    (
+    < Button
+    type = "primary"
+    onClick = {this.handleSubmit.bind(this)} >
+      {locale.publicSpace}
+      < /Button>
+  )
+    ;
     return (
-      <div>
-        <Dialog
-          title={locale.confirmModify}
-          style={{ width: '50%' }}
-          visible={this.state.dialogvisible}
-          footer={footer}
-          onCancel={this.closeDialog.bind(this)}
-          onClose={this.closeDialog.bind(this)}
-        >
-          <Loading
-            tip={locale.editNamespace}
-            style={{ width: '100%', position: 'relative' }}
-            visible={this.state.loading}
-          >
-            <Form field={this.field}>
-              <FormItem label={locale.load} required {...formItemLayout}>
-                <Input
-                  {...this.field.init('namespaceShowName', {
-                    rules: [
-                      { required: true, message: locale.namespace },
-                      { validator: this.validateChart.bind(this) },
-                    ],
-                  })}
-                  disabled={this.state.type === 0}
-                />
-              </FormItem>
-              <FormItem label={locale.description} required {...formItemLayout}>
-                <Input
-                  {...this.field.init('namespaceDesc', {
-                    rules: [
-                      { required: true, message: locale.namespaceDesc },
-                      { validator: this.validateChart.bind(this) },
-                    ],
-                  })}
-                  disabled={this.state.type === 0}
-                />
-              </FormItem>
-            </Form>
-          </Loading>
-        </Dialog>
-      </div>
-    );
+      < div >
+      < Dialog
+    title = {locale.confirmModify}
+    style = {
+    {
+      width: '50%'
+    }
+  }
+    visible = {this.state.dialogvisible}
+    footer = {footer}
+    onCancel = {this.closeDialog.bind(this)}
+    onClose = {this.closeDialog.bind(this)}
+      >
+      < Loading
+    tip = {locale.editNamespace}
+    style = {
+    {
+      width: '100%', position
+    :
+      'relative'
+    }
+  }
+    visible = {this.state.loading}
+      >
+      < Form
+    field = {this.field} >
+      < FormItem
+    label = {locale.load}
+    required
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Input
+    {...
+      this.field.init('namespaceShowName', {
+        rules: [
+          {required: true, message: locale.namespace},
+          {validator: this.validateChart.bind(this)},
+        ],
+      })
+    }
+    disabled = {this.state.type === 0}
+    />
+    < /FormItem>
+    < FormItem
+    label = {locale.description}
+    required
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Input
+    {...
+      this.field.init('namespaceDesc', {
+        rules: [
+          {required: true, message: locale.namespaceDesc},
+          {validator: this.validateChart.bind(this)},
+        ],
+      })
+    }
+    disabled = {this.state.type === 0}
+    />
+    < /FormItem>
+    < /Form>
+    < /Loading>
+    < /Dialog>
+    < /div>
+  )
+    ;
   }
 }
 

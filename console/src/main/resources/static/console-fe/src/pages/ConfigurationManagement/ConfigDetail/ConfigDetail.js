@@ -12,8 +12,8 @@
  */
 
 import React from 'react';
-import { Button, ConfigProvider, Dialog, Field, Form, Input, Loading, Tab } from '@alifd/next';
-import { getParams, request } from '../../../globalLib';
+import {Button, ConfigProvider, Dialog, Field, Form, Input, Loading, Tab} from '@alifd/next';
+import {getParams, request} from '../../../globalLib';
 
 import './index.scss';
 import PropTypes from 'prop-types';
@@ -59,13 +59,13 @@ class ConfigDetail extends React.Component {
   }
 
   initData() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     if (this.dataId.startsWith('cipher-')) {
       this.setState({
         switchEncrypt: true,
       });
     }
-    this.setState({ tag: [{ title: locale.official, key: 'normal' }] });
+    this.setState({tag: [{title: locale.official, key: 'normal'}]});
   }
 
   openLoading() {
@@ -104,7 +104,7 @@ class ConfigDetail extends React.Component {
   }
 
   getDataDetail() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const self = this;
     this.serverId = getParams('serverId') || 'center';
     this.tenant = getParams('namespace') || '';
@@ -129,7 +129,7 @@ class ConfigDetail extends React.Component {
           self.field.setValue('desc', data.desc);
           self.field.setValue('md5', data.md5);
         } else {
-          Dialog.alert({ title: locale.error, content: result.message });
+          Dialog.alert({title: locale.error, content: result.message});
         }
       },
       complete() {
@@ -147,8 +147,8 @@ class ConfigDetail extends React.Component {
   }
 
   render() {
-    const { locale = {} } = this.props;
-    const { init } = this.field;
+    const {locale = {}} = this.props;
+    const {init} = this.field;
     const formItemLayout = {
       labelCol: {
         span: 2,
@@ -159,90 +159,270 @@ class ConfigDetail extends React.Component {
     };
     const activeKey = this.state.activeKey.split('-')[0];
     return (
-      <div style={{ padding: 10 }}>
-        <Loading
-          shape={'flower'}
-          tip={'Loading...'}
-          style={{ width: '100%', position: 'relative' }}
-          visible={this.state.loading}
-          color={'#333'}
+      < div
+    style = {
+    {
+      padding: 10
+    }
+  }>
+  <
+    Loading
+    shape = {'flower'}
+    tip = {'Loading...'}
+    style = {
+    {
+      width: '100%', position
+    :
+      'relative'
+    }
+  }
+    visible = {this.state.loading}
+    color = {'#333'}
+      >
+      < h1
+    style = {
+    {
+      position: 'relative', width
+    :
+      '100%'
+    }
+  }>
+    {
+      locale.configurationDetails
+    }
+  <
+    /h1>
+    {
+      this.state.hasbeta ? (
+        < div style = {
+      {
+        display: 'inline-block', height
+      :
+        40, width
+      :
+        '80%', overflow
+      :
+        'hidden'
+      }
+    }>
+    <
+      Tab
+      shape = {'wrapped'}
+      onChange = {this.changeTab.bind(this)}
+      lazyLoad = {false}
+      activeKey = {this.state.activeKey}
         >
-          <h1 style={{ position: 'relative', width: '100%' }}>{locale.configurationDetails}</h1>
-          {this.state.hasbeta ? (
-            <div style={{ display: 'inline-block', height: 40, width: '80%', overflow: 'hidden' }}>
-              <Tab
-                shape={'wrapped'}
-                onChange={this.changeTab.bind(this)}
-                lazyLoad={false}
-                activeKey={this.state.activeKey}
-              >
-                {this.state.tag.map(tab => (
-                  <TabPane title={tab.title} key={tab.key} />
-                ))}
-              </Tab>
-            </div>
-          ) : (
-            ''
-          )}
-          <Form inline={false} field={this.field}>
-            <FormItem label={'Data ID:'} required {...formItemLayout}>
-              <Input htmlType={'text'} readOnly {...init('dataId')} />
-            </FormItem>
-            <FormItem label={'Group:'} required {...formItemLayout}>
-              <Input htmlType={'text'} readOnly {...init('group')} />
-            </FormItem>
-            <div style={{ marginTop: 10 }}>
-              <a style={{ fontSize: '12px' }} onClick={this.toggleMore.bind(this)}>
-                {this.state.showmore ? locale.collapse : locale.more}
-              </a>
-            </div>
-            {this.state.showmore ? (
-              <div>
-                <FormItem label={locale.home} {...formItemLayout}>
-                  <Input htmlType={'text'} readOnly {...init('appName')} />
-                </FormItem>
+        {
+          this.state.tag.map(tab => (
+            < TabPane title = {tab.title} key = {tab.key}
+      />
+    ))
+    }
+    <
+      /Tab>
+      < /div>
+    ) :
+      (
+        ''
+      )
+    }
+  <
+    Form
+    inline = {false}
+    field = {this.field} >
+      < FormItem
+    label = {'Data ID:'}
+    required
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Input
+    htmlType = {'text'}
+    readOnly
+    {...
+      init('dataId')
+    }
+    />
+    < /FormItem>
+    < FormItem
+    label = {'Group:'}
+    required
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Input
+    htmlType = {'text'}
+    readOnly
+    {...
+      init('group')
+    }
+    />
+    < /FormItem>
+    < div
+    style = {
+    {
+      marginTop: 10
+    }
+  }>
+  <
+    a
+    style = {
+    {
+      fontSize: '12px'
+    }
+  }
+    onClick = {this.toggleMore.bind(this)} >
+      {this.state.showmore ? locale.collapse : locale.more}
+      < /a>
+      < /div>
+    {
+      this.state.showmore ? (
+        < div >
+        < FormItem label = {locale.home}
+      {...
+        formItemLayout
+      }
+    >
+    <
+      Input
+      htmlType = {'text'}
+      readOnly
+      {...
+        init('appName')
+      }
+      />
+      < /FormItem>
 
-                <FormItem label={locale.tags} {...formItemLayout}>
-                  <Input htmlType={'text'} readOnly {...init('config_tags')} />
-                </FormItem>
-              </div>
-            ) : (
-              ''
-            )}
+      < FormItem
+      label = {locale.tags}
+      {...
+        formItemLayout
+      }
+    >
+    <
+      Input
+      htmlType = {'text'}
+      readOnly
+      {...
+        init('config_tags')
+      }
+      />
+      < /FormItem>
+      < /div>
+    ) :
+      (
+        ''
+      )
+    }
 
-            <FormItem label={locale.description} {...formItemLayout}>
-              <Input.TextArea htmlType={'text'} multiple rows={3} readOnly {...init('desc')} />
-            </FormItem>
-            {activeKey === 'normal' ? (
-              ''
-            ) : (
-              <FormItem label={locale.betaRelease} {...formItemLayout}>
-                <div style={{ width: '100%' }} id={'betaips'}>
-                  <Input.TextArea
-                    multiple
-                    style={{ width: '100%' }}
-                    value={this.state.ips}
-                    readOnly
-                    placeholder={'127.0.0.1,127.0.0.2'}
-                  />
-                </div>
-              </FormItem>
-            )}
-            <FormItem label={'MD5:'} required {...formItemLayout}>
-              <Input htmlType={'text'} readOnly {...init('md5')} />
-            </FormItem>
-            <FormItem label={locale.configuration} required {...formItemLayout}>
-              <Input.TextArea htmlType={'text'} multiple rows={15} readOnly {...init('content')} />
-            </FormItem>
-            <FormItem label={' '} {...formItemLayout}>
-              <Button type={'primary'} onClick={this.goList.bind(this)}>
-                {locale.back}
-              </Button>
-            </FormItem>
-          </Form>
-        </Loading>
-      </div>
-    );
+  <
+    FormItem
+    label = {locale.description}
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Input.TextArea
+    htmlType = {'text'}
+    multiple
+    rows = {3}
+    readOnly
+    {...
+      init('desc')
+    }
+    />
+    < /FormItem>
+    {
+      activeKey === 'normal' ? (
+        ''
+      ) : (
+        < FormItem
+      label = {locale.betaRelease}
+      {...
+        formItemLayout
+      }
+    >
+    <
+      div
+      style = {
+      {
+        width: '100%'
+      }
+    }
+      id = {'betaips'} >
+        < Input.TextArea
+      multiple
+      style = {
+      {
+        width: '100%'
+      }
+    }
+      value = {this.state.ips}
+      readOnly
+      placeholder = {'127.0.0.1,127.0.0.2'}
+      />
+      < /div>
+      < /FormItem>
+    )
+    }
+  <
+    FormItem
+    label = {'MD5:'}
+    required
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Input
+    htmlType = {'text'}
+    readOnly
+    {...
+      init('md5')
+    }
+    />
+    < /FormItem>
+    < FormItem
+    label = {locale.configuration}
+    required
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Input.TextArea
+    htmlType = {'text'}
+    multiple
+    rows = {15}
+    readOnly
+    {...
+      init('content')
+    }
+    />
+    < /FormItem>
+    < FormItem
+    label = {' '}
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Button
+    type = {'primary'}
+    onClick = {this.goList.bind(this)} >
+      {locale.back}
+      < /Button>
+      < /FormItem>
+      < /Form>
+      < /Loading>
+      < /div>
+  )
+    ;
   }
 }
 

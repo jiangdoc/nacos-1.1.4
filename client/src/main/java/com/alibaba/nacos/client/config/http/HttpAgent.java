@@ -30,6 +30,7 @@ import java.util.List;
 public interface HttpAgent {
     /**
      * start to get nacos ip list
+     *
      * @return Nothing.
      * @throws NacosException on get ip list error.
      */
@@ -37,10 +38,11 @@ public interface HttpAgent {
 
     /**
      * invoke http get method
-     * @param path http path
-     * @param headers http headers
-     * @param paramValues http paramValues http
-     * @param encoding http encode
+     *
+     * @param path          http path
+     * @param headers       http headers
+     * @param paramValues   http paramValues http
+     * @param encoding      http encode
      * @param readTimeoutMs http timeout
      * @return HttpResult http response
      * @throws IOException If an input or output exception occurred
@@ -50,10 +52,11 @@ public interface HttpAgent {
 
     /**
      * invoke http post method
-     * @param path http path
-     * @param headers http headers
-     * @param paramValues http paramValues http
-     * @param encoding http encode
+     *
+     * @param path          http path
+     * @param headers       http headers
+     * @param paramValues   http paramValues http
+     * @param encoding      http encode
      * @param readTimeoutMs http timeout
      * @return HttpResult http response
      * @throws IOException If an input or output exception occurred
@@ -62,10 +65,11 @@ public interface HttpAgent {
 
     /**
      * invoke http delete method
-     * @param path http path
-     * @param headers http headers
-     * @param paramValues http paramValues http
-     * @param encoding http encode
+     *
+     * @param path          http path
+     * @param headers       http headers
+     * @param paramValues   http paramValues http
+     * @param encoding      http encode
      * @param readTimeoutMs http timeout
      * @return HttpResult http response
      * @throws IOException If an input or output exception occurred
@@ -74,24 +78,28 @@ public interface HttpAgent {
 
     /**
      * get name
+     *
      * @return String
      */
     String getName();
 
     /**
      * get namespace
+     *
      * @return String
      */
     String getNamespace();
 
     /**
      * get tenant
+     *
      * @return String
      */
     String getTenant();
 
     /**
      * get encode
+     *
      * @return String
      */
     String getEncode();

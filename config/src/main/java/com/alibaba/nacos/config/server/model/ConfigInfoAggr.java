@@ -116,7 +116,7 @@ public class ConfigInfoAggr implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        ConfigInfoAggr other = (ConfigInfoAggr)obj;
+        ConfigInfoAggr other = (ConfigInfoAggr) obj;
         if (content == null) {
             if (other.content != null) {
                 return false;

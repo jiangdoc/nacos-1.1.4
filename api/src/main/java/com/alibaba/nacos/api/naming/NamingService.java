@@ -140,6 +140,7 @@ public interface NamingService {
 
     /**
      * deregister instance with full instance information and default groupName
+     *
      * @param serviceName
      * @param instance
      * @throws NacosException

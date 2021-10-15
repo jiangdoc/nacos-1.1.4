@@ -36,7 +36,7 @@ public class ZipUtils {
     private static final Logger log = LoggerFactory.getLogger(ZipUtils.class);
 
 
-    public static class ZipItem{
+    public static class ZipItem {
 
         private String itemName;
 
@@ -64,7 +64,7 @@ public class ZipUtils {
         }
     }
 
-    public static class UnZipResult{
+    public static class UnZipResult {
 
         private List<ZipItem> zipItemList;
 
@@ -93,9 +93,9 @@ public class ZipUtils {
         }
     }
 
-    public static byte[] zip(List<ZipItem> source){
+    public static byte[] zip(List<ZipItem> source) {
         byte[] result = null;
-        try (ByteArrayOutputStream byteOut = new ByteArrayOutputStream(); ZipOutputStream zipOut = new ZipOutputStream(byteOut)){
+        try (ByteArrayOutputStream byteOut = new ByteArrayOutputStream(); ZipOutputStream zipOut = new ZipOutputStream(byteOut)) {
             for (ZipItem item : source) {
                 zipOut.putNextEntry(new ZipEntry(item.getItemName()));
                 zipOut.write(item.getItemData().getBytes(StandardCharsets.UTF_8));
@@ -116,7 +116,7 @@ public class ZipUtils {
         try (ZipInputStream zipIn = new ZipInputStream(new ByteArrayInputStream(source))) {
             ZipEntry entry;
             while ((entry = zipIn.getNextEntry()) != null) {
-                if(entry.isDirectory()){
+                if (entry.isDirectory()) {
                     continue;
                 }
                 try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
@@ -125,7 +125,7 @@ public class ZipUtils {
                     while ((offset = zipIn.read(buffer)) != -1) {
                         out.write(buffer, 0, offset);
                     }
-                    if(".meta.yml".equals(entry.getName())){
+                    if (".meta.yml".equals(entry.getName())) {
                         metaDataItem = new ZipItem(entry.getName(), out.toString("UTF-8"));
                     } else {
                         itemList.add(new ZipItem(entry.getName(), out.toString("UTF-8")));
@@ -139,7 +139,6 @@ public class ZipUtils {
         }
         return new UnZipResult(itemList, metaDataItem);
     }
-
 
 
 }

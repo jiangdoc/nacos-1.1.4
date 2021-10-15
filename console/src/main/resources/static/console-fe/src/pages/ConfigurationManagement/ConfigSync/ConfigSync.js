@@ -13,9 +13,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button, Checkbox, ConfigProvider, Dialog, Field, Form, Input, Loading } from '@alifd/next';
+import {Button, Checkbox, ConfigProvider, Dialog, Field, Form, Input, Loading} from '@alifd/next';
 import SuccessDialog from '../../../components/SuccessDialog';
-import { getParams, request } from '../../../globalLib';
+import {getParams, request} from '../../../globalLib';
 
 import './index.scss';
 
@@ -76,7 +76,7 @@ class ConfigSync extends React.Component {
       url: '/diamond-ops/env/domain',
       success(data) {
         if (data.code === 200) {
-          const { envGroups } = data.data;
+          const {envGroups} = data.data;
 
           self.setState({
             envGroups,
@@ -88,7 +88,7 @@ class ConfigSync extends React.Component {
 
   getDataDetail() {
     const self = this;
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     this.tenant = getParams('namespace') || '';
     this.serverId = getParams('serverId') || 'center';
     let url = `/diamond-ops/configList/detail/serverId/${this.serverId}/dataId/${
@@ -106,7 +106,7 @@ class ConfigSync extends React.Component {
       },
       success(result) {
         if (result.code === 200) {
-          const { data = {} } = result;
+          const {data = {}} = result;
 
           self.field.setValue('dataId', data.dataId);
           // self.field.setValue('content', data.content);
@@ -156,7 +156,7 @@ class ConfigSync extends React.Component {
 
   sync() {
     const self = this;
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const payload = {
       dataId: this.field.getValue('dataId'),
       appName: this.field.getValue('appName'),
@@ -227,8 +227,8 @@ class ConfigSync extends React.Component {
   }
 
   render() {
-    const { init } = this.field;
-    const { locale = {} } = this.props;
+    const {init} = this.field;
+    const {locale = {}} = this.props;
     const formItemLayout = {
       labelCol: {
         span: 2,
@@ -239,70 +239,200 @@ class ConfigSync extends React.Component {
     };
 
     return (
-      <div style={{ padding: 10 }}>
-        <Loading
-          shape="flower"
-          style={{ position: 'relative', width: '100%' }}
-          visible={this.state.loading}
-          tip="Loading..."
-          color="#333"
-        >
-          <h1>{locale.syncConfiguration}</h1>
-          <Form field={this.field}>
-            <Form.Item label="Data ID:" required {...formItemLayout}>
-              <Input htmlType="text" disabled={'disabled'} {...init('dataId')} />
-              <div style={{ marginTop: 10 }}>
-                <a style={{ fontSize: '12px' }} onClick={this.toggleMore.bind(this)}>
-                  {this.state.showmore ? locale.collapse : locale.advancedOptions}
-                </a>
-              </div>
-            </Form.Item>
-            <div style={{ overflow: 'hidden', height: this.state.showmore ? 'auto' : '0' }}>
-              <Form.Item label="Group ID:" required {...formItemLayout}>
-                <Input htmlType="text" disabled={'disabled'} {...init('group')} />
-              </Form.Item>
-              <Form.Item label={locale.home} required {...formItemLayout}>
-                <Input htmlType="text" disabled={'disabled'} {...init('appName')} />
-              </Form.Item>
-            </div>
-            <Form.Item label={locale.region} required {...formItemLayout}>
-              <Input htmlType="text" disabled={'disabled'} {...init('envs')} />
-            </Form.Item>
+      < div
+    style = {
+    {
+      padding: 10
+    }
+  }>
+  <
+    Loading
+    shape = "flower"
+    style = {
+    {
+      position: 'relative', width
+    :
+      '100%'
+    }
+  }
+    visible = {this.state.loading}
+    tip = "Loading..."
+    color = "#333"
+      >
+      < h1 > {locale.syncConfiguration} < /h1>
+      < Form
+    field = {this.field} >
+      < Form.Item
+    label = "Data ID:"
+    required
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Input
+    htmlType = "text"
+    disabled = {'disabled'}
+    {...
+      init('dataId')
+    }
+    />
+    < div
+    style = {
+    {
+      marginTop: 10
+    }
+  }>
+  <
+    a
+    style = {
+    {
+      fontSize: '12px'
+    }
+  }
+    onClick = {this.toggleMore.bind(this)} >
+      {this.state.showmore ? locale.collapse : locale.advancedOptions}
+      < /a>
+      < /div>
+      < /Form.Item>
+      < div
+    style = {
+    {
+      overflow: 'hidden', height
+    :
+      this.state.showmore ? 'auto' : '0'
+    }
+  }>
+  <
+    Form.Item
+    label = "Group ID:"
+    required
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Input
+    htmlType = "text"
+    disabled = {'disabled'}
+    {...
+      init('group')
+    }
+    />
+    < /Form.Item>
+    < Form.Item
+    label = {locale.home}
+    required
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Input
+    htmlType = "text"
+    disabled = {'disabled'}
+    {...
+      init('appName')
+    }
+    />
+    < /Form.Item>
+    < /div>
+    < Form.Item
+    label = {locale.region}
+    required
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Input
+    htmlType = "text"
+    disabled = {'disabled'}
+    {...
+      init('envs')
+    }
+    />
+    < /Form.Item>
 
-            <Form.Item label={locale.configuration} required {...formItemLayout}>
-              <Input.TextArea
-                htmlType="text"
-                multiple
-                rows={15}
-                disabled={'disabled'}
-                {...init('content')}
-              />
-            </Form.Item>
-            <Form.Item label={locale.target} required {...formItemLayout}>
-              <div>
-                <Checkbox.Group
-                  value={this.state.envvalues}
-                  onChange={this.changeEnv.bind(this)}
-                  dataSource={this.state.envlist}
-                />
-              </div>
-            </Form.Item>
-            <Form.Item label=" " {...formItemLayout}>
-              <div style={{ textAlign: 'right' }}>
-                <Button type="primary" onClick={this.sync.bind(this)} style={{ marginRight: 10 }}>
-                  {locale.sync}
-                </Button>
-                {}
-                <Button type="light" onClick={this.goList.bind(this)}>
-                  {locale.back}
-                </Button>
-              </div>
-            </Form.Item>
-          </Form>
-          <SuccessDialog ref={this.successDialog} />
-        </Loading>
-      </div>
-    );
+    < Form.Item
+    label = {locale.configuration}
+    required
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Input.TextArea
+    htmlType = "text"
+    multiple
+    rows = {15}
+    disabled = {'disabled'}
+    {...
+      init('content')
+    }
+    />
+    < /Form.Item>
+    < Form.Item
+    label = {locale.target}
+    required
+    {...
+      formItemLayout
+    }
+  >
+  <
+    div >
+    < Checkbox.Group
+    value = {this.state.envvalues}
+    onChange = {this.changeEnv.bind(this)}
+    dataSource = {this.state.envlist}
+    />
+    < /div>
+    < /Form.Item>
+    < Form.Item
+    label = " "
+    {...
+      formItemLayout
+    }
+  >
+  <
+    div
+    style = {
+    {
+      textAlign: 'right'
+    }
+  }>
+  <
+    Button
+    type = "primary"
+    onClick = {this.sync.bind(this)}
+    style = {
+    {
+      marginRight: 10
+    }
+  }>
+    {
+      locale.sync
+    }
+  <
+    /Button>
+    {
+    }
+  <
+    Button
+    type = "light"
+    onClick = {this.goList.bind(this)} >
+      {locale.back}
+      < /Button>
+      < /div>
+      < /Form.Item>
+      < /Form>
+      < SuccessDialog
+    ref = {this.successDialog}
+    />
+    < /Loading>
+    < /div>
+  )
+    ;
   }
 }
 

@@ -79,7 +79,7 @@ public class TenantCapacityPersistService {
         String sql
             = "SELECT id, quota, `usage`, `max_size`, max_aggr_count, max_aggr_size, tenant_id FROM tenant_capacity "
             + "WHERE tenant_id=?";
-        List<TenantCapacity> list = jdbcTemplate.query(sql, new Object[] {tenantId},
+        List<TenantCapacity> list = jdbcTemplate.query(sql, new Object[]{tenantId},
             TENANT_CAPACITY_ROW_MAPPER);
         if (list.isEmpty()) {
             return null;
@@ -233,7 +233,7 @@ public class TenantCapacityPersistService {
         }
 
         try {
-            return jdbcTemplate.query(sql, new Object[] {lastId, pageSize},
+            return jdbcTemplate.query(sql, new Object[]{lastId, pageSize},
                 new RowMapper<TenantCapacity>() {
                     @Override
                     public TenantCapacity mapRow(ResultSet rs, int rowNum) throws SQLException {

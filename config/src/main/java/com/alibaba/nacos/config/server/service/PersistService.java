@@ -752,14 +752,14 @@ public class PersistService {
     }
 
     /**
+     * @return List<ConfigInfo> deleted configInfos
      * @author klw
      * @Description: delete config info by ids
      * @Date 2019/7/5 16:45
      * @Param [ids, srcIp, srcUser]
-     * @return List<ConfigInfo> deleted configInfos
      */
     public List<ConfigInfo> removeConfigInfoByIds(final List<Long> ids, final String srcIp, final String srcUser) {
-        if(CollectionUtils.isEmpty(ids)){
+        if (CollectionUtils.isEmpty(ids)) {
             return null;
         }
         ids.removeAll(Collections.singleton(null));
@@ -773,7 +773,7 @@ public class PersistService {
                     List<ConfigInfo> configInfoList = findConfigInfosByIds(idsStr);
                     if (!CollectionUtils.isEmpty(configInfoList)) {
                         removeConfigInfoByIdsAtomic(idsStr);
-                        for(ConfigInfo configInfo : configInfoList){
+                        for (ConfigInfo configInfo : configInfoList) {
                             removeTagByIdAtomic(configInfo.getId());
                             insertConfigHistoryAtomic(configInfo.getId(), configInfo, srcIp, srcUser, time, "D");
                         }
@@ -2829,14 +2829,14 @@ public class PersistService {
     }
 
     /**
+     * @return void
      * @author klw
      * @Description: Delete configuration; database atomic operation, minimum SQL action, no business encapsulation
      * @Date 2019/7/5 16:39
      * @Param [id]
-     * @return void
      */
     private void removeConfigInfoByIdsAtomic(final String ids) {
-        if(StringUtils.isBlank(ids)){
+        if (StringUtils.isBlank(ids)) {
             return;
         }
         StringBuilder sql = new StringBuilder(SQL_DELETE_CONFIG_INFO_BY_IDS);
@@ -2938,14 +2938,14 @@ public class PersistService {
     }
 
     /**
+     * @return java.util.List<com.alibaba.nacos.config.server.model.ConfigInfo>
      * @author klw
      * @Description: find ConfigInfo by ids
      * @Date 2019/7/5 16:37
      * @Param [ids]
-     * @return java.util.List<com.alibaba.nacos.config.server.model.ConfigInfo>
      */
     public List<ConfigInfo> findConfigInfosByIds(final String ids) {
-        if(StringUtils.isBlank(ids)){
+        if (StringUtils.isBlank(ids)) {
             return null;
         }
         StringBuilder sql = new StringBuilder(SQL_FIND_CONFIG_INFO_BY_IDS);
@@ -3420,7 +3420,7 @@ public class PersistService {
      * @return Collection of ConfigInfo objects
      */
     public List<ConfigAllInfo> findAllConfigInfo4Export(final String dataId, final String group, final String tenant,
-                                                     final String appName, final List<Long> ids) {
+                                                        final String appName, final List<Long> ids) {
         String tenantTmp = StringUtils.isBlank(tenant) ? StringUtils.EMPTY : tenant;
         StringBuilder where = new StringBuilder(" where ");
         List<Object> paramList = new ArrayList<>();

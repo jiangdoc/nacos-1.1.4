@@ -16,6 +16,7 @@ body,
 :global(#root) {
   height: 100%;
 }
+
 :global(.mainwrapper) {
   position: absolute !important;
   top: 0;
@@ -23,6 +24,7 @@ body,
   left: 0;
   right: 0;
 }
+
 :global(.sideleft) {
   float: left;
   background-color: #eaedf1;
@@ -33,6 +35,7 @@ body,
   overflow: hidden;
   width: 180px;
 }
+
 :global(.sideleft .toptitle) {
   width: 100%;
   height: 70px;
@@ -44,6 +47,7 @@ body,
   font-weight: bold;
   text-indent: 20px;
 }
+
 :global(.maincontainer) {
   position: absolute;
   width: auto;
@@ -58,6 +62,7 @@ body,
   -moz-transition: all 0.2s ease;
   -webkit-transition: all 0.2s ease;
 }
+
 :global(.viewFramework-product-navbar .product-nav-list li .active) {
   background-color: #fff !important;
 }
@@ -763,15 +768,13 @@ form.vertical-margin-lg .form-group {
 .dingding {
   display: inline-block;
   padding: 5px 0 5px 30px;
-  background: url('https://g.alicdn.com/cm-design/arms/1.1.27/styles/arms/images/dingding.png')
-    no-repeat left center;
+  background: url('https://g.alicdn.com/cm-design/arms/1.1.27/styles/arms/images/dingding.png') no-repeat left center;
   height: 24px;
   vertical-align: middle;
 }
 
 .wangwang {
-  background: url('https://g.alicdn.com/cm-design/arms/1.1.27/styles/arms/images/wangwang.png')
-    no-repeat left center;
+  background: url('https://g.alicdn.com/cm-design/arms/1.1.27/styles/arms/images/wangwang.png') no-repeat left center;
   display: inline-block;
   padding: 5px 0 5px 30px;
   background-size: 24px;

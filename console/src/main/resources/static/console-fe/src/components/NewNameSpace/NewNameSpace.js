@@ -12,8 +12,8 @@
  */
 
 import React from 'react';
-import { request } from '../../globalLib';
-import { Button, ConfigProvider, Dialog, Field, Form, Input, Loading } from '@alifd/next';
+import {request} from '../../globalLib';
+import {Button, ConfigProvider, Dialog, Field, Form, Input, Loading} from '@alifd/next';
 
 import './index.scss';
 import PropTypes from 'prop-types';
@@ -21,8 +21,8 @@ import PropTypes from 'prop-types';
 const FormItem = Form.Item;
 
 const formItemLayout = {
-  labelCol: { fixedSpan: 6 },
-  wrapperCol: { span: 18 },
+  labelCol: {fixedSpan: 6},
+  wrapperCol: {span: 18},
 };
 
 @ConfigProvider.config
@@ -95,14 +95,14 @@ class NewNameSpace extends React.Component {
   }
 
   handleSubmit() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     this.field.validate((errors, values) => {
       if (errors) return;
       const flag = this.state.dataSource.every(
         val => val.namespaceShowName !== values.namespaceShowName
       );
       if (!flag) {
-        Dialog.alert({ content: locale.norepeat });
+        Dialog.alert({content: locale.norepeat});
         return;
       }
       this.disabled = true;
@@ -154,7 +154,7 @@ class NewNameSpace extends React.Component {
   }
 
   validateChart(rule, value, callback) {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const chartReg = /[@#\$%\^&\*]+/g;
 
     if (chartReg.test(value)) {
@@ -165,67 +165,119 @@ class NewNameSpace extends React.Component {
   }
 
   render() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const footer = (
-      <div>
-        <Button type="primary" onClick={this.handleSubmit.bind(this)} disabled={this.disabled}>
-          {locale.ok}
-        </Button>
-        <Button type="normal" onClick={this.closeDialog.bind(this)} style={{ marginLeft: 5 }}>
-          {locale.cancel}
-        </Button>
-      </div>
-    );
+      < div >
+      < Button
+    type = "primary"
+    onClick = {this.handleSubmit.bind(this)}
+    disabled = {this.disabled} >
+      {locale.ok}
+      < /Button>
+      < Button
+    type = "normal"
+    onClick = {this.closeDialog.bind(this)}
+    style = {
+    {
+      marginLeft: 5
+    }
+  }>
+    {
+      locale.cancel
+    }
+  <
+    /Button>
+    < /div>
+  )
+    ;
     return (
-      <div>
-        <Dialog
-          title={locale.newnamespce}
-          style={{ width: '50%' }}
-          visible={this.state.dialogvisible}
-          onOk={this.handleSubmit.bind(this)}
-          onCancel={this.closeDialog.bind(this)}
-          footer={footer}
-          onClose={this.closeDialog.bind(this)}
-        >
-          <Form field={this.field}>
-            <Loading
-              tip={locale.loading}
-              style={{ width: '100%', position: 'relative' }}
-              visible={this.state.loading}
-            >
-              <FormItem label={locale.name} required {...formItemLayout}>
-                <Input
-                  {...this.field.init('namespaceShowName', {
-                    rules: [
-                      {
-                        required: true,
-                        message: locale.namespacenotnull,
-                      },
-                      { validator: this.validateChart.bind(this) },
-                    ],
-                  })}
-                  style={{ width: '100%' }}
-                />
-              </FormItem>
-              <FormItem label={locale.description} required {...formItemLayout}>
-                <Input
-                  {...this.field.init('namespaceDesc', {
-                    rules: [
-                      {
-                        required: true,
-                        message: locale.namespacedescnotnull,
-                      },
-                      { validator: this.validateChart.bind(this) },
-                    ],
-                  })}
-                  style={{ width: '100%' }}
-                />
-              </FormItem>
-            </Loading>
-          </Form>
-        </Dialog>
-      </div>
-    );
+      < div >
+      < Dialog
+    title = {locale.newnamespce}
+    style = {
+    {
+      width: '50%'
+    }
+  }
+    visible = {this.state.dialogvisible}
+    onOk = {this.handleSubmit.bind(this)}
+    onCancel = {this.closeDialog.bind(this)}
+    footer = {footer}
+    onClose = {this.closeDialog.bind(this)}
+      >
+      < Form
+    field = {this.field} >
+      < Loading
+    tip = {locale.loading}
+    style = {
+    {
+      width: '100%', position
+    :
+      'relative'
+    }
+  }
+    visible = {this.state.loading}
+      >
+      < FormItem
+    label = {locale.name}
+    required
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Input
+    {...
+      this.field.init('namespaceShowName', {
+        rules: [
+          {
+            required: true,
+            message: locale.namespacenotnull,
+          },
+          {validator: this.validateChart.bind(this)},
+        ],
+      })
+    }
+    style = {
+    {
+      width: '100%'
+    }
+  }
+    />
+    < /FormItem>
+    < FormItem
+    label = {locale.description}
+    required
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Input
+    {...
+      this.field.init('namespaceDesc', {
+        rules: [
+          {
+            required: true,
+            message: locale.namespacedescnotnull,
+          },
+          {validator: this.validateChart.bind(this)},
+        ],
+      })
+    }
+    style = {
+    {
+      width: '100%'
+    }
+  }
+    />
+    < /FormItem>
+    < /Loading>
+    < /Form>
+    < /Dialog>
+    < /div>
+  )
+    ;
   }
 }
 

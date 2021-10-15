@@ -20,5 +20,5 @@ export default function ajaxrequest(options) {
     dataType: options.dataType, // 返回的数据格式
     type: options.type,
   });
-  return promise.done(data => ({ data }));
+  return promise.done(data => ({data}));
 }

@@ -35,8 +35,8 @@ import static com.alibaba.nacos.core.utils.Constants.STANDALONE_SPRING_PROFILE;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(
-        classes = StandaloneProfileApplicationListenerTest.class,
-        webEnvironment = SpringBootTest.WebEnvironment.NONE)
+    classes = StandaloneProfileApplicationListenerTest.class,
+    webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class StandaloneProfileApplicationListenerTest {
 
     @BeforeClass

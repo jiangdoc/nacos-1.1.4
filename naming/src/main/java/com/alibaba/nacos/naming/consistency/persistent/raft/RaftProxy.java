@@ -37,7 +37,7 @@ public class RaftProxy {
         }
         String url = "http://" + server + RunningConfig.getContextPath() + api;
 
-        HttpClient.HttpResult result =  HttpClient.httpGet(url, null, params);
+        HttpClient.HttpResult result = HttpClient.httpGet(url, null, params);
         if (result.code != HttpURLConnection.HTTP_OK) {
             throw new IllegalStateException("leader failed, caused by: " + result.content);
         }
@@ -52,13 +52,13 @@ public class RaftProxy {
         HttpClient.HttpResult result;
         switch (method) {
             case GET:
-                result =  HttpClient.httpGet(url, null, params);
+                result = HttpClient.httpGet(url, null, params);
                 break;
             case POST:
                 result = HttpClient.httpPost(url, null, params);
                 break;
             case DELETE:
-                result =  HttpClient.httpDelete(url, null, params);
+                result = HttpClient.httpDelete(url, null, params);
                 break;
             default:
                 throw new RuntimeException("unsupported method:" + method);
@@ -76,7 +76,7 @@ public class RaftProxy {
         }
         String url = "http://" + server + RunningConfig.getContextPath() + api;
 
-        HttpClient.HttpResult result =  HttpClient.httpPostLarge(url, headers, content);
+        HttpClient.HttpResult result = HttpClient.httpPostLarge(url, headers, content);
         if (result.code != HttpURLConnection.HTTP_OK) {
             throw new IllegalStateException("leader failed, caused by: " + result.content);
         }

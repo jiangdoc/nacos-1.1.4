@@ -263,7 +263,7 @@ public class CapacityService {
         // 初始化的时候该Group/租户就已经到达限额，自动扩容，降低运维成本
         int initialExpansionPercent = PropertyUtil.getInitialExpansionPercent();
         if (initialExpansionPercent > 0) {
-            int finalQuota = (int)(usage + defaultQuota * (1.0 * initialExpansionPercent / 100));
+            int finalQuota = (int) (usage + defaultQuota * (1.0 * initialExpansionPercent / 100));
             if (tenant != null) {
                 tenantCapacityPersistService.updateQuota(tenant, finalQuota);
                 LogUtil.defaultLog.warn("[capacityManagement] 初始化的时候该租户（{}）使用量（{}）就已经到达限额{}，自动扩容到{}", tenant,

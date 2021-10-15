@@ -165,7 +165,7 @@ public class Subscribe_ITCase extends RestAPI_ITCase {
         Assert.assertTrue(verifyInstanceList(instances, naming.getAllInstances(serviceName)));
     }
 
-    @Test(timeout = 20*TIME_OUT)
+    @Test(timeout = 20 * TIME_OUT)
     public void subscribeEmpty() throws Exception {
 
         String serviceName = randomDomainName();

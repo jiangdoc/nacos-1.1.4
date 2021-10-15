@@ -14,8 +14,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import RegionGroup from 'components/RegionGroup';
-import { ConfigProvider, Input, Field, Form, Message } from '@alifd/next';
-import { getParams, setParams, request } from '../../globalLib';
+import {ConfigProvider, Input, Field, Form, Message} from '@alifd/next';
+import {getParams, setParams, request} from '../../globalLib';
 
 import './index.scss';
 
@@ -35,10 +35,11 @@ class Password extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+  }
 
   validatePassword(rule, value, callback) {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     if (this.field.getValue('newPassword') !== this.field.getValue('confirmNewPassword')) {
       callback(locale.passwordNotConsistent);
     } else {
@@ -47,7 +48,7 @@ class Password extends React.Component {
   }
 
   handleSubmit = () => {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     this.field.validate((errors, values) => {
       if (errors) {
         return;
@@ -56,7 +57,7 @@ class Password extends React.Component {
         type: 'post',
         url: 'v1/auth/login',
         data: values,
-        success: ({ code, data }) => {
+        success: ({code, data}) => {
           if (code === 200) {
             // TODO: 封装一个方法存储、读取token
             localStorage.setItem('token', data);
@@ -79,7 +80,7 @@ class Password extends React.Component {
   };
 
   changePassword() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     this.field.validate((errors, values) => {
       if (errors) {
         return;
@@ -88,7 +89,7 @@ class Password extends React.Component {
         type: 'put',
         url: 'v1/auth/password',
         data: values,
-        success: ({ code, data }) => {
+        success: ({code, data}) => {
           if (code === 200) {
             window.localStorage.clear();
             this.props.history.push('/login');
@@ -109,69 +110,119 @@ class Password extends React.Component {
   }
 
   render() {
-    const { locale = {} } = this.props;
+    const {locale = {}} = this.props;
     const formItemLayout = {
-      labelCol: { fixedSpan: 6 },
-      wrapperCol: { span: 18 },
+      labelCol: {fixedSpan: 6},
+      wrapperCol: {span: 18},
     };
     return (
-      <div style={{ padding: 10 }}>
-        <RegionGroup left={locale.changePassword} />
-        <Form style={{ width: '300px' }} field={this.field}>
-          <FormItem label={locale.oldPassword} required {...formItemLayout}>
-            <Input
-              htmlType="password"
-              placeholder={locale.pleaseInputOldPassword}
-              {...this.field.init('oldPassword', {
-                rules: [
-                  {
-                    required: true,
-                    message: locale.passwordRequired,
-                  },
-                ],
-              })}
-              disabled={this.state.type === 0}
-            />
-          </FormItem>
-          <FormItem label={locale.newPassword} required {...formItemLayout}>
-            <Input
-              htmlType="password"
-              placeholder={locale.pleaseInputNewPassword}
-              {...this.field.init('newPassword', {
-                rules: [
-                  {
-                    required: true,
-                    message: locale.passwordRequired,
-                  },
-                ],
-              })}
-              disabled={this.state.type === 0}
-            />
-          </FormItem>
-          <FormItem label={locale.checkPassword} required {...formItemLayout}>
-            <Input
-              htmlType="password"
-              placeholder={locale.pleaseInputNewPasswordAgain}
-              {...this.field.init('confirmNewPassword', {
-                rules: [
-                  {
-                    required: true,
-                    message: locale.passwordRequired,
-                  },
-                  { validator: this.validatePassword.bind(this) },
-                ],
-              })}
-              disabled={this.state.type === 0}
-            />
-          </FormItem>
-          <FormItem label=" " {...formItemLayout}>
-            <Form.Submit type="primary" onClick={this.changePassword.bind(this)}>
-              {locale.changePassword}
-            </Form.Submit>
-          </FormItem>
-        </Form>
-      </div>
-    );
+      < div
+    style = {
+    {
+      padding: 10
+    }
+  }>
+  <
+    RegionGroup
+    left = {locale.changePassword}
+    />
+    < Form
+    style = {
+    {
+      width: '300px'
+    }
+  }
+    field = {this.field} >
+      < FormItem
+    label = {locale.oldPassword}
+    required
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Input
+    htmlType = "password"
+    placeholder = {locale.pleaseInputOldPassword}
+    {...
+      this.field.init('oldPassword', {
+        rules: [
+          {
+            required: true,
+            message: locale.passwordRequired,
+          },
+        ],
+      })
+    }
+    disabled = {this.state.type === 0}
+    />
+    < /FormItem>
+    < FormItem
+    label = {locale.newPassword}
+    required
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Input
+    htmlType = "password"
+    placeholder = {locale.pleaseInputNewPassword}
+    {...
+      this.field.init('newPassword', {
+        rules: [
+          {
+            required: true,
+            message: locale.passwordRequired,
+          },
+        ],
+      })
+    }
+    disabled = {this.state.type === 0}
+    />
+    < /FormItem>
+    < FormItem
+    label = {locale.checkPassword}
+    required
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Input
+    htmlType = "password"
+    placeholder = {locale.pleaseInputNewPasswordAgain}
+    {...
+      this.field.init('confirmNewPassword', {
+        rules: [
+          {
+            required: true,
+            message: locale.passwordRequired,
+          },
+          {validator: this.validatePassword.bind(this)},
+        ],
+      })
+    }
+    disabled = {this.state.type === 0}
+    />
+    < /FormItem>
+    < FormItem
+    label = " "
+    {...
+      formItemLayout
+    }
+  >
+  <
+    Form.Submit
+    type = "primary"
+    onClick = {this.changePassword.bind(this)} >
+      {locale.changePassword}
+      < /Form.Submit>
+      < /FormItem>
+      < /Form>
+      < /div>
+  )
+    ;
   }
 }
 

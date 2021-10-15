@@ -174,7 +174,7 @@ public class ConfigInfoBase implements Serializable, Comparable<ConfigInfoBase> 
         if (getClass() != obj.getClass()) {
             return false;
         }
-        ConfigInfoBase other = (ConfigInfoBase)obj;
+        ConfigInfoBase other = (ConfigInfoBase) obj;
         if (content == null) {
             if (other.content != null) {
                 return false;

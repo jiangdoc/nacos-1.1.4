@@ -31,6 +31,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import static com.alibaba.nacos.test.naming.NamingBase.*;
 
 /**
@@ -47,12 +48,13 @@ public class SelectOneHealthyInstance_ITCase {
     private NamingService naming;
     @LocalServerPort
     private int port;
+
     @Before
-    public void init() throws Exception{
+    public void init() throws Exception {
         NamingBase.prepareServer(port);
         if (naming == null) {
             //TimeUnit.SECONDS.sleep(10);
-            naming = NamingFactory.createNamingService("127.0.0.1"+":"+port);
+            naming = NamingFactory.createNamingService("127.0.0.1" + ":" + port);
         }
         while (true) {
             if (!"UP".equals(naming.getServerStatus())) {
@@ -66,6 +68,7 @@ public class SelectOneHealthyInstance_ITCase {
 
     /**
      * 获取一个健康的Instance
+     *
      * @throws Exception
      */
     @Test
@@ -80,7 +83,7 @@ public class SelectOneHealthyInstance_ITCase {
         List<Instance> instancesGet = naming.getAllInstances(serviceName);
 
         for (Instance instance1 : instancesGet) {
-            if (instance1.getIp().equals(instance.getIp())&&
+            if (instance1.getIp().equals(instance.getIp()) &&
                 instance1.getPort() == instance.getPort()) {
                 Assert.assertTrue(instance.isHealthy());
                 Assert.assertTrue(verifyInstance(instance1, instance));
@@ -93,6 +96,7 @@ public class SelectOneHealthyInstance_ITCase {
 
     /**
      * 获取指定单个cluster中一个健康的Instance
+     *
      * @throws Exception
      */
     @Test
@@ -113,7 +117,7 @@ public class SelectOneHealthyInstance_ITCase {
         List<Instance> instancesGet = naming.getAllInstances(serviceName);
 
         for (Instance instance1 : instancesGet) {
-            if (instance1.getIp().equals(instance.getIp())&&
+            if (instance1.getIp().equals(instance.getIp()) &&
                 instance1.getPort() == instance.getPort()) {
                 Assert.assertTrue(instance.isHealthy());
                 Assert.assertTrue(verifyInstance(instance1, instance));
@@ -126,6 +130,7 @@ public class SelectOneHealthyInstance_ITCase {
 
     /**
      * 获取指定多个cluster中一个健康的Instance
+     *
      * @throws Exception
      */
     @Test

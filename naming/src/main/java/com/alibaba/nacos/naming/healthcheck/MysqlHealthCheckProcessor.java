@@ -59,7 +59,7 @@ public class MysqlHealthCheckProcessor implements HealthCheckProcessor {
     private static final String MYSQL_SLAVE_READONLY = "ON";
 
     private static ConcurrentMap<String, Connection> CONNECTION_POOL
-            = new ConcurrentHashMap<String, Connection>();
+        = new ConcurrentHashMap<String, Connection>();
 
     private static ExecutorService EXECUTOR;
 
@@ -67,16 +67,16 @@ public class MysqlHealthCheckProcessor implements HealthCheckProcessor {
 
         int processorCount = Runtime.getRuntime().availableProcessors();
         EXECUTOR
-                = Executors.newFixedThreadPool(processorCount <= 1 ? 1 : processorCount / 2,
-                new ThreadFactory() {
-                    @Override
-                    public Thread newThread(Runnable r) {
-                        Thread thread = new Thread(r);
-                        thread.setDaemon(true);
-                        thread.setName("com.nacos.mysql.checker");
-                        return thread;
-                    }
+            = Executors.newFixedThreadPool(processorCount <= 1 ? 1 : processorCount / 2,
+            new ThreadFactory() {
+                @Override
+                public Thread newThread(Runnable r) {
+                    Thread thread = new Thread(r);
+                    thread.setDaemon(true);
+                    thread.setName("com.nacos.mysql.checker");
+                    return thread;
                 }
+            }
         );
     }
 
@@ -187,9 +187,9 @@ public class MysqlHealthCheckProcessor implements HealthCheckProcessor {
                 int maxStackDepth = 50;
                 for (int deepth = 0; deepth < maxStackDepth && cause != null; deepth++) {
                     if (cause instanceof SocketTimeoutException
-                            || cause instanceof ConnectTimeoutException
-                            || cause instanceof TimeoutException
-                            || cause.getCause() instanceof TimeoutException) {
+                        || cause instanceof ConnectTimeoutException
+                        || cause instanceof TimeoutException
+                        || cause.getCause() instanceof TimeoutException) {
 
                         healthCheckCommon.checkFail(ip, task, "mysql:timeout:" + cause.getMessage());
                         healthCheckCommon.reEvaluateCheckRT(task.getCheckRTNormalized() * 2, task, switchDomain.getMysqlHealthParams());

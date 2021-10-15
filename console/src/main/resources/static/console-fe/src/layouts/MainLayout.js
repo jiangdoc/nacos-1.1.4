@@ -12,22 +12,22 @@
  */
 
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { ConfigProvider, Icon } from '@alifd/next';
+import {ConfigProvider, Icon} from '@alifd/next';
 import Header from './Header';
 import $ from 'jquery';
-import { connect } from 'react-redux';
-import { setParams } from '../globalLib';
-import { getState } from '../reducers/base';
+import {connect} from 'react-redux';
+import {setParams} from '../globalLib';
+import {getState} from '../reducers/base';
 import _menu from '../menu';
 
 import './index.scss';
 
 @withRouter
 @connect(
-  state => ({ ...state.locale, ...state.base }),
-  { getState }
+  state => ({...state.locale, ...state.base}),
+  {getState}
 )
 @ConfigProvider.config
 class MainLayout extends React.Component {
@@ -70,7 +70,7 @@ class MainLayout extends React.Component {
     const nowNav = document.getElementById(id);
     const iconClass = nowNav.querySelector('.iconshow');
     const subNav = nowNav.querySelector('.subnavlist');
-    const { classList } = iconClass;
+    const {classList} = iconClass;
     let tmpClassName = 'iconshow ';
     for (let i = 0; i < classList.length; i++) {
       if (classList[i] === 'icon-arrow-down') {
@@ -224,8 +224,8 @@ class MainLayout extends React.Component {
   }
 
   nacosLoopNav(data, _index = 0, parent) {
-    const { locale = {}, location = {} } = this.props;
-    const { pathname } = location;
+    const {locale = {}, location = {}} = this.props;
+    const {pathname} = location;
     let index = _index;
     // 遍历导航，只显示2级
     const self = this;
@@ -237,80 +237,117 @@ class MainLayout extends React.Component {
         if (item.isVirtual) {
           // 如果是虚拟菜单需要增加展开箭头
           const icon = item.isExtend ? (
-            <span className="icon-arrow-down iconshow" />
-          ) : (
-            <span className="icon-arrow-right iconshow" />
-          );
+            < span className = "icon-arrow-down iconshow" / >
+        ) :
+          (
+          < span
+          className = "icon-arrow-right iconshow" / >
+        )
+          ;
           const hiddenClass = item.isExtend ? '' : 'hidden';
           return (
-            <li
-              style={{ display: item.enable ? 'block' : 'none' }}
-              key={`${item.serviceName}`}
-              data-spm-click={`gostr=/aliyun;locaid=${item.serviceName}`}
-              id={`${item.serviceName}`}
-            >
-              <div>
-                <a href="" onClick={this.nacosToggleNav.bind(this, item.serviceName)}>
-                  <div className="nav-icon">{icon}</div>
-                  <div className="nav-title">{locale[item.serviceName]}</div>
-                </a>
-              </div>
-              <ul className={`subnavlist ${hiddenClass}`}>
-                {self.nacosLoopNav(item.children, index)}
-              </ul>
-            </li>
-          );
+            < li
+          style = {
+          {
+            display: item.enable ? 'block' : 'none'
+          }
+        }
+          key = {`${item.serviceName}`
+        }
+          data - spm - click = {`gostr=/aliyun;locaid=${item.serviceName}`
+        }
+          id = {`${item.serviceName}`
+        }
+        >
+        <
+          div >
+          < a
+          href = ""
+          onClick = {this.nacosToggleNav.bind(this, item.serviceName)} >
+            < div
+          className = "nav-icon" > {icon} < /div>
+            < div
+          className = "nav-title" > {locale[item.serviceName]} < /div>
+            < /a>
+            < /div>
+            < ul
+          className = {`subnavlist ${hiddenClass}`
+        }>
+          {
+            self.nacosLoopNav(item.children, index)
+          }
+        <
+          /ul>
+          < /li>
+        )
+          ;
         } else {
           return (
-            <li
-              className={pathname === `/${item.serviceName}` ? 'selected' : ''}
-              key={`${item.serviceName}`}
-              data-spm-click={`gostr=/aliyun;locaid=${item.serviceName}`}
-              onClick={this.navTo.bind(this, `/${item.serviceName}`)}
+            < li
+          className = {pathname === `/${item.serviceName}` ? 'selected' : ''
+        }
+          key = {`${item.serviceName}`
+        }
+          data - spm - click = {`gostr=/aliyun;locaid=${item.serviceName}`
+        }
+          onClick = {this.navTo.bind(this, `/${item.serviceName}`)}
             >
-              <a
-                href="javascript:;"
-                id={`${item.serviceName}`}
-                onClick={this.activeNav.bind(this, `nav${index}`)}
-              >
-                <div className="nav-icon" />
-                <div className="nav-title">{locale[item.serviceName]}</div>
-              </a>
-            </li>
-          );
+            < a
+          href = "javascript:;"
+          id = {`${item.serviceName}`
+        }
+          onClick = {this.activeNav.bind(this, `nav${index}`)}
+            >
+            < div
+          className = "nav-icon" / >
+            < div
+          className = "nav-title" > {locale[item.serviceName]} < /div>
+            < /a>
+            < /li>
+        )
+          ;
         }
       }
       return (
-        <li
-          className={pathname === `/${item.serviceName}` ? 'selected' : ''}
-          key={`${item.serviceName}`}
-          data-spm-click={`gostr=/aliyun;locaid=${item.serviceName}`}
-          onClick={this.navTo.bind(this, `/${item.serviceName}`)}
+        < li
+      className = {pathname === `/${item.serviceName}` ? 'selected' : ''
+    }
+      key = {`${item.serviceName}`
+    }
+      data - spm - click = {`gostr=/aliyun;locaid=${item.serviceName}`
+    }
+      onClick = {this.navTo.bind(this, `/${item.serviceName}`)}
         >
-          <a
-            href={'javascript:;'}
-            id={`${item.serviceName}`}
-            onClick={this.activeNav.bind(this, `nav${index}`)}
-          >
-            <div className="nav-icon" />
-            <div className="nav-title">{locale[item.serviceName]}</div>
-          </a>
-        </li>
-      );
+        < a
+      href = {'javascript:;'}
+      id = {`${item.serviceName}`
+    }
+      onClick = {this.activeNav.bind(this, `nav${index}`)}
+        >
+        < div
+      className = "nav-icon" / >
+        < div
+      className = "nav-title" > {locale[item.serviceName]} < /div>
+        < /a>
+        < /li>
+    )
+      ;
     });
   }
 
   nacosGetNav(navList) {
     let navRow = ''; // 导航
     if (navList.length > 0) {
-      navRow = <ul>{this.nacosLoopNav(navList)}</ul>;
+      navRow =
+    <
+      ul > {this.nacosLoopNav(navList)} < /ul>;
       this.nacosLoopNavDeeply(navList); // 深度遍历导航树获得平行map
     }
     return navRow;
   }
 
   renderNav() {
-    const { navList } = this.state;
+    const {navList} = this.state;
     this.nacosLeftBarDom = document.getElementById('viewFramework-product-navbar');
     this.nacosBodyDom = document.getElementById('viewFramework-product-body');
     this.nacosToggleIconDom = document.getElementById('viewFramework-product-navbar-collapse');
@@ -341,33 +378,47 @@ class MainLayout extends React.Component {
         });
         return;
       }
-      const { parentServiceName } = nowNavObj;
+      const {parentServiceName} = nowNavObj;
 
       const parentNav = this.oneLevelNavArr[parentServiceName];
       if (simplePath !== '/' && nowNavObj && parentNav && !parentNav.isVirtual) {
         this.setState({
           showLink: (
-            <div>
-              <Icon
-                type="arrow-left"
-                onClick={this.nacosGoBack.bind(this, parentServiceName)}
-                id={'backarrow'}
-                onMouseOver={this.nacosEnterBack.bind(this)}
-                onMouseLeave={this.nacosOutBack.bind(this)}
-                style={{
-                  marginLeft: 77,
-                  marginTop: 0,
-                  fontWeight: 'bold',
-                  cursor: 'pointer',
-                  color: '#546478',
-                  fontSize: '20px',
-                }}
-              />
-            </div>
-          ),
+            < div >
+            < Icon
+          type = "arrow-left"
+          onClick = {this.nacosGoBack.bind(this, parentServiceName)}
+          id = {'backarrow'}
+          onMouseOver = {this.nacosEnterBack.bind(this)}
+          onMouseLeave = {this.nacosOutBack.bind(this)}
+          style = {
+        {
+          marginLeft: 77,
+            marginTop
+        :
+          0,
+            fontWeight
+        :
+          'bold',
+            cursor
+        :
+          'pointer',
+            color
+        :
+          '#546478',
+            fontSize
+        :
+          '20px',
+        }
+      }
+        />
+        < /div>
+      ),
 
-          navRow: <ul>{this.nacosLoopNav([nowNavObj])}</ul>,
-        });
+        navRow: <
+        ul > {this.nacosLoopNav([nowNavObj])} < /ul>,
+      })
+        ;
         setTimeout(() => {
           const navid = navName;
           this.activeNav(navid);
@@ -375,8 +426,9 @@ class MainLayout extends React.Component {
       } else {
         this.setState({
           showLink: null,
-          navRow: <ul>{this.nacosLoopNav(navList)}</ul>,
-        });
+          navRow: < ul > {this.nacosLoopNav(navList)} < /ul>,
+      })
+        ;
         setTimeout(() => {
           const navid = navName;
           this.activeNav(navid);
@@ -386,8 +438,8 @@ class MainLayout extends React.Component {
   }
 
   refreshNav() {
-    const { navList } = this.state;
-    const { location, history, functionMode } = this.props;
+    const {navList} = this.state;
+    const {location, history, functionMode} = this.props;
     const [configUrl, serviceUrl, clusterUrl] = [
       '/configurationManagement',
       '/serviceManagement',
@@ -417,7 +469,7 @@ class MainLayout extends React.Component {
           return item;
         }),
       },
-      () => this.setState({ navRow: this.nacosGetNav(navList) }, () => this.renderNav())
+      () => this.setState({navRow: this.nacosGetNav(navList)}, () => this.renderNav())
     );
     if (functionMode === 'config' && location.pathname === serviceUrl) {
       history.push(configUrl);
@@ -435,85 +487,173 @@ class MainLayout extends React.Component {
   }
 
   render() {
-    const { locale = {}, version } = this.props;
-    const { nacosName, doesNotExist } = locale;
-    const { showLink, navRow, leftBarClose, noChild } = this.state;
+    const {locale = {}, version} = this.props;
+    const {nacosName, doesNotExist} = locale;
+    const {showLink, navRow, leftBarClose, noChild} = this.state;
     return (
-      <div className="viewFramework-product" style={{ top: 66 }}>
-        <Header />
-        <div
-          className="viewFramework-product-navbar"
-          style={{ width: 180, marginLeft: 0 }}
-          id="viewFramework-product-navbar"
-          data-spm="acm_nav"
-        >
-          <div className="viewFramework-product-navbar-removed">
-            <div>
-              <div className="product-nav-scene product-nav-main-scene">
-                {showLink ? (
-                  <div className="product-nav-icon env" style={{ height: 80, paddingTop: 25 }}>
-                    {showLink}
-                  </div>
-                ) : (
-                  <div
-                    style={{ textIndent: 0, display: !version ? 'none' : 'block' }}
-                    className="product-nav-title"
-                    title={nacosName}
-                  >
-                    <span>{nacosName}</span>
-                    <span style={{ marginLeft: 5 }}>{version}</span>
-                  </div>
-                )}
-                <div
-                  className="product-nav-list"
-                  style={{ position: 'relative', top: 0, height: '100%' }}
-                >
-                  {navRow}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="viewFramework-product-navbar-collapse"
-          id="viewFramework-product-navbar-collapse"
-          onClick={this.nacosToggleLeftBar.bind(this)}
-        >
-          <div className="product-navbar-collapse-inner">
-            <div className="product-navbar-collapse-bg" />
-            <div className="product-navbar-collapse">
-              {leftBarClose ? (
-                <span className="icon-collapse-right" style={{ display: 'block' }} />
-              ) : (
-                <span className="icon-collapse-left" />
-              )}
-            </div>
-          </div>
-        </div>
-        <div
-          className="viewFramework-product-body"
-          style={{ marginLeft: 180 }}
-          id="viewFramework-product-body"
-        >
-          <div>
-            {!noChild ? (
-              <div>{this.props.children}</div>
-            ) : (
-              <div
-                style={{
-                  height: 300,
-                  lineHeight: 300,
-                  textAlign: 'center',
-                  fontSize: 18,
-                }}
-              >
-                {doesNotExist}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    );
+      < div
+    className = "viewFramework-product"
+    style = {
+    {
+      top: 66
+    }
+  }>
+  <
+    Header / >
+    < div
+    className = "viewFramework-product-navbar"
+    style = {
+    {
+      width: 180, marginLeft
+    :
+      0
+    }
+  }
+    id = "viewFramework-product-navbar"
+    data - spm = "acm_nav"
+      >
+      < div
+    className = "viewFramework-product-navbar-removed" >
+      < div >
+      < div
+    className = "product-nav-scene product-nav-main-scene" >
+      {
+        showLink ? (
+          < div className = "product-nav-icon env" style = {
+    {
+      height: 80, paddingTop
+    :
+      25
+    }
+  }>
+    {
+      showLink
+    }
+  <
+    /div>
+  ) :
+    (
+    < div
+    style = {
+    {
+      textIndent: 0, display
+    :
+      !version ? 'none' : 'block'
+    }
+  }
+    className = "product-nav-title"
+    title = {nacosName}
+      >
+      < span > {nacosName} < /span>
+      < span
+    style = {
+    {
+      marginLeft: 5
+    }
+  }>
+    {
+      version
+    }
+  <
+    /span>
+    < /div>
+  )
+  }
+  <
+    div
+    className = "product-nav-list"
+    style = {
+    {
+      position: 'relative', top
+    :
+      0, height
+    :
+      '100%'
+    }
+  }
+  >
+    {
+      navRow
+    }
+  <
+    /div>
+    < /div>
+    < /div>
+    < /div>
+    < /div>
+    < div
+    className = "viewFramework-product-navbar-collapse"
+    id = "viewFramework-product-navbar-collapse"
+    onClick = {this.nacosToggleLeftBar.bind(this)}
+      >
+      < div
+    className = "product-navbar-collapse-inner" >
+      < div
+    className = "product-navbar-collapse-bg" / >
+      < div
+    className = "product-navbar-collapse" >
+      {
+        leftBarClose ? (
+          < span className = "icon-collapse-right" style = {
+    {
+      display: 'block'
+    }
+  }
+    />
+  ) :
+    (
+    < span
+    className = "icon-collapse-left" / >
+  )
+  }
+  <
+    /div>
+    < /div>
+    < /div>
+    < div
+    className = "viewFramework-product-body"
+    style = {
+    {
+      marginLeft: 180
+    }
+  }
+    id = "viewFramework-product-body"
+      >
+      < div >
+      {
+    !noChild ? (
+      < div > {this.props.children} < /div>
+  ) :
+    (
+    < div
+    style = {
+    {
+      height: 300,
+        lineHeight
+    :
+      300,
+        textAlign
+    :
+      'center',
+        fontSize
+    :
+      18,
+    }
+  }
+  >
+    {
+      doesNotExist
+    }
+  <
+    /div>
+  )
+  }
+  <
+    /div>
+    < /div>
+    < /div>
+  )
+    ;
   }
 }
 

@@ -111,7 +111,7 @@ public class MergeDatumService {
                 try {
                     List<ConfigInfoAggr> datumList = new ArrayList<ConfigInfoAggr>();
                     int rowCount = persistService.aggrConfigInfoCount(dataId, group, tenant);
-                    int pageCount = (int)Math.ceil(rowCount * 1.0 / PAGE_SIZE);
+                    int pageCount = (int) Math.ceil(rowCount * 1.0 / PAGE_SIZE);
                     for (int pageNo = 1; pageNo <= pageCount; pageNo++) {
                         Page<ConfigInfoAggr> page = persistService.findConfigInfoAggrByPage(dataId, group, tenant,
                             pageNo, PAGE_SIZE);

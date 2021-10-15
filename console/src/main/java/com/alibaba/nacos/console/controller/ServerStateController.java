@@ -36,8 +36,8 @@ public class ServerStateController {
 
     @GetMapping("state")
     public ResponseEntity serverState() {
-        Map<String,String> serverState = new HashMap<>(3);
-        serverState.put("standalone_mode",SystemUtils.STANDALONE_MODE ?
+        Map<String, String> serverState = new HashMap<>(3);
+        serverState.put("standalone_mode", SystemUtils.STANDALONE_MODE ?
             SystemUtils.STANDALONE_MODE_ALONE : SystemUtils.STANDALONE_MODE_CLUSTER);
 
         serverState.put("function_mode", SystemUtils.FUNCTION_MODE);

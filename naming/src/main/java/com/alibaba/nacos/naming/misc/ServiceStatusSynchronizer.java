@@ -31,22 +31,22 @@ import java.util.Map;
 public class ServiceStatusSynchronizer implements Synchronizer {
     @Override
     public void send(final String serverIP, Message msg) {
-        if(serverIP == null) {
+        if (serverIP == null) {
             return;
         }
 
-        Map<String,String> params = new HashMap<String, String>(10);
+        Map<String, String> params = new HashMap<String, String>(10);
 
         params.put("statuses", msg.getData());
         params.put("clientIP", NetUtils.localServer());
 
 
         String url = "http://" + serverIP + ":" + RunningConfig.getServerPort() + RunningConfig.getContextPath() +
-                UtilsAndCommons.NACOS_NAMING_CONTEXT + "/service/status";
+            UtilsAndCommons.NACOS_NAMING_CONTEXT + "/service/status";
 
         if (serverIP.contains(UtilsAndCommons.IP_PORT_SPLITER)) {
             url = "http://" + serverIP + RunningConfig.getContextPath() +
-                    UtilsAndCommons.NACOS_NAMING_CONTEXT + "/service/status";
+                UtilsAndCommons.NACOS_NAMING_CONTEXT + "/service/status";
         }
 
         try {
@@ -69,11 +69,11 @@ public class ServiceStatusSynchronizer implements Synchronizer {
 
     @Override
     public Message get(String serverIP, String key) {
-        if(serverIP == null) {
+        if (serverIP == null) {
             return null;
         }
 
-        Map<String,String> params = new HashMap<>(10);
+        Map<String, String> params = new HashMap<>(10);
 
         params.put("key", key);
 
@@ -89,7 +89,7 @@ public class ServiceStatusSynchronizer implements Synchronizer {
             return null;
         }
 
-        if(result == null || result.equals(StringUtils.EMPTY)) {
+        if (result == null || result.equals(StringUtils.EMPTY)) {
             return null;
         }
 

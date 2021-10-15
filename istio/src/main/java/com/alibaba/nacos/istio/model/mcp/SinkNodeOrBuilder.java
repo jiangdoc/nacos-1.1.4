@@ -7,77 +7,85 @@ public interface SinkNodeOrBuilder extends
     // @@protoc_insertion_point(interface_extends:istio.mcp.v1alpha1.SinkNode)
     com.google.protobuf.MessageOrBuilder {
 
-  /**
-   * <pre>
-   * An opaque identifier for the MCP node.
-   * </pre>
-   *
-   * <code>string id = 1;</code>
-   * @return The id.
-   */
-  java.lang.String getId();
-  /**
-   * <pre>
-   * An opaque identifier for the MCP node.
-   * </pre>
-   *
-   * <code>string id = 1;</code>
-   * @return The bytes for id.
-   */
-  com.google.protobuf.ByteString
-      getIdBytes();
+    /**
+     * <pre>
+     * An opaque identifier for the MCP node.
+     * </pre>
+     *
+     * <code>string id = 1;</code>
+     *
+     * @return The id.
+     */
+    java.lang.String getId();
 
-  /**
-   * <pre>
-   * Opaque annotations extending the node identifier.
-   * </pre>
-   *
-   * <code>map&lt;string, string&gt; annotations = 2;</code>
-   */
-  int getAnnotationsCount();
-  /**
-   * <pre>
-   * Opaque annotations extending the node identifier.
-   * </pre>
-   *
-   * <code>map&lt;string, string&gt; annotations = 2;</code>
-   */
-  boolean containsAnnotations(
-      java.lang.String key);
-  /**
-   * Use {@link #getAnnotationsMap()} instead.
-   */
-  @java.lang.Deprecated
-  java.util.Map<java.lang.String, java.lang.String>
-  getAnnotations();
-  /**
-   * <pre>
-   * Opaque annotations extending the node identifier.
-   * </pre>
-   *
-   * <code>map&lt;string, string&gt; annotations = 2;</code>
-   */
-  java.util.Map<java.lang.String, java.lang.String>
-  getAnnotationsMap();
-  /**
-   * <pre>
-   * Opaque annotations extending the node identifier.
-   * </pre>
-   *
-   * <code>map&lt;string, string&gt; annotations = 2;</code>
-   */
+    /**
+     * <pre>
+     * An opaque identifier for the MCP node.
+     * </pre>
+     *
+     * <code>string id = 1;</code>
+     *
+     * @return The bytes for id.
+     */
+    com.google.protobuf.ByteString
+    getIdBytes();
 
-  java.lang.String getAnnotationsOrDefault(
-      java.lang.String key,
-      java.lang.String defaultValue);
-  /**
-   * <pre>
-   * Opaque annotations extending the node identifier.
-   * </pre>
-   *
-   * <code>map&lt;string, string&gt; annotations = 2;</code>
-   */
+    /**
+     * <pre>
+     * Opaque annotations extending the node identifier.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; annotations = 2;</code>
+     */
+    int getAnnotationsCount();
 
-  java.lang.String getAnnotationsOrThrow(
-      java.lang.String key);
+    /**
+     * <pre>
+     * Opaque annotations extending the node identifier.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; annotations = 2;</code>
+     */
+    boolean containsAnnotations(
+        java.lang.String key);
+
+    /**
+     * Use {@link #getAnnotationsMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.String, java.lang.String>
+    getAnnotations();
+
+    /**
+     * <pre>
+     * Opaque annotations extending the node identifier.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; annotations = 2;</code>
+     */
+    java.util.Map<java.lang.String, java.lang.String>
+    getAnnotationsMap();
+
+    /**
+     * <pre>
+     * Opaque annotations extending the node identifier.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; annotations = 2;</code>
+     */
+
+    java.lang.String getAnnotationsOrDefault(
+        java.lang.String key,
+        java.lang.String defaultValue);
+
+    /**
+     * <pre>
+     * Opaque annotations extending the node identifier.
+     * </pre>
+     *
+     * <code>map&lt;string, string&gt; annotations = 2;</code>
+     */
+
+    java.lang.String getAnnotationsOrThrow(
+        java.lang.String key);
 }

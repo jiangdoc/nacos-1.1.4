@@ -320,9 +320,9 @@ public class Base64 {
                         modulus = (modulus + 1) % BYTES_PER_ENCODED_BLOCK;
                         bitWorkArea = (bitWorkArea << BITS_PER_ENCODED_BYTE) + result;
                         if (modulus == 0) {
-                            buffer[pos++] = (byte)((bitWorkArea >> 16) & MASK_8BITS);
-                            buffer[pos++] = (byte)((bitWorkArea >> 8) & MASK_8BITS);
-                            buffer[pos++] = (byte)(bitWorkArea & MASK_8BITS);
+                            buffer[pos++] = (byte) ((bitWorkArea >> 16) & MASK_8BITS);
+                            buffer[pos++] = (byte) ((bitWorkArea >> 8) & MASK_8BITS);
+                            buffer[pos++] = (byte) (bitWorkArea & MASK_8BITS);
                         }
                     }
                 }
@@ -342,12 +342,12 @@ public class Base64 {
                 //       break;
                 case 2:
                     bitWorkArea = bitWorkArea >> 4;
-                    buffer[pos++] = (byte)((bitWorkArea) & MASK_8BITS);
+                    buffer[pos++] = (byte) ((bitWorkArea) & MASK_8BITS);
                     break;
                 case 3:
                     bitWorkArea = bitWorkArea >> 2;
-                    buffer[pos++] = (byte)((bitWorkArea >> 8) & MASK_8BITS);
-                    buffer[pos++] = (byte)((bitWorkArea) & MASK_8BITS);
+                    buffer[pos++] = (byte) ((bitWorkArea >> 8) & MASK_8BITS);
+                    buffer[pos++] = (byte) ((bitWorkArea) & MASK_8BITS);
                     break;
                 default:
                     break;
@@ -624,7 +624,7 @@ public class Base64 {
     private long getEncodedLength(byte[] pArray) {
         // Calculate non-chunked size - rounded up to allow for padding
         // cast to long is needed to avoid possibility of overflow
-        long len = ((pArray.length + unencodedBlockSize - 1) / unencodedBlockSize) * (long)encodedBlockSize;
+        long len = ((pArray.length + unencodedBlockSize - 1) / unencodedBlockSize) * (long) encodedBlockSize;
         if (lineLength > 0) {
             /**
              * Round up to nearest multiple

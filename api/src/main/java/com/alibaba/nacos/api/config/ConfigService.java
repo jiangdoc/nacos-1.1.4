@@ -38,7 +38,7 @@ public interface ConfigService {
 
     /**
      * Get config and register Listener
-     *
+     * <p>
      * If you want to pull it yourself when the program starts to get the configuration for the first time,
      * and the registered Listener is used for future configuration updates, you can keep the original
      * code unchanged, just add the system parameter: enableRemoteSyncConfig = "true" ( But there is network overhead);
@@ -47,7 +47,7 @@ public interface ConfigService {
      * @param dataId    dataId
      * @param group     group
      * @param timeoutMs read timeout
-     * @param listener {@link Listener}
+     * @param listener  {@link Listener}
      * @return config value
      * @throws NacosException NacosException
      */

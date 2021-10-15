@@ -33,7 +33,7 @@ public class TimeUtils {
         return new Timestamp(date.getTime());
     }
 
-     public static String getCurrentTimeStr() {
+    public static String getCurrentTimeStr() {
         Calendar c = Calendar.getInstance();
         c.setTime(new Date());
         FastDateFormat format = FastDateFormat.getInstance("yyyy-MM-dd HH:mm:ss");

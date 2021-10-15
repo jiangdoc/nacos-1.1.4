@@ -82,7 +82,7 @@ public class ConcurrentDiskUtil {
                         i);
                 }
             } while (null == rlock);
-            int fileSize = (int)fcin.size();
+            int fileSize = (int) fcin.size();
             ByteBuffer byteBuffer = ByteBuffer.allocate(fileSize);
             fcin.read(byteBuffer);
             byteBuffer.flip();

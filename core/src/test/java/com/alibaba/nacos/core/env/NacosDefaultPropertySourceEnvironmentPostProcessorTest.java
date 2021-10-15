@@ -40,7 +40,7 @@ import static java.util.Arrays.asList;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = NacosDefaultPropertySourceEnvironmentPostProcessorTest.class,
-        webEnvironment = SpringBootTest.WebEnvironment.NONE)
+    webEnvironment = SpringBootTest.WebEnvironment.NONE)
 public class NacosDefaultPropertySourceEnvironmentPostProcessorTest {
 
     @Autowired
@@ -78,14 +78,14 @@ public class NacosDefaultPropertySourceEnvironmentPostProcessorTest {
     public void testDefaultPropertyNames() {
 
         assertPropertyNames(
-                "nacos.version",
-                "server.servlet.contextPath",
-                "server.port",
-                "server.tomcat.uri-encoding",
-                "spring.http.encoding.force",
-                "spring.http.encoding.enabled",
-                "spring.messages.encoding",
-                "spring.autoconfigure.exclude"
+            "nacos.version",
+            "server.servlet.contextPath",
+            "server.port",
+            "server.tomcat.uri-encoding",
+            "spring.http.encoding.force",
+            "spring.http.encoding.enabled",
+            "spring.messages.encoding",
+            "spring.autoconfigure.exclude"
         );
     }
 
@@ -94,8 +94,8 @@ public class NacosDefaultPropertySourceEnvironmentPostProcessorTest {
         CompositePropertySource propertySource = getNacosDefaultPropertySource();
 
         Assert.assertEquals("Please Properties from resources[" + RESOURCE_LOCATION_PATTERN + "]",
-                new HashSet<String>(asList(propertyNames)),
-                new HashSet<String>(asList(propertySource.getPropertyNames())));
+            new HashSet<String>(asList(propertyNames)),
+            new HashSet<String>(asList(propertySource.getPropertyNames())));
     }
 
     private void assertPropertyEquals(String propertyName, String expectedValue) {

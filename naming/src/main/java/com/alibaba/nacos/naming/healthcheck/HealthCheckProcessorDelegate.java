@@ -38,7 +38,7 @@ public class HealthCheckProcessorDelegate implements HealthCheckProcessor {
     }
 
     @Autowired
-    public void addProcessor(Collection<HealthCheckProcessor> processors){
+    public void addProcessor(Collection<HealthCheckProcessor> processors) {
         healthCheckProcessorMap.putAll(processors.stream()
             .filter(processor -> processor.getType() != null)
             .collect(Collectors.toMap(HealthCheckProcessor::getType, processor -> processor)));
@@ -49,7 +49,7 @@ public class HealthCheckProcessorDelegate implements HealthCheckProcessor {
 
         String type = task.getCluster().getHealthChecker().getType();
         HealthCheckProcessor processor = healthCheckProcessorMap.get(type);
-        if(processor == null){
+        if (processor == null) {
             processor = healthCheckProcessorMap.get(NoneHealthCheckProcessor.TYPE);
         }
 

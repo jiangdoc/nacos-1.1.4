@@ -47,7 +47,7 @@ public class NotifyTaskProcessor implements TaskProcessor {
 
     @Override
     public boolean process(String taskType, AbstractTask task) {
-        NotifyTask notifyTask = (NotifyTask)task;
+        NotifyTask notifyTask = (NotifyTask) task;
         String dataId = notifyTask.getDataId();
         String group = notifyTask.getGroup();
         String tenant = notifyTask.getTenant();
@@ -84,7 +84,7 @@ public class NotifyTaskProcessor implements TaskProcessor {
                 return true;
             } else {
                 MetricsMonitor.getConfigNotifyException().increment();
-                log.error("[notify-error] {}, {}, to {}, result {}", new Object[] {dataId, group,
+                log.error("[notify-error] {}, {}, to {}, result {}", new Object[]{dataId, group,
                     serverIp, result.code});
                 ConfigTraceService.logNotifyEvent(dataId, group, tenant, null, lastModified, LOCAL_IP,
                     ConfigTraceService.NOTIFY_EVENT_ERROR, delayed, serverIp);

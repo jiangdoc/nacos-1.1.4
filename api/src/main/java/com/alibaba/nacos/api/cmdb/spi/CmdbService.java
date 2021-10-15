@@ -57,8 +57,8 @@ public interface CmdbService {
      * Get label value of label name of ip
      *
      * @param entityName entity name
-     * @param entityType  entity type
-     * @param labelName   target label name
+     * @param entityType entity type
+     * @param labelName  target label name
      * @return label value
      */
     String getLabelValue(String entityName, String entityType, String labelName);
@@ -67,7 +67,7 @@ public interface CmdbService {
      * Get all label value of ip
      *
      * @param entityName entity name
-     * @param entityType  entity type
+     * @param entityType entity type
      * @return all label values
      */
     Map<String, String> getLabelValues(String entityName, String entityType);

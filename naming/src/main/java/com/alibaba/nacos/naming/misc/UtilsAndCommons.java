@@ -247,7 +247,7 @@ public class UtilsAndCommons {
      * the number will be nearly uniform distribution.
      * <p>
      * <p>
-     *
+     * <p>
      * e.g. Assume there's an array which contains some IP of the servers provide the same service,
      * the caller name can be used to choose the server to achieve load balance.
      * <blockquote><pre>
@@ -260,8 +260,8 @@ public class UtilsAndCommons {
      * @param upperLimit the upper limit of the returned number, must be a positive integer, which means > 0
      * @return a number between 0(inclusive) and upperLimit(exclusive)
      * @throws IllegalArgumentException if the upper limit equals or less than 0
-     * @since 1.0.0
      * @author jifengnan
+     * @since 1.0.0
      */
     public static int shakeUp(String string, int upperLimit) {
         if (upperLimit < 1) {

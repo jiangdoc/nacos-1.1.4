@@ -190,7 +190,7 @@ public class ServiceInfo {
         ServiceInfo serviceInfo = new ServiceInfo();
         int maxSegCount = 3;
         String[] segs = key.split(Constants.SERVICE_INFO_SPLITER);
-        if (segs.length == maxSegCount -1) {
+        if (segs.length == maxSegCount - 1) {
             serviceInfo.setGroupName(segs[0]);
             serviceInfo.setName(segs[1]);
         } else if (segs.length == maxSegCount) {

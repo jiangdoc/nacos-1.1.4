@@ -78,7 +78,7 @@ public class ClusterController {
         AbstractHealthChecker abstractHealthChecker;
         String type = healthCheckObj.getString("type");
         Class<AbstractHealthChecker> healthCheckClass = HealthCheckType.ofHealthCheckerClass(type);
-        if(healthCheckClass == null){
+        if (healthCheckClass == null) {
             throw new NacosException(NacosException.INVALID_PARAM, "unknown health check type:" + healthChecker);
         }
         abstractHealthChecker = JSON.parseObject(healthChecker, healthCheckClass);
